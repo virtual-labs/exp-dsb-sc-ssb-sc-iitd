@@ -1,1 +1,1 @@
-## Experiment name
+## DSB-SC, SSB-SC Modulator & Detector
