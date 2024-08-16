@@ -10,6 +10,32 @@
     <!-- sidebar and body -->
     <div class="flex min-h-[80vh]">
       <div class="px-6 pb-6 flex-1">
+        <div id="container">
+          <h1>Instructions for SSBSC Modulation</h1>
+          <ul>
+            <li>
+              Step 1: Click on 'Generate Message' button to generate input
+              message signal
+            </li>
+            <li>
+              Step 2: Then click on 'Generate Carrier' button to generate
+              carrier signal
+            </li>
+            <li>
+              Step 3: The carrier frequency has to be more than the message
+              frequency and You can change frequencies using sliders
+            </li>
+            <li>
+              Step 4: Click on 'Generate Upper SSB-SC Signal' button to generate
+              Generate Upper Sideband SSB-SC Signal
+            </li>
+            <li>
+              Step 5: Click on 'Generate Lower SSB-SC Signal' to generate
+              Generate Lower Sideband SSB-SC Signal
+            </li>
+          </ul>
+          <br />
+        </div>
         <div class="flex flex-shrink-0">
           <div class="relative w-[700px] py-2">
             <div
@@ -119,21 +145,7 @@
                     <p class="text-[12px] font-medium">cos(wt)</p>
                   </div>
                 </div>
-                <div class="flex flex-col items-center">
-                  <p class="text-[13px] pb-1 text-center font-semibold">
-                    Message Frequency:
-                  </p>
-                  <input
-                    id="messageFrequency"
-                    value="100"
-                    type="range"
-                    step="1"
-                    min="1"
-                    max="2000"
-                    onchange="handleMessageFrequencyChange()"
-                  />
-                  <div class="leading-none messageFrequencyDiv">100</div>
-                </div>
+
                 <div class="flex mt-3 flex-col items-end">
                   <div class="flex flex-col items-start">
                     <div
@@ -149,12 +161,7 @@
                   </div>
                 </div>
                 <div class="flex justify-center mt-4">
-                  <button
-                    onclick="generateMessage()"
-                    class="bg-[#0c9c0c] py-1 px-3 rounded-md hover:bg-[#008000] hover:scale-105"
-                  >
-                    Generate
-                  </button>
+
                 </div>
               </div>
               <!-- Multiplier -->
@@ -255,18 +262,7 @@
                 <div
                   class="absolute top-[90px] flex flex-col items-center gap-y-1"
                 >
-                  <p class="text-[13px] pb-1 font-bold">Carrier Frequency:</p>
-                  <input
-                    id="carrierFrequency"
-                    value="1000"
-                    type="range"
-                    min="1"
-                    max="10000"
-                    onchange="handleCarrierFrequencyChange()"
-                  />
-                  <div class="leading-none font-medium carrierFrequencyDiv">
-                    1000
-                  </div>
+
                 </div>
                 <div class="flex flex-col gap-4 mt-4 items-end">
                   <div class="flex items-center gap-1">
@@ -321,12 +317,7 @@
                   </div>
                 </div>
                 <div class="flex justify-center mt-12">
-                  <button
-                    onclick="generateCarrier()"
-                    class="bg-[#0c9c0c] py-1 px-3 rounded-md hover:bg-[#008000] hover:scale-105"
-                  >
-                    Generate
-                  </button>
+
                 </div>
               </div>
               <!-- phase shifter -->
@@ -480,32 +471,88 @@
             </div>
           </div>
           <div class="flex flex-col grow-0 items-center">
-            <div class="flex  w-full py-4 gap-2">
-                <div class="flex justify-center gap-1 items-center">
-                  <p class="text-nowrap font-medium">Sampling Frequency (Hz):</p>
+            <div class="flex w-full py-4 gap-2">
+			
+						                <div class="flex flex-col items-center">
+                  <p class="text-[13px] pb-1 text-center font-semibold">
+                    Message Frequency
+                  </p>
                   <input
-                    class="border px-1 w-[142px] py-1 rounded-sm border-black"
+                    id="messageFrequency"
+                    value="10"
+                    type="range"
+                    step="1"
                     min="1"
-                    type="number"
-                    id="samplingFrequency"
-                    value="10000"
-                    placeholder="sampling frequency in Hz"
+                    max="200"
+                    onchange="handleMessageFrequencyChange()"
                   />
-                </div>     
-                <button
-                class="bg-blue-500 text-white py-1 px-3 font-medium  text-sm rounded-md hover:scale-105"
+                  <div class="leading-none messageFrequencyDiv">10</div>
+				                    <button
+                    onclick="generateMessage()"
+                    class="bg-[#008000] py-1 px-3 rounded-md hover:bg-[#0c9c0c] hover:scale-105"
+                  >
+                    Generate Message
+                  </button>
+                </div>
+
+				                <div>
+                  <!-- carrier frequency -->
+                  <div class="flex flex-col items-center">
+                    <p class="text-[13px] pb-1 font-bold">Carrier Frequency:</p>
+                    <input
+                      id="carrierFrequency"
+                      value="100"
+                      type="range"
+                      min="1"
+                      max="1000"
+                      onchange="handleCarrierFrequencyChange()"
+                    />
+                    <div class="leading-none carrierFrequencyDiv">100</div>
+                    <button
+                      onclick="generateCarrier()"
+                      class="bg-[#008000] py-1 px-3 mt-1 rounded-md hover:bg-[#0c9c0c] hover:scale-105"
+                    >
+                      Generate Carrier
+                    </button>
+                  </div>
+                </div>
+              <div class="flex justify-center gap-1 items-center">
+                <p class="text-nowrap font-medium"></p>
+                <input
+                  class="border px-1 w-[142px] py-1 rounded-sm border-black"
+                  min="1"
+                  type="number"
+                  id="samplingFrequency"
+                  value="10000"
+                  placeholder="sampling frequency in Hz"
+                />
+              </div>
+			  			              <button
+                class="bg-blue-500 text-white py-1 px-3 font-medium text-sm rounded-md hover:scale-105"
                 onclick="generateUpperSSBSC()"
-                > 
-                Generate Upper SSB-SC Signal
-                </button>     
-            </div>
-            <div class="flex gap-2 w-full">
-              <button
-              class="bg-blue-500 text-white py-[6px] font-medium px-3 text-sm rounded-md  hover:scale-105"
-              onclick="generateLowerSSBSC()"
               >
-              Generate Lower SSB-SC Signal
+                Generate Upper SSB-SC Signal
               </button>
+			  
+			  <button
+                class="bg-blue-500 text-white py-[6px] font-medium px-3 text-sm rounded-md hover:scale-105"
+                onclick="generateLowerSSBSC()"
+              >
+                Generate Lower SSB-SC Signal
+              </button>
+			  
+			  			  <button
+                class="bg-blue-500 text-white py-[6px] font-medium px-3 text-sm rounded-md hover:scale-105"
+                onclick="generateRecoveredUSB()"
+              >
+                Perform SSB-SC Demodulation
+              </button>
+			  
+            </div>
+			  
+            <div class="flex gap-2 w-full">
+              
+
             </div>
             <div class="plotSection">
               <div id="recoveredUSBPlot" class="w-[600px] max-h-[410px]"></div>
@@ -516,119 +563,938 @@
             </div>
           </div>
         </div>
+        <br />
+        <br />
+        <hr />
+        <br />
+        <div id="container">
+          <h1>Instructions for SSBSC Demodulation</h1>
+          <ul>
+            <li>
+			 Step 1: Click on 'Generate Recovered Message Signal(from USB SSB-SC)' button
+              to generate message signal from Upper Sideband SSB-SC Signal
+
+            </li>
+            <li>
+              Step 2: Click on 'Generate Recovered Message Signal(from LSB SSB-SC)' button
+              to generate message signal from lower Sideband SSB-SC Signal
+            </li>
+						
+			            <li>
+              Step 3: Click on the 'Show Frequency Spectrums' button to see spectrums of the message, modulated, and demodulated signal
+            </li>
+          </ul>
+        </div>
+        <br />
+        <div class="flex flex-shrink-0">
+          <div class="relative w-[700px] py-2">
+            <div
+              class="absolute bg-[#ffff00] z-10 w-[60px] h-2 rounded-md top-[244px] left-[88px]"
+            ></div>
+            <div
+              class="absolute bg-[#ffff00] z-10 h-[60px] w-2 rounded-md top-[244px] left-[88px]"
+            ></div>
+            <div
+              class="absolute bg-[#ffff00] z-10 w-[78px] h-2 rounded-md top-[298px] left-[88px]"
+            ></div>
+            <div
+              class="absolute bg-[#ffff00] z-10 h-[236px] w-2 rounded-md top-[298px] left-[158px]"
+            ></div>
+            <div
+              class="absolute bg-[#ffff00] z-10 w-[64px] h-2 rounded-md top-[526px] left-[102px]"
+            ></div>
+
+            <div
+              class="absolute bg-[#ff0000] z-10 w-[248px] h-2 rounded-md top-[12px] left-[20px]"
+            >
+              <p class="font-medium pt-1">CH1-A</p>
+            </div>
+            <div
+              class="absolute bg-[#ff0000] z-10 h-[118px] w-2 rounded-md top-[12px] left-[262px]"
+            ></div>
+            <div
+              class="absolute bg-[#ff0000] z-10 w-[64px] h-2 rounded-md top-[122px] left-[262px]"
+            ></div>
+
+            <div
+              class="absolute bg-[#ff0000] z-10 w-[70px] h-2 rounded-md top-[84px] left-[20px]"
+            >
+              <p class="pt-1 font-medium">IN</p>
+            </div>
+            <div
+              class="absolute bg-[#ff0000] z-10 h-[78px] w-2 rounded-md top-[12px] left-[82px]"
+            ></div>
+            <div
+              class="absolute bg-[#ff0000] z-10 w-[126px] h-2 rounded-md top-[244px] left-[208px]"
+            ></div>
+            <div
+              class="absolute bg-[#ff0000] z-10 w-[106px] h-2 rounded-md top-[244px] left-[398px]"
+            ></div>
+
+            <div
+              class="absolute bg-[#000000] z-10 w-[106px] h-2 rounded-md top-[244px] left-[588px]"
+            ></div>
+            <div
+              class="absolute bg-[#000000] z-10 w-[106px] h-2 rounded-md top-[158px] left-[588px]"
+            >
+              <p class="flex justify-end pt-1 font-medium">CH2-A</p>
+            </div>
+
+            <div class="flex pb-4 pt-6 pl-28 gap-10">
+              <!-- phase shifter -->
+              <div
+                class="relative bg-[#a9a9a9] p-1 pt-0 border-4 shadow-[5px_5px_5px_5px_rgba(0,0,0,0.6)] border-black w-[140px] h-[250px]"
+              >
+                <h5 class="text-center text-sm font-medium">PHASE SHIFTER</h5>
+                <!--  -->
+                <div class="flex flex-col items-center mb-14 mt-5">
+                  <div class="flex flex-col items-start">
+                    <div
+                      class="h-[24px] w-[24px] flex justify-center items-center bg-[#ff0000] rounded-full"
+                    >
+                      <div
+                        class="h-[14px] w-[14px] bg-[#000] rounded-full"
+                      ></div>
+                    </div>
+                    <p class="text-[12px] font-medium">DC</p>
+                  </div>
+                  <div class="flex flex-col items-start">
+                    <div
+                      class="h-[24px] w-[24px] flex justify-center items-center bg-[#ffff00] rounded-full"
+                    >
+                      <div
+                        class="h-[14px] w-[14px] bg-[#000] rounded-full"
+                      ></div>
+                    </div>
+                    <p class="text-[12px] font-medium">GND</p>
+                  </div>
+                </div>
+                <div class="flex pt-5 justify-around">
+                  <div class="flex flex-col items-center">
+                    <div
+                      class="h-[24px] w-[24px] flex justify-center items-center bg-[#ffff00] rounded-full"
+                    >
+                      <div
+                        class="h-[14px] w-[14px] bg-[#000] rounded-full"
+                      ></div>
+                    </div>
+                    <p class="text-[12px] font-medium">B</p>
+                  </div>
+                  <div class="flex flex-col items-center">
+                    <div
+                      class="h-[24px] w-[24px] flex justify-center items-center bg-[#ffff00] rounded-full"
+                    >
+                      <div
+                        class="h-[14px] w-[14px] bg-[#000] rounded-full"
+                      ></div>
+                    </div>
+                    <p class="text-[12px] font-medium">GA+gB</p>
+                  </div>
+                </div>
+              </div>
+              <!-- Multiplier -->
+              <div
+                class="relative bg-[#a9a9a9] p-1 pt-0 border-4 shadow-[5px_5px_5px_5px_rgba(0,0,0,0.6)] border-black w-[140px] h-[250px]"
+              >
+                <h5 class="text-center text-sm font-medium">Multiplier</h5>
+                <div class="flex flex-col pl-3 pt-[58px] pb-[53px]">
+                  <div
+                    class="h-[24px] w-[24px] relative border-[5px] border-[#ffff00] bg-black rounded-full"
+                  ></div>
+                  <p>X</p>
+                </div>
+                <div class="flex absolute bottom-0 w-full justify-around">
+                  <div class="flex flex-col items-center">
+                    <div
+                      class="h-[24px] w-[24px] flex justify-center items-center bg-[#ffff00] rounded-full"
+                    >
+                      <div
+                        class="h-[14px] w-[14px] bg-[#000] rounded-full"
+                      ></div>
+                    </div>
+                    <p class="text-[12px] font-medium">Y</p>
+                  </div>
+                  <div class="flex flex-col items-center">
+                    <div
+                      class="h-[24px] w-[24px] flex justify-center items-center bg-[#ffff00] rounded-full"
+                    >
+                      <div
+                        class="h-[14px] w-[14px] bg-[#000] rounded-full"
+                      ></div>
+                    </div>
+                    <p class="text-[12px] font-medium">KXY</p>
+                  </div>
+                </div>
+              </div>
+              <!-- HEADPHONE AMPLIFIER -->
+              <div
+                class="relative bg-[#a9a9a9] p-1 pt-0 border-4 shadow-[5px_5px_5px_5px_rgba(0,0,0,0.6)] border-black w-[140px] h-[250px]"
+              >
+                <h5 class="text-center text-sm font-medium">
+                  HEADPHONE AMPLIFIER
+                </h5>
+                <p class="text-center text-[12px] pt-2 font-medium">
+                  LPF SELECT
+                </p>
+                <div class="flex justify-center mt-2 gap-2 items-center">
+                  <p class="text-[12px] font-medium">IN</p>
+                  <div
+                    class="relative h-[24px] w-[24px] border-[5px] border-[#464644] bg-black rounded-full"
+                  >
+                    <span
+                      class="absolute top-[4px] rounded-md -left-2 w-4 h-[5px] bg-white"
+                    ></span>
+                  </div>
+                  <p class="text-[12px] font-medium">OUT</p>
+                </div>
+                <div class="flex mt-4 flex-col items-end">
+                  <div class="flex flex-col items-start">
+                    <div
+                      class="h-[24px] w-[24px] border-[5px] border-[#ffff00] bg-black rounded-full"
+                    ></div>
+                    <p class="text-[12px] font-medium">LPF</p>
+                  </div>
+                </div>
+                <div class="flex flex-col items-center justify-center gap-3">
+                  <div class="flex flex-col items-center">
+                    <div
+                      class="h-[26px] w-[26px] border-[4px] relative shadow-black shadow-lg border-black bg-[#ffff00] rounded-full"
+                    >
+                      <div
+                        class="w-1 h-2 absolute top-[50%] left-[40%] bg-black"
+                      ></div>
+                    </div>
+                    <p class="text-[12px] font-medium">K</p>
+                  </div>
+                </div>
+                <!--  -->
+                <div
+                  class="flex items-center justify-between px-2 gap-8 absolute bottom-0 w-full"
+                >
+                  <div class="flex flex-col items-center">
+                    <div
+                      class="h-[24px] w-[24px] border-[5px] border-[#ffff00] bg-black rounded-full"
+                    ></div>
+                    <p class="text-[12px] font-medium">A</p>
+                  </div>
+                  <div class="flex flex-col items-center">
+                    <div
+                      class="h-[24px] w-[24px] border-[5px] border-[#575749] bg-black rounded-full"
+                    ></div>
+                    <p class="text-[12px] font-medium">KA</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flex mt-4 mb-8 gap-12">
+              <!-- vco -->
+              <div
+                class="relative bg-[#a9a9a9] p-1 pt-0 border-4 shadow-[5px_5px_5px_5px_rgba(0,0,0,0.6)] border-black w-[140px] h-[250px]"
+              >
+                <h5 class="text-center text-sm font-medium">VCO</h5>
+                <div class="flex justify-around py-1">
+                  <div class="flex flex-col items-center">
+                    <div
+                      class="h-[24px] w-[24px] bg-[#ff0000] flex justify-center items-center rounded-full"
+                    >
+                      <div
+                        class="h-[14px] w-[14px] bg-[#000] rounded-full"
+                      ></div>
+                    </div>
+                    <p class="text-[12px] font-medium">DATA</p>
+                  </div>
+                  <div class="flex flex-col items-center">
+                    <div
+                      class="h-[24px] w-[24px] bg-[#ff0000] flex justify-center items-center rounded-full"
+                    >
+                      <div
+                        class="h-[14px] w-[14px] bg-[#000] rounded-full"
+                      ></div>
+                    </div>
+                    <p class="text-[12px] font-medium">TTL</p>
+                  </div>
+                </div>
+
+                <div
+                  class="flex flex-col items-center mt-2 justify-center gap-3"
+                >
+                  <div class="flex flex-col items-center">
+                    <div
+                      class="h-[24px] w-[24px] border-[4px] relative shadow-black shadow-lg border-black bg-[#ffff00] rounded-full"
+                    >
+                      <div
+                        class="w-1 h-2 absolute top-[50%] left-[40%] bg-black"
+                      ></div>
+                    </div>
+                    <p class="text-[12px] font-medium">GAIN</p>
+                  </div>
+                  <div class="flex flex-col items-center">
+                    <div
+                      class="h-[24px] w-[24px] relative border-[4px] shadow-black shadow-md border-black bg-[#ffff00] rounded-full"
+                    >
+                      <div
+                        class="w-1 h-2 absolute top-[50%] left-[40%] bg-black"
+                      ></div>
+                    </div>
+                    <p class="text-[12px] font-medium">fo</p>
+                  </div>
+                </div>
+                <!--  -->
+                <div class="flex absolute bottom-0 w-full justify-around">
+                  <div class="flex flex-col items-center">
+                    <div
+                      class="h-[24px] w-[24px] flex justify-center items-center bg-[#ffff00] rounded-full"
+                    >
+                      <div
+                        class="h-[14px] w-[14px] bg-[#000] rounded-full"
+                      ></div>
+                    </div>
+                    <p class="text-[12px] font-medium">Vin</p>
+                  </div>
+                  <div class="flex flex-col items-center">
+                    <div
+                      class="h-[24px] w-[24px] flex justify-center items-center bg-[#ffff00] rounded-full"
+                    >
+                      <div
+                        class="h-[14px] w-[14px] bg-[#000] rounded-full"
+                      ></div>
+                    </div>
+                    <p class="text-[12px] font-medium">sin(wt)</p>
+                  </div>
+                </div>
+                <div class="absolute -bottom-28"></div>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-col grow-0 items-center">
+
+            <div class="flex w-full py-4 gap-2">
+              <div class="flex justify-center gap-1 items-center">
+                <p class="text-nowrap font-medium"></p>
+                <input
+                  class="border px-1 w-[142px] py-1 rounded-sm border-black"
+                  min="1"
+                  type="number"
+                  id="samplingFrequency_demod"
+                  value="10000"
+                  placeholder="sampling frequency in Hz"
+                />
+              </div>
+
+            </div>
+            <div class="flex py-2 gap-3 w-full">
+
+
+            </div>
+
+            <div class="flex py-1 gap-3 w-full">
+              <button
+                class="bg-blue-500 text-white py-[6px] px-3 text-sm rounded-md hover:scale-105"
+                onclick="generateRecoveredUSB()"
+              >
+                Generate Recovered Message Signal (from USB SSB-SC)
+              </button>
+              <button
+                class="bg-blue-500 text-white py-[6px] px-3 text-sm rounded-md hover:scale-105"
+                onclick="generateRecoveredLSB()"
+              >
+                Generate Recovered Message Signal (from LSB SSB-SC)
+              </button>
+			                <button
+                class="bg-blue-500 text-white py-[6px] px-3 text-sm rounded-md hover:scale-105"
+                onclick="frequencySpectrums()" id = "modtodemod"
+              >
+                Show Frequency Spectrums
+              </button>
+            </div>
+
+            <div class="plotSection">
+              <div
+                id="recoveredLSBPlot_demod"
+                class="w-[600px] max-h-[410px]"
+              ></div>
+              <div
+                id="recoveredUSBPlot_demod"
+                class="w-[600px] max-h-[410px]"
+              ></div>
+              <div id="lsbPlot_demod" class="w-[600px] max-h-[410px]"></div>
+              <div id="usbPlot_demod" class="w-[600px] max-h-[410px]"></div>
+              <div id="messagePlot_demod" class="w-[600px] max-h-[410px]"></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+	
+	    <div class="plot-container1">
+        <div id="plot-message" class="plot1"></div>
+<div id="plot-lower-sideband" style="width: 45%; display: inline-block;"></div>
+<div id="plot-upper-sideband" style="width: 45%; display: inline-block;"></div>
+
+        <div id="plot-demodulated" class="plot1"></div>
+    </div>
+
+	<script>
+	        function checkFrequencies() {
+            // Get values from input fields
+            let carrierFrequency = parseFloat(document.getElementById('carrierFrequency').value);
+            let messageFrequency = parseFloat(document.getElementById('messageFrequency').value);
+            
+            // Check the frequencies
+            if (carrierFrequency <= messageFrequency) {
+                alert("Carrier frequency should be greater than message frequency.");
+            } else {
+                console.log("Carrier frequency is greater than message frequency.");
+            }
+        }
+
+        // Function to attach event listeners to all buttons
+        function attachEventListeners() {
+            let buttons = document.querySelectorAll('button');
+            buttons.forEach(button => {
+                button.addEventListener('click', checkFrequencies);
+            });
+        }
+
+        // Attach event listeners when the DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', attachEventListeners);
+
+    </script>
+	
     <script>
+      function handleMessageFrequencyChange() {
+        const messageValue = parseFloat(
+          document.getElementById("messageFrequency").value
+        );
+        document.querySelector(".messageFrequencyDiv").innerHTML = messageValue;
+      }
+      function handleCarrierFrequencyChange() {
+        const messageValue = parseFloat(
+          document.getElementById("carrierFrequency").value
+        );
+        document.querySelector(".carrierFrequencyDiv").innerHTML = messageValue;
+      }
       // Generate Message Signal
       function generateMessage() {
-          const fm = parseFloat(document.getElementById('messageFrequency').value);
-          const F = parseFloat(document.getElementById('samplingFrequency').value);
-          const T = 1 / F;
-          const t = Array.from({ length: 2501 }, (_, i) => i * T);
-          const Am = 5;
-          const m = t.map(time => Am * Math.cos(2 * Math.PI * fm * time));
-          const trace = {
-              x: t,
-              y: m,
-              mode: 'lines',
-              name: 'Message Signal'
-          };
-          const layout = {
-              title: 'Message Signal',
-              xaxis: {
-                  title: 'Time (s)'
-              },
-              yaxis: {
-                  title: 'Amplitude'
-              }
-          };
-          Plotly.newPlot('messagePlot', [trace], layout);
+        const fm = parseFloat(
+          document.getElementById("messageFrequency").value
+        );
+        const F = 10*parseFloat(
+          document.getElementById("carrierFrequency").value
+        );
+        const T = 1 / F;
+        const t = Array.from({ length: F }, (_, i) => i * T);
+        const Am = 1;
+        const m = t.map((time) => Am * Math.cos(2 * Math.PI * fm * time));
+        const trace = {
+          x: t,
+          y: m,
+          mode: "lines",
+          name: "Message Signal",
+        };
+        const layout = {
+          title: "Message Signal",
+          xaxis: {
+            title: "Time (s)",
+          },
+          yaxis: {
+            title: "Amplitude",
+          },
+        };
+        Plotly.newPlot("messagePlot", [trace], layout);
       }
-      
+
       // Generate Carrier Signal
       function generateCarrier() {
-          const fc = parseFloat(document.getElementById('carrierFrequency').value);
-          const F = parseFloat(document.getElementById('samplingFrequency').value);
-          const T = 1 / F;
-          const t = Array.from({ length: 2501 }, (_, i) => i * T);
-          const c = t.map(time => Math.cos(2 * Math.PI * fc * time));
-          const trace = {
-              x: t,
-              y: c,
-              mode: 'lines',
-              name: 'Carrier Signal'
-          };
-          const layout = {
-              title: 'Carrier Signal',
-              xaxis: {
-                  title: 'Time (s)'
-              },
-              yaxis: {
-                  title: 'Amplitude'
-              }
-          };
-          Plotly.newPlot('usbPlot', [trace], layout);
+        const fc = parseFloat(
+          document.getElementById("carrierFrequency").value
+        );
+        const F = parseFloat(
+          document.getElementById("samplingFrequency").value
+        );
+        const T = 1 / F;
+        const t = Array.from({ length: F }, (_, i) => i * T);
+        const c = t.map((time) => Math.cos(2 * Math.PI * fc * time));
+        const trace = {
+          x: t,
+          y: c,
+          mode: "lines",
+          name: "Carrier Signal",
+        };
+        const layout = {
+          title: "Carrier Signal",
+          xaxis: {
+            title: "Time (s)",
+          },
+          yaxis: {
+            title: "Amplitude",
+          },
+        };
+        Plotly.newPlot("usbPlot", [trace], layout);
       }
-      
+
       // Generate Upper Sideband SSB-SC Signal
       function generateUpperSSBSC() {
-          const fm = parseFloat(document.getElementById('messageFrequency').value);
-          const fc = parseFloat(document.getElementById('carrierFrequency').value);
-          const F = parseFloat(document.getElementById('samplingFrequency').value);
-          const T = 1 / F;
-          const t = Array.from({ length: 2501 }, (_, i) => i * T);
-          const Am = 5;
-          const m = t.map(time => Am * Math.cos(2 * Math.PI * fm * time));
-          const y1 = m.map((sample, index) => sample * Math.cos(2 * Math.PI * fc * t[index]));
-          const y2 = m.map((sample, index) => Math.sin(2 * Math.PI * fc * (t[index] + Math.PI / 2)) * Math.sin(2 * Math.PI * fc * t[index]));
-          const x = y1.map((sample, index) => sample - y2[index]);
-          const trace = {
-              x: t,
-              y: x,
-              mode: 'lines',
-              name: 'Upper Sideband SSB-SC Signal'
-          };
-          const layout = {
-              title: 'Upper Sideband SSB-SC Signal',
-              xaxis: {
-                  title: 'Time (s)'
-              },
-              yaxis: {
-                  title: 'Amplitude'
-              }
-          };
-          Plotly.newPlot('lsbPlot', [trace], layout);
+        const fm = parseFloat(
+          document.getElementById("messageFrequency").value
+        );
+        const fc = parseFloat(
+          document.getElementById("carrierFrequency").value
+        );
+        const F = parseFloat(
+          document.getElementById("samplingFrequency").value
+        );
+        const T = 1 / F;
+        const t = Array.from({ length: F }, (_, i) => i * T);
+        const Am = 1;
+        const m = t.map((time) => Am * Math.cos(2 * Math.PI * fm * time));
+        const y1 = m.map(
+          (sample, index) => sample * Math.cos(2 * Math.PI * fc * t[index])
+        );
+        const y2 = m.map(
+          (sample, index) =>
+            Math.sin(2 * Math.PI * fc * (t[index] + Math.PI / 2)) *
+            Math.sin(2 * Math.PI * fc * t[index])
+        );
+        const x = y1.map((sample, index) => sample - y2[index]);
+        const trace = {
+          x: t,
+          y: x,
+          mode: "lines",
+          name: "Upper Sideband SSB-SC Signal",
+        };
+        const layout = {
+          title: "Upper Sideband SSB-SC Signal",
+          xaxis: {
+            title: "Time (s)",
+          },
+          yaxis: {
+            title: "Amplitude",
+          },
+        };
+        Plotly.newPlot("lsbPlot", [trace], layout);
       }
-      
+
       // Generate Lower Sideband SSB-SC Signal
       function generateLowerSSBSC() {
-          const fm = parseFloat(document.getElementById('messageFrequency').value);
-          const fc = parseFloat(document.getElementById('carrierFrequency').value);
-          const F = parseFloat(document.getElementById('samplingFrequency').value);
-          const T = 1 / F;
-          const t = Array.from({ length: 2501 }, (_, i) => i * T);
-          const Am = 5;
-          const m = t.map(time => Am * Math.cos(2 * Math.PI * fm * time));
-          const y1 = m.map((sample, index) => sample * Math.cos(2 * Math.PI * fc * t[index]));
-          const y2 = m.map((sample, index) => Math.sin(2 * Math.PI * fc * (t[index] + Math.PI / 2)) * Math.sin(2 * Math.PI * fc * t[index]));
-          const x = y1.map((sample, index) => sample + y2[index]);
-          const trace = {
-              x: t,
-              y: x,
-              mode: 'lines',
-              name: 'Lower Sideband SSB-SC Signal'
-          };
-          const layout = {
-              title: 'Lower Sideband SSB-SC Signal',
-              xaxis: {
-                  title: 'Time (s)'
-              },
-              yaxis: {
-                  title: 'Amplitude'
-              }
-          };
-          Plotly.newPlot('recoveredUSBPlot', [trace], layout);
+        const fm = parseFloat(
+          document.getElementById("messageFrequency").value
+        );
+        const fc = parseFloat(
+          document.getElementById("carrierFrequency").value
+        );
+        const F = parseFloat(
+          document.getElementById("samplingFrequency").value
+        );
+        const T = 1 / F;
+        const t = Array.from({ length: F }, (_, i) => i * T);
+        const Am = 1;
+        const m = t.map((time) => Am * Math.cos(2 * Math.PI * fm * time));
+        const y1 = m.map(
+          (sample, index) => sample * Math.cos(2 * Math.PI * fc * t[index])
+        );
+        const y2 = m.map(
+          (sample, index) =>
+            Math.sin(2 * Math.PI * fc * (t[index] + Math.PI / 2)) *
+            Math.sin(2 * Math.PI * fc * t[index])
+        );
+        const x = y1.map((sample, index) => sample + y2[index]);
+        const trace = {
+          x: t,
+          y: x,
+          mode: "lines",
+          name: "Lower Sideband SSB-SC Signal",
+        };
+        const layout = {
+          title: "Lower Sideband SSB-SC Signal",
+          xaxis: {
+            title: "Time (s)",
+          },
+          yaxis: {
+            title: "Amplitude",
+          },
+        };
+        Plotly.newPlot("recoveredUSBPlot", [trace], layout);
       }
     </script>
+	
+	
+    <!--ssbsc demod script -->
+   <script>
+    let Am = 1; // Amplitude of message signal
+    let Ac = 1; // Amplitude of carrier wave
+    let fm = parseInt(document.getElementById("messageFrequency").value); // Frequency of message signal (Hz)
+    let fc = parseInt(document.getElementById("carrierFrequency").value); // Frequency of carrier wave (Hz)
+    let F = 10 * parseInt(document.getElementById("carrierFrequency").value); // Sampling frequency (Hz)
+    let T = 1 / F;
+    let t = Array.from({ length: F }, (_, i) => i * T); // Time vector
+
+    // Update parameters based on user input
+    function updateParameters() {
+      Am = parseFloat(document.getElementById("messageFrequency").value);
+      Ac = parseFloat(document.getElementById("carrierFrequency").value);
+      fm = parseFloat(document.getElementById("messageFrequency").value);
+      fc = parseFloat(document.getElementById("carrierFrequency").value);
+      F = 10 * parseFloat(document.getElementById("carrierFrequency").value);
+      T = 1 / F;
+      t = Array.from({ length: F }, (_, i) => i * T); // Time vector
+    }
+
+
+		
+    // Function to generate message signal
+    function generateMessage_demod() {
+      updateParameters();
+      const m = t.map((time) => Am * Math.cos(2 * Math.PI * fm * time));
+      const trace = {
+        x: t,
+        y: m,
+        mode: "lines",
+        name: "Message Signal",
+      };
+      Plotly.newPlot("messagePlot_demod", [trace], getLayout("Message Signal"));
+    }
+
+    // Function to generate upper sideband SSB-SC signal
+    function generateUpperSideband() {
+      updateParameters();
+      const m = t.map((time) => Am * Math.cos(2 * Math.PI * fm * time));
+      const c1 = t.map((time) => Math.cos(2 * Math.PI * fc * time));
+      const c2 = t.map((time) => Math.sin(2 * Math.PI * fc * time));
+      const y1 = m.map((sample, index) => sample * c1[index]);
+      const y2 = m.map(
+        (sample, index) =>
+          Math.sin(2 * Math.PI * fc * (t[index] + Math.PI / 2)) * c2[index]
+      ); // Quadrature component (90 degree phase shift)
+      const x_usb = y1.map((sample, index) => sample - y2[index]);
+      const trace = {
+        x: t,
+        y: x_usb,
+        mode: "lines",
+        name: "Upper Sideband SSB-SC Signal",
+      };
+      Plotly.newPlot("usbPlot_demod", [trace], getLayout("Upper Sideband SSB-SC Signal"));
+
+    }
+
+    // Function to generate lower sideband SSB-SC signal
+    function generateLowerSideband() {
+      updateParameters();
+      const m = t.map((time) => Am * Math.cos(2 * Math.PI * fm * time));
+      const c1 = t.map((time) => Math.cos(2 * Math.PI * fc * time));
+      const c2 = t.map((time) => Math.sin(2 * Math.PI * fc * time));
+      const y1 = m.map((sample, index) => sample * c1[index]);
+      const y2 = m.map(
+        (sample, index) =>
+          Math.sin(2 * Math.PI * fc * (t[index] + Math.PI / 2)) * c2[index]
+      ); // Quadrature component (90 degree phase shift)
+      const x_lsb = y1.map((sample, index) => sample + y2[index]);
+      const trace = {
+        x: t,
+        y: x_lsb,
+        mode: "lines",
+        name: "Lower Sideband SSB-SC Signal",
+      };
+      Plotly.newPlot("lsbPlot_demod", [trace], getLayout("Lower Sideband SSB-SC Signal"));
+    }
+
+    // Function to generate recovered message signal from upper sideband
+    function generateRecoveredUSB() {
+      updateParameters();
+      const m = t.map((time) => Am * Math.cos(2 * Math.PI * fm * time));
+      const c1 = t.map((time) => Math.cos(2 * Math.PI * fc * time));
+      const y1 = m.map((sample, index) => sample * c1[index]);
+      const y2 = m.map(
+        (sample, index) =>
+          Math.sin(2 * Math.PI * fc * (t[index] + Math.PI / 2)) * c1[index]
+      ); // Quadrature component (90 degree phase shift)
+      const x_usb = y1.map((sample, index) => sample - y2[index]);
+      const demodulated_usb = x_usb.map(
+        (sample, index) => sample * c1[index]
+      ); // Demodulate by multiplying with carrier
+      const windowSize = 21; // Adjust window size as needed
+      const recovered_message_usb = movingAverage(demodulated_usb, windowSize); // Apply low-pass filter
+      const normalized_message_usb = normalizeSignal(recovered_message_usb); // Normalize
+      const trace = {
+        x: t,
+        y: normalized_message_usb,
+        mode: "lines",
+        name: "Recovered Message Signal from Upper Sideband",
+      };
+      Plotly.newPlot("recoveredUSBPlot_demod", [trace], getLayout("Recovered Message Signal from Upper Sideband SSB-SC"));
+	  document.getElementById('modtodemod').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Function to generate recovered message signal from lower sideband
+    function generateRecoveredLSB() {
+      updateParameters();
+      const m = t.map((time) => Am * Math.cos(2 * Math.PI * fm * time));
+      const c1 = t.map((time) => Math.cos(2 * Math.PI * fc * time));
+      const y1 = m.map((sample, index) => sample * c1[index]);
+      const y2 = m.map(
+        (sample, index) =>
+          Math.sin(2 * Math.PI * fc * (t[index] + Math.PI / 2)) * c1[index]
+      ); // Quadrature component (90 degree phase shift)
+      const x_lsb = y1.map((sample, index) => sample + y2[index]);
+      const demodulated_lsb = x_lsb.map(
+        (sample, index) => sample * c1[index]
+      ); // Demodulate by multiplying with carrier
+      const windowSize = 21; // Adjust window size as needed
+      const recovered_message_lsb = movingAverage(demodulated_lsb, windowSize); // Apply low-pass filter
+      const normalized_message_lsb = normalizeSignal(recovered_message_lsb); // Normalize
+      const trace = {
+        x: t,
+        y: normalized_message_lsb,
+        mode: "lines",
+        name: "Recovered Message Signal from Lower Sideband",
+      };
+      Plotly.newPlot("recoveredLSBPlot_demod", [trace], getLayout("Recovered Message Signal from Lower Sideband SSB-SC"));
+    }
+
+    // Function to normalize a signal to range -1 to +1
+    function normalizeSignal(signal) {
+      const max = Math.max(...signal);
+      const min = Math.min(...signal);
+      return signal.map(value => 2 * (value - min) / (max - min) - 1);
+    }
+
+    // Simple Moving Average (SMA) low-pass filter function
+    function movingAverage(signal, windowSize) {
+      const filteredSignal = [];
+      for (let i = 0; i < signal.length; i++) {
+        const start = Math.max(0, i - Math.floor(windowSize / 2));
+        const end = Math.min(signal.length - 1, i + Math.floor(windowSize / 2));
+        const sum = signal.slice(start, end + 1).reduce((acc, val) => acc + val, 0);
+        const average = sum / (end - start + 1);
+        filteredSignal.push(average);
+      }
+      return filteredSignal;
+    }
+	
+
+    // Function to generate layout
+    function getLayout(title) {
+      return {
+        title: title,
+        xaxis: {
+          title: "Time (s)",
+        },
+        yaxis: {
+          title: "Amplitude",
+        },
+      };
+	  
+
+    }
+  </script>
+	
+	<script>
+	function frequencySpectrums() {
+    // Get user inputs
+    const carrierFrequency = parseFloat(document.getElementById('carrierFrequency').value);
+    const messageFrequency = parseFloat(document.getElementById('messageFrequency').value);
+
+    // Calculate sideband frequencies
+    const lowerSidebandFrequency = carrierFrequency - messageFrequency;
+    const upperSidebandFrequency = carrierFrequency + messageFrequency;
+
+    // Define the magnitudes for each frequency component
+    const lowerSideband = { frequency: lowerSidebandFrequency, magnitude: 0.5, label: 'Lower Sideband' };
+    const upperSideband = { frequency: upperSidebandFrequency, magnitude: 0.5, label: 'Upper Sideband' };
+
+    // Create trace for the lower sideband
+    const traceLowerSideband = {
+        x: [lowerSideband.frequency, lowerSideband.frequency],
+        y: [0, lowerSideband.magnitude],
+        mode: 'lines',
+        type: 'scatter',
+        line: {
+            width: 3,
+            color: 'blue'
+        },
+        name: lowerSideband.label
+    };
+
+    // Create trace for the upper sideband
+    const traceUpperSideband = {
+        x: [upperSideband.frequency, upperSideband.frequency],
+        y: [0, upperSideband.magnitude],
+        mode: 'lines',
+        type: 'scatter',
+        line: {
+            width: 3,
+            color: 'red'
+        },
+        name: upperSideband.label
+    };
+
+    // Create trace for the message signal spectrum
+    const traceMessageSignal = {
+        x: [messageFrequency, messageFrequency],
+        y: [0, 1], // Amplitude of 1
+        mode: 'lines',
+        type: 'scatter',
+        line: {
+            width: 3,
+            color: 'green'
+        },
+        name: 'Message Signal'
+    };
+
+    // Create trace for the demodulated signal spectrum
+    const traceDemodulatedSignal = {
+        x: [messageFrequency, messageFrequency],
+        y: [0, 1], // Amplitude of 1
+        mode: 'lines',
+        type: 'scatter',
+        line: {
+            width: 3,
+            color: 'orange'
+        },
+        name: 'Demodulated Signal'
+    };
+
+    // Define layouts for each plot
+    const layoutLowerSideband = {
+        title: 'Lower Sideband SSB-SC Spectrum',
+        xaxis: {
+            title: 'Frequency (Hz)',
+            showgrid: true,
+            zeroline: true,
+            range: [lowerSidebandFrequency - 10, lowerSidebandFrequency + 10]
+        },
+        yaxis: {
+            title: 'Magnitude',
+            showgrid: true,
+            zeroline: true,
+            range: [0, 1.2]
+        }
+    };
+
+    const layoutUpperSideband = {
+        title: 'Upper Sideband SSb-SC Spectrum',
+        xaxis: {
+            title: 'Frequency (Hz)',
+            showgrid: true,
+            zeroline: true,
+            range: [upperSidebandFrequency - 10, upperSidebandFrequency + 10]
+        },
+        yaxis: {
+            title: 'Magnitude',
+            showgrid: true,
+            zeroline: true,
+            range: [0, 1.2]
+        }
+    };
+
+    const layoutMessage = {
+        title: 'Message Signal Spectrum',
+        xaxis: {
+            title: 'Frequency (Hz)',
+            showgrid: true,
+            zeroline: true,
+            range: [messageFrequency - 10, messageFrequency + 10]
+        },
+        yaxis: {
+            title: 'Magnitude',
+            showgrid: true,
+            zeroline: true,
+            range: [0, 1.2]
+        }
+    };
+
+    const layoutDemodulated = {
+        title: 'Demodulated Signal Spectrum',
+        xaxis: {
+            title: 'Frequency (Hz)',
+            showgrid: true,
+            zeroline: true,
+            range: [messageFrequency - 10, messageFrequency + 10]
+        },
+        yaxis: {
+            title: 'Magnitude',
+            showgrid: true,
+            zeroline: true,
+            range: [0, 1.2]
+        }
+    };
+
+    // Render the plots
+    Plotly.newPlot('plot-message', [traceMessageSignal], layoutMessage);
+    Plotly.newPlot('plot-lower-sideband', [traceLowerSideband], layoutLowerSideband);
+    Plotly.newPlot('plot-upper-sideband', [traceUpperSideband], layoutUpperSideband);
+    Plotly.newPlot('plot-demodulated', [traceDemodulatedSignal], layoutDemodulated);
+
+    // Smooth scroll to the plot container
+    document.querySelector('.plot-container1').scrollIntoView({ behavior: 'smooth' });
+}
+
+	</script>
+	
+    <style>
+      #cutoff, #samplingFrequency,  #samplingFrequency_demod {
+        display: none;
+}
+      .container {
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        padding: 20px 40px;
+        max-width: 1000px; /* Increased max-width to fit three plots side by side */
+        margin: 0 auto; /* Center the container */
+        text-align: center;
+      }
+
+      h1 {
+        color: #333;
+        font-size: 22px; /* Increased font size */
+        margin-bottom: 20px;
+      }
+
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      li {
+        background-color: #e0e7ff;
+        margin: 5px 0;
+        padding: 5px;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        font-size: 14px; /* Set font size for list items */
+      }
+
+      li::before {
+        content: "✔";
+        color: #4caf50;
+        margin-right: 10px;
+      }
+
+      .plot-container {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px; /* Add space between plots */
+        flex-wrap: wrap; /* Allow wrapping for smaller screens */
+        margin-bottom: 20px; /* Add space below the plots */
+      }
+
+      .plot {
+        flex: 1 1 calc(33.33% - 20px); /* Responsive width for three plots side by side */
+        min-width: 300px; /* Minimum width to ensure responsiveness */
+        height: 400px;
+      }
+	  
+	     .plot-container1 {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        .plot1 {
+            width: 30%;
+            height: 400px; /* Adjust height as needed */
+            margin: 10px;
+        }
+    </style>
   </body>
 </html>
