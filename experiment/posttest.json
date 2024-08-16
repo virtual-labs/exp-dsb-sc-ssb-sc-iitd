@@ -2,38 +2,191 @@
   "version": 2.0,
   "questions": [
     {
-      "question": "This is a Sample Question 1?",
+      "question": "In a DSB-SC modulation scheme, if the message signal contains frequency components up to 5 kHz, what is the minimum sampling frequency required to avoid aliasing according to the Nyquist theorem?",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
+        "a": "5 kHz",
+        "b": "10 kHz",
+        "c": "15 kHz",
+        "d": "20 kHz"
       },
       "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
+        "a": "5 kHz is not sufficient as it is less than twice the highest frequency component.",
+        "b": "According to the Nyquist theorem, the minimum sampling frequency should be twice the highest frequency component, which is 10 kHz.",
+        "c": "15 kHz exceeds the Nyquist requirement but is not the minimum necessary.",
+        "d": "20 kHz would be appropriate for higher frequency signals, but not required for a 5 kHz message signal."
       },
-      "correctAnswer": "a",
-      "difficulty": "beginner"
+      "correctAnswer": "b",
+      "difficulty": "hard"
     },
     {
-      "question": "This is a Sample Question 2?",
+      "question": "How does the phase shift of the local oscillator affect the demodulation of an SSB-SC signal?",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
+        "a": "The phase shift must match exactly the phase shift of the original modulating signal for optimal demodulation.",
+        "b": "The phase shift of the local oscillator does not affect the demodulation of an SSB-SC signal.",
+        "c": "The phase shift of the local oscillator enhances the signal-to-noise ratio of the demodulated output.",
+        "d": "An incorrect phase shift can result in significant distortion or loss of the message signal."
       },
       "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
+        "a": "Exact phase matching is crucial for coherent demodulation, but phase shift errors can still cause issues.",
+        "b": "Phase shift is critical in coherent detection and affects the signal quality.",
+        "c": "Phase shift does not directly impact the signal-to-noise ratio in SSB-SC demodulation.",
+        "d": "An incorrect phase shift in the local oscillator can cause distortion or complete loss of the original message signal during demodulation."
+      },
+      "correctAnswer": "d",
+      "difficulty": "hard"
+    },
+    {
+      "question": "What is the impact of a non-ideal filter on the recovered message signal in an SSB-SC system?",
+      "answers": {
+        "a": "Non-ideal filtering reduces the overall signal power but preserves the message signal shape.",
+        "b": "Non-ideal filtering enhances the signal-to-noise ratio by removing unwanted frequencies.",
+        "c": "Non-ideal filtering can introduce distortions such as frequency distortions or amplitude variations.",
+        "d": "Non-ideal filtering does not affect the message signal if the filter's cutoff is set properly."
+      },
+      "explanations": {
+        "a": "Signal power reduction is a factor, but distortions are more significant.",
+        "b": "Non-ideal filtering generally does not enhance signal-to-noise ratio but can introduce additional noise or distortion.",
+        "c": "Non-ideal filtering can lead to distortions including frequency distortions and amplitude variations, affecting the quality of the recovered signal.",
+        "d": "Even with proper cutoff, non-ideal filters can still introduce artifacts."
       },
       "correctAnswer": "c",
-      "difficulty": "beginner"
+      "difficulty": "hard"
+    },
+    {
+      "question": "In a DSB-SC system, what is the effect of phase mismatch between the transmitted and received carrier signals during demodulation?",
+      "answers": {
+        "a": "Phase mismatch only affects the frequency of the output signal without altering its amplitude.",
+        "b": "Phase mismatch results in a reduction of the output signal amplitude and introduces significant distortion.",
+        "c": "Phase mismatch does not affect the demodulation process if the amplitude of the received signal is sufficient.",
+        "d": "Phase mismatch results in an increase in the overall signal power."
+      },
+      "explanations": {
+        "a": "Frequency changes alone are not the primary concern; amplitude and distortion are more critical.",
+        "b": "Phase mismatch in DSB-SC demodulation leads to reduced output amplitude and significant signal distortion.",
+        "c": "Sufficient amplitude does not compensate for the effects of phase mismatch.",
+        "d": "Phase mismatch typically reduces power and causes distortion rather than increasing power."
+      },
+      "correctAnswer": "b",
+      "difficulty": "hard"
+    },
+    {
+      "question": "What is the theoretical bandwidth requirement of an SSB-SC signal if the message signal bandwidth is 4 kHz?",
+      "answers": {
+        "a": "8 kHz",
+        "b": "1 kHz",
+        "c": "2 kHz",
+        "d": "4 kHz"
+      },
+      "explanations": {
+        "a": "8 kHz would be the bandwidth for a DSB-SC signal, not SSB-SC.",
+        "b": "1 kHz is not sufficient for a 4 kHz message signal.",
+        "c": "2 kHz would be the bandwidth for a narrower band signal or other modulation schemes.",
+        "d": "The theoretical bandwidth of an SSB-SC signal is equal to the bandwidth of the message signal, which is 4 kHz."
+      },
+      "correctAnswer": "d",
+      "difficulty": "hard"
+    },
+    {
+      "question": "How does the use of a balanced modulator impact the performance of a DSB-SC system?",
+      "answers": {
+        "a": "A balanced modulator increases the power of the carrier signal in the output.",
+        "b": "A balanced modulator helps suppress the carrier and reduces unwanted spurious signals.",
+        "c": "A balanced modulator simplifies the receiver design by eliminating the need for coherent detection.",
+        "d": "A balanced modulator has no significant impact on the performance of the DSB-SC system."
+      },
+      "explanations": {
+        "a": "Carrier suppression is the goal, not an increase in carrier power.",
+        "b": "Balanced modulators are designed to suppress the carrier effectively, reducing spurious signals and improving overall performance.",
+        "c": "Balanced modulator does not eliminate the need for coherent detection but improves carrier suppression.",
+        "d": "Balanced modulators significantly impact performance by reducing carrier and spurious signals."
+      },
+      "correctAnswer": "b",
+      "difficulty": "hard"
+    },
+    {
+      "question": "In an SSB-SC system, what are the primary challenges faced in achieving perfect carrier suppression?",
+      "answers": {
+        "a": "Challenges are mainly related to the bandwidth of the message signal.",
+        "b": "Challenges involve the use of non-linear amplifiers in the transmission chain.",
+        "c": "Challenges are associated with the power of the transmitted signal.",
+        "d": "Challenges include maintaining precise oscillator frequency and phase synchronization, and handling non-ideal components."
+      },
+      "explanations": {
+        "a": "Bandwidth is not the primary challenge for carrier suppression.",
+        "b": "Non-linear amplifiers are not the main concern for carrier suppression in SSB-SC.",
+        "c": "Signal power is not directly related to carrier suppression challenges.",
+        "d": "Perfect carrier suppression in SSB-SC requires precise control of oscillator frequency, phase synchronization, and handling non-ideal components."
+      },
+      "correctAnswer": "d",
+      "difficulty": "hard"
+    },
+    {
+      "question": "In DSB-SC modulation, what role does the Hilbert transform play in the signal processing chain?",
+      "answers": {
+        "a": "The Hilbert transform is used to create the analytic signal, which is crucial for generating the modulated signal.",
+        "b": "The Hilbert transform adjusts the amplitude of the signal to fit the desired modulation index.",
+        "c": "The Hilbert transform is used to filter out the carrier frequency from the modulated signal.",
+        "d": "The Hilbert transform is used to demodulate the DSB-SC signal directly."
+      },
+      "explanations": {
+        "a": "The Hilbert transform is used to create the analytic signal, essential for generating the modulated signal in DSB-SC modulation.",
+        "b": "Amplitude adjustment is not the role of the Hilbert transform.",
+        "c": "Filtering out the carrier is not the function of the Hilbert transform.",
+        "d": "Demodulation is not achieved directly by the Hilbert transform."
+      },
+      "correctAnswer": "a",
+      "difficulty": "hard"
+    },
+    {
+      "question": "For an SSB-SC signal, how can the presence of noise impact the phase detection process during demodulation?",
+      "answers": {
+        "a": "Noise improves phase detection by spreading the signal's frequency components.",
+        "b": "Noise will only affect the amplitude of the received signal, not the phase detection.",
+        "c": "Noise can cause phase jitter, leading to incorrect phase detection and loss of signal fidelity.",
+        "d": "Noise does not affect the phase detection if the signal-to-noise ratio is high."
+      },
+      "explanations": {
+        "a": "Noise typically introduces errors rather than improving detection.",
+        "b": "Noise affects both amplitude and phase, not just amplitude.",
+        "c": "Phase jitter due to noise can lead to significant errors in phase detection and degrade signal fidelity.",
+        "d": "Even with a high signal-to-noise ratio, noise can still affect phase detection."
+      },
+      "correctAnswer": "c",
+      "difficulty": "hard"
+    },
+    {
+      "question": "What is the main reason for using a synchronous detector in the reception of DSB-SC signals?",
+      "answers": {
+        "a": "A synchronous detector removes the need for a local oscillator in the demodulation process.",
+        "b": "A synchronous detector ensures that the carrier is properly aligned with the received signal, allowing accurate recovery of the message signal.",
+        "c": "A synchronous detector filters out any out-of-band noise from the received signal.",
+        "d": "A synchronous detector is used to amplify the received signal before further processing."
+      },
+      "explanations": {
+        "a": "A local oscillator is still needed; synchronous detection aligns the carrier for coherent demodulation.",
+        "b": "A synchronous detector aligns the carrier with the received signal to enable accurate demodulation and recovery of the message signal.",
+        "c": "Filtering out noise is not the main purpose of a synchronous detector.",
+        "d": "Amplification is not the primary function of a synchronous detector."
+      },
+      "correctAnswer": "b",
+      "difficulty": "hard"
+    },
+    {
+      "question": "In SSB-SC modulation, what is the primary reason for implementing a phase-locked loop (PLL) in the demodulation process?",
+      "answers": {
+        "a": "A PLL enhances the amplitude of the received SSB-SC signal for better visibility.",
+        "b": "A PLL is used to lock onto the carrier frequency and phase, ensuring accurate demodulation of the SSB-SC signal.",
+        "c": "A PLL eliminates the need for a coherent detector in the demodulation process.",
+        "d": "A PLL reduces the bandwidth of the demodulated signal to fit within system constraints."
+      },
+      "explanations": {
+        "a": "Phase-locked loops are not used to amplify signals but to synchronize phase and frequency.",
+        "b": "A PLL helps in locking onto the carrier frequency and phase, which is essential for accurate demodulation of SSB-SC signals.",
+        "c": "Coherent detection is still required; PLL assists in frequency and phase alignment.",
+        "d": "PLL does not directly affect bandwidth; it focuses on phase and frequency synchronization."
+      },
+      "correctAnswer": "b",
+      "difficulty": "hard"
     }
   ]
 }
