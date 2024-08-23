@@ -3,6 +3,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
+	    <script type="text/javascript" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
     <title>Virtual Labs</title>
     <link rel="stylesheet" href="../css/vlabs-style.css" />
     <link rel="shortcut icon" href="../images/favicon.ico" />
@@ -160,6 +163,25 @@
           >
             SSB-SC Modulation
           </h2>
+		  
+          <h3 class="text-[24px] font-semibold text-black">Theory</h3>		  
+		      <p>The SSB-SC modulated signal \( S(t) \) can be expressed as:</p>
+    <p>
+        \( S(t) = \frac{A_c}{2} \left[ m(t) \cos(2\pi f_c t) \pm \hat{m}(t) \sin(2\pi f_c t) \right] \)
+    </p>
+    <p>Where:</p>
+    <ul>
+        <li>\( A_c \) is the amplitude of the carrier signal.</li>
+        <li>\( m(t) \) is the baseband (modulating) signal.</li>
+        <li>\( f_c \) is the frequency of the carrier signal.</li>
+        <li>\( \hat{m}(t) \) is the Hilbert transform of the modulating signal \( m(t) \).</li>
+    </ul>
+    <p>
+        In SSB-SC modulation, either the upper sideband (USB) or the lower sideband (LSB) is transmitted by choosing the corresponding sign (plus or minus) in the equation.
+        The carrier \( A_c \cos(2\pi f_c t) \) is suppressed, and only one sideband is transmitted. This reduces the bandwidth required for transmission to half that of DSB-SC.
+    </p>
+    <br>
+	
           <h3 class="text-[24px] font-semibold text-black">Block Diagram</h3>
 
           <div class="flex justify-center">
@@ -322,6 +344,60 @@
               you cannot check results against theory</span
             >
           </div>
+
+
+<br>
+<hr>
+<br>
+         <h2
+            class="text-center pt-6 border-b pb-2 mb-2 text-[#2C99CE] text-[32px]"
+          >
+            SSB-SC Demodulation
+          </h2>
+          <h3 class="text-[24px] font-semibold text-black">Block Diagram</h3>
+
+          <div class="flex justify-center">
+            <img
+              src="../images/theory/ssbsc_demod1.png"
+              alt="ssbsc_demod1"
+              class="h-[280px]"
+            />
+          </div>
+          <p class="mb-4 text-center font-semibold text-black">Figure 1</p>
+          <h3 class="text-[24px] font-semibold text-black">Procedures :</h3>
+          <p class="ml-3">
+            <span class="font-semibold">1. </span> This is an asynchronous
+            demodulation process. Here frequency of the VCO is adjusted with the
+            frequency counter.
+
+            <br />
+            <span class="font-semibold">2. </span>It is quite easy to make small
+            frequency adjustments (fractions of a Hertz) by connecting a small
+            negative DC voltage into the VCO Vin input, and tuning with the GAIN
+            control.
+
+            <br />
+            <span class="font-semibold">3. </span>Here, VCO facilitates fine
+            tuning. Even if the frequency difference between the original
+            carrier frequency (e.g., 100 KHz) and the frequency of the VCO
+            differs by 10 Hz, then demodulated signal / speech will be quite
+            intelligible
+
+            <br />
+            <span class="font-semibold">4. </span>A recommended method of
+            showing the small frequency difference between the VCO and the 100
+            kHz reference is to display each on separate oscilloscope traces -
+            the speed of drift between the two gives an immediate and easily
+            recognised indication of the frequency difference.
+
+            <br />
+            <span class="font-semibold">5. </span>Connect an SSB signal, derived
+            from speech, to the input ‘X’ of the multiplier as shown in the
+            figure 1. Tune the VCO slowly around the 100 kHz region, and listen.
+            Report results. <br />
+            <br />
+          </p>
+
 
           <!--  -->
         </div>
