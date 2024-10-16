@@ -353,8 +353,8 @@
           <div class="flex flex-col grow-0 items-center">
             <div class="flex w-full py-4 gap-4">
 			                <div class="flex flex-col items-center">
-                  <p class="text-[13px] pb-1 text-center font-semibold">
-                    Message Frequency
+                  <p class="text-[13px] pb-1 text-center font-bold">
+                    Message Frequency (Hz)
                   </p>
                   <input
                     id="messageFrequency"
@@ -377,7 +377,7 @@
 				                <div>
                   <!-- carrier frequency -->
                   <div class="flex flex-col items-center">
-                    <p class="text-[13px] pb-1 font-bold">Carrier Frequency:</p>
+                    <p class="text-[13px] pb-1 font-bold">Carrier Frequency (Hz)</p>
                     <input
                       id="carrierFrequency"
                       value="100"
@@ -395,6 +395,23 @@
                     </button>
                   </div>
                 </div>
+				
+				<div>
+                  <!-- Gain -->
+                  <div class="flex flex-col items-center">
+                    <p class="text-[13px] pb-1 font-bold">Gain</p>
+                    <input
+                      id="gain"
+                      value="1"
+                      type="range"
+                      min="1"
+                      max="10"
+                      onchange="handleGainChange()"
+                    />
+                    <div class="leading-none gainDiv">1</div>
+                  </div>
+                </div>
+				
               <div class="flex items-center gap-2">
                 <p class="text-nowrap font-medium"></p>
                 <input
@@ -833,10 +850,17 @@
         );
         document.querySelector(".carrierFrequencyDiv").innerHTML = messageValue;
       }
+	  function handleGainChange() {
+        const gainValue = parseFloat(
+          document.getElementById("gain").value
+        );
+        document.querySelector(".gainDiv").innerHTML = gainValue;
+      }
       function dsbsc_modulation(
         messageFrequency,
         carrierFrequency,
-        samplingFrequency
+        samplingFrequency,
+		gain
       ) {
         const numSamples = samplingFrequency;
         const x_values = Array.from(
@@ -844,7 +868,7 @@
           (_, i) => i / numSamples
         );
         const message_signal = x_values.map((x) =>
-          Math.sin(2 * Math.PI * messageFrequency * x)
+          gain*Math.sin(2 * Math.PI * messageFrequency * x)
         );
         const carrier_signal = x_values.map((x) =>
           Math.cos(2 * Math.PI * carrierFrequency * x)
@@ -924,14 +948,20 @@
         const carrierFrequency = parseFloat(
           document.getElementById("carrierFrequency").value
         );
-        const samplingFrequency = parseFloat(
-          document.getElementById("samplingFrequency").value
+
+                const samplingFrequency = 100 * parseFloat(
+          document.getElementById("carrierFrequency").value
+        );
+		
+		        const gain = parseFloat(
+          document.getElementById("gain").value
         );
 
         const result = dsbsc_modulation(
           messageFrequency,
           carrierFrequency,
-          samplingFrequency
+          samplingFrequency,
+		  gain
         );
         plotGraph(result, "messagePlotCanvas");
       }
@@ -965,11 +995,14 @@
         const samplingFrequency = 100 * parseFloat(
           document.getElementById("carrierFrequency").value
         );
-
+        const gain = parseFloat(
+          document.getElementById("gain").value
+        );
         const result = dsbsc_modulation(
           messageFrequency,
           carrierFrequency,
-          samplingFrequency
+          samplingFrequency,
+		  gain
         );
         plotGraph(result, "dsbscPlotCanvas");
       }
@@ -1128,7 +1161,7 @@
                         y: {
                             title: {
                                 display: true,
-                                text: "Amplitude",
+                                text: "Normalized Amplitude",
                             },
                         },
                     },
@@ -1218,7 +1251,7 @@
                         y: {
                             title: {
                                 display: true,
-                                text: "Amplitude",
+                                text: "Normalized Amplitude",
                             },
                         },
                     },
@@ -1264,6 +1297,9 @@
 	
 	
   <script>
+  	 			function log10(value) {
+    return Math.log(value) / Math.log(10);
+}
         function handleMessageFrequencyChange_demod() {
             const messageFrequencyValue = parseFloat(
                 document.getElementById("messageFrequency").value
@@ -1277,19 +1313,27 @@
             );
             document.querySelector(".carrierFrequencyDiv").innerHTML = carrierFrequencyValue;
         }
+		
+		        function handleGainChange() {
+            const gainValue = parseFloat(
+                document.getElementById("gain").value
+            );
+            document.querySelector(".gainDiv").innerHTML = gainValue;
+        }
 
         function frequencySpectrums() {
             // Get user inputs
             const carrierFrequency = parseFloat(document.getElementById('carrierFrequency').value);
             const messageFrequency = parseFloat(document.getElementById('messageFrequency').value);
+			const gain = parseFloat(document.getElementById('gain').value);
 
             // Calculate sideband frequencies
             const lowerSidebandFrequency = carrierFrequency - messageFrequency;
             const upperSidebandFrequency = carrierFrequency + messageFrequency;
 
             // Define the magnitudes for each frequency component
-            const lowerSideband = { frequency: lowerSidebandFrequency, magnitude: 0.5, label: 'Lower Sideband' };
-            const upperSideband = { frequency: upperSidebandFrequency, magnitude: 0.5, label: 'Upper Sideband' };
+            const lowerSideband = { frequency: lowerSidebandFrequency, magnitude: 10*log10(((0.5*gain)**2)/2), label: 'Lower Sideband' };
+            const upperSideband = { frequency: upperSidebandFrequency, magnitude: 10*log10(((0.5*gain)**2)/2), label: 'Upper Sideband' };
 
             // Create trace for the lower sideband
             const traceLowerSideband = {
@@ -1320,7 +1364,7 @@
             // Create trace for the message signal spectrum
             const traceMessageSignal = {
                 x: [messageFrequency, messageFrequency],
-                y: [0, 1], // Amplitude of 1
+                y: [0, 10*log10(((1*gain)**2)/2)], // Amplitude of 1
                 mode: 'lines',
                 type: 'scatter',
                 line: {
@@ -1333,7 +1377,7 @@
             // Create trace for the demodulated signal spectrum
             const traceDemodulatedSignal = {
                 x: [messageFrequency, messageFrequency],
-                y: [0, 1], // Amplitude of 1
+                y: [0, 10*log10((1**2)/2)], // Amplitude of 1
                 mode: 'lines',
                 type: 'scatter',
                 line: {
@@ -1353,10 +1397,10 @@
                     range: [lowerSidebandFrequency - 10, upperSidebandFrequency + 10]
                 },
                 yaxis: {
-                    title: 'Magnitude',
+                    title: 'Normalized PSD (dB/Hz)',
                     showgrid: true,
                     zeroline: true,
-                    range: [0, 1.2]
+                    //range: [0, 1.2]
                 },
                 legend: {
                     x: 1,
@@ -1382,10 +1426,10 @@
                     range: [messageFrequency - 10, messageFrequency + 10]
                 },
                 yaxis: {
-                    title: 'Magnitude',
+                    title: 'Normalized PSD (dB/Hz)',
                     showgrid: true,
                     zeroline: true,
-                    range: [0, 1.2]
+                    //range: [0, 1.2]
                 }
             };
 
@@ -1398,10 +1442,10 @@
                     range: [messageFrequency - 10, messageFrequency + 10]
                 },
                 yaxis: {
-                    title: 'Magnitude',
+                    title: 'Normalized PSD (dB/Hz)',
                     showgrid: true,
                     zeroline: true,
-                    range: [0, 1.2]
+                    //range: [0, 1.2]
                 }
             };
 
