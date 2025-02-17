@@ -468,13 +468,13 @@
         <div class="flex flex-shrink-0">
           <div class="relative w-[700px] py-2">
             <div
-              class="absolute bg-[#ffff00] h-[228px] w-2 rounded-md top-[240px] left-[210px]"
+              class="absolute bg-[#ffff00] h-[275px] w-2 rounded-md top-[190px] left-[210px]"
             ></div>
             <div
-              class="absolute bg-[#ff0000] h-[74px] w-2 rounded-md top-[130px] left-[210px]"
+              class="absolute bg-[#ff0000] h-[17px] w-2 rounded-md top-[130px] left-[210px]"
             ></div>
             <div
-              class="z-10 absolute bg-[#ffff00] h-2 w-[72px] rounded-md top-[240px] left-[144px]"
+              class="z-10 absolute bg-[#ffff00] h-2 w-[72px] rounded-md top-[185px] left-[144px]"
             ></div>
             <div
               class="z-10 absolute bg-[#0000ff] h-2 w-[186px] rounded-md top-[252px] left-[384px]"
@@ -508,7 +508,7 @@
             ></div>
 
             <div
-              class="z-10 absolute bg-[#ff0000] h-2 w-[70px] rounded-md top-[198px] left-[148px]"
+              class="z-10 absolute bg-[#ff0000] h-2 w-[70px] rounded-md top-[143px] left-[148px]"
             ></div>
             <div
               class="z-10 absolute bg-[#ffff00] h-2 w-[110px] rounded-md top-[460px] left-[210px]"
@@ -810,32 +810,47 @@
         <div id="plot-demodulated" class="plot1"></div>
     </div>
 	
-	<script>
-	        function checkFrequencies() {
-            // Get values from input fields
-            let carrierFrequency = parseFloat(document.getElementById('carrierFrequency').value);
-            let messageFrequency = parseFloat(document.getElementById('messageFrequency').value);
-            
-            // Check the frequencies
-            if (carrierFrequency <= messageFrequency) {
-                alert("Carrier frequency should be greater than message frequency.");
-            } else {
-                console.log("Carrier frequency is greater than message frequency.");
-            }
-        }
+<script>
+    function checkFrequencies() {
+        // Get values from input fields
+        let carrierFrequency = parseFloat(document.getElementById('carrierFrequency').value);
+        let messageFrequency = parseFloat(document.getElementById('messageFrequency').value);
 
-        // Function to attach event listeners to all buttons
-        function attachEventListeners() {
+        // Check the frequencies
+        if (carrierFrequency <= messageFrequency) {
+            alert("Carrier frequency should be greater than message frequency.");
+            
+            // Disable buttons after alert to prevent further execution
             let buttons = document.querySelectorAll('button');
             buttons.forEach(button => {
-                button.addEventListener('click', checkFrequencies);
+                button.disabled = true;
             });
+            
+            // Hard refresh the page after the alert is dismissed
+            setTimeout(() => {
+                window.location.href = window.location.href; // This forces a hard reload
+            }, 0); // Set a small delay to allow the alert to be dismissed first
+
+            return;  // Stop further execution of the code
+        } else {
+            console.log("Carrier frequency is greater than message frequency.");
         }
+    }
 
-        // Attach event listeners when the DOM is fully loaded
-        document.addEventListener('DOMContentLoaded', attachEventListeners);
+    // Function to attach event listeners to all buttons
+    function attachEventListeners() {
+        let buttons = document.querySelectorAll('button');
+        buttons.forEach(button => {
+            button.addEventListener('click', checkFrequencies);
+        });
+    }
 
-    </script>
+    // Attach event listeners when the DOM is fully loaded
+    document.addEventListener('DOMContentLoaded', attachEventListeners);
+</script>
+
+
+
 	
     <script>
       function handleMessageFrequencyChange() {
@@ -927,7 +942,7 @@
               x: {
                 title: {
                   display: true,
-                  text: "Time",
+                  text: "Time (s)",
                 },
               },
               y: {
@@ -1155,7 +1170,7 @@
                         x: {
                             title: {
                                 display: true,
-                                text: "Time",
+                                text: "Time (s)",
                             },
                         },
                         y: {
@@ -1200,7 +1215,7 @@
                         x: {
                             title: {
                                 display: true,
-                                text: "Time",
+                                text: "Time (s)",
                             },
                         },
                         y: {
@@ -1245,7 +1260,7 @@
                         x: {
                             title: {
                                 display: true,
-                                text: "Time",
+                                text: "Time (s)",
                             },
                         },
                         y: {
