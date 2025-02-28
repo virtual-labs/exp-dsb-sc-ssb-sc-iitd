@@ -95,12 +95,12 @@
         "d": "Band-stop filter"
       },
       "explanations": {
-        "a": "Band-pass filters are used in SSB-SC to recover the message signal from the modulated signal.",
-        "b": "Low-pass filters are not suitable for extracting the message signal from SSB-SC.",
+        "a": "Band-pass filters are not used in SSB-SC to recover the message signal from the modulated signal.",
+        "b": "Low-pass filters are suitable for extracting the message signal from SSB-SC.",
         "c": "High-pass filters are not appropriate for SSB-SC signal extraction.",
         "d": "Band-stop filters are used for eliminating specific frequencies, not for SSB-SC extraction."
       },
-      "correctAnswer": "a",
+      "correctAnswer": "b",
       "difficulty": "intermediate"
     },
     {
