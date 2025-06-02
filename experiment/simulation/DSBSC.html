@@ -12,7 +12,7 @@
     <div class="flex min-h-[80vh]">
       <div class="px-6 pb-6 flex-1">
         <div id="container">
-          <h1>Instructions for DSBSC Modulation</h1>
+          <h1>Instructions for Double Sideband Suppressed Carrier (DSB-SC) Modulation</h1>
           <ul>
             <li>
               Step 1: Click on 'Generate Message' button to generate input
@@ -34,372 +34,17 @@
           <br />
         </div>
 
-        <div class="flex flex-shrink-0">
-          <div class="relative w-[700px] py-2">
-            <!-- <div
-              class="absolute bg-[#ff0000] h-2 w-[650px] rounded-md top-1 left-14"
-            ></div> -->
-            <div
-              class="absolute bg-[#ff0000] h-[134px] w-2 rounded-md top-1 right-[216px]"
-            ></div>
-            <div
-              class="z-10 absolute bg-[#ff0000] h-2 w-[84px] rounded-md top-[130px] right-[136px]"
-            ></div>
-            <div
-              class="z-10 absolute bg-[#ff0000] h-2 w-[100px] rounded-md top-[96px] right-[222px]"
-            ></div>
-            <div
-              class="absolute bg-[#ffff00] h-[150px] w-2 rounded-md top-[444px] right-[216px]"
-            ></div>
-            <div
-              class="z-10 absolute bg-[#ffff00] h-2 w-[76px] rounded-md top-[586px] right-[216px]"
-            ></div>
-            <div
-              class="z-10 absolute bg-[#ffff00] h-2 w-[74px] rounded-md top-[441px] right-[150px]"
-            ></div>
-            <!--  -->
-            <div
-              class="absolute bg-[#ffff00] h-[100px] w-2 rounded-md top-[252px] left-[210px]"
-            ></div>
-            <div
-              class="z-10 absolute bg-[#ffff00] h-2 w-[84px] rounded-md top-[252px] left-[130px]"
-            ></div>
-            <div
-              class="z-10 absolute bg-[#ffff00] h-2 w-[270px] rounded-md top-[348px] left-[210px]"
-            ></div>
-            <div
-              class="absolute bg-[#ffff00] h-[104px] w-2 rounded-md top-[252px] right-[216px]"
-            ></div>
-            <div
-              class="z-10 absolute bg-[#ffff00] h-2 w-[90px] rounded-md top-[252px] right-[128px]"
-            ></div>
-            <!--  -->
-            <div
-              class="z-10 absolute bg-[#ff0000] h-2 w-[58px] rounded-md top-[252px] right-[10px]"
-            ></div>
-            <div
-              class="absolute bg-[#ff0000] h-[114px] w-2 rounded-md top-[252px] right-[10px]"
-            ></div>
-            <div
-              class="z-10 absolute bg-[#ff0000] h-2 w-[398px] rounded-md top-[360px] right-[10px]"
-            ></div>
-            <div
-              class="absolute bg-[#ff0000] h-[300px] w-2 rounded-md top-[362px] right-[400px]"
-            ></div>
-            <div
-              class="z-10 absolute bg-[#ff0000] h-2 w-[218px] rounded-md top-[658px] right-[190px]"
-            ></div>
-            <div
-              class="absolute bg-[#ff0000] h-[104px] w-2 rounded-md top-[560px] right-[190px]"
-            ></div>
-            <div
-              class="z-10 absolute bg-[#ff0000] h-2 w-[48px] rounded-md top-[559px] right-[150px]"
-            ></div>
-            <div
-              class="z-10 absolute bg-[#ff0000] h-2 w-[60px] rounded-md top-[586px] right-[344px]"
-            ></div>
-            <div class="flex justify-around p-8 gap-28">
-              <!-- vco -->
-              <div
-                class="relative bg-[#a9a9a9] p-1 pt-0 border-4 shadow-[5px_5px_5px_5px_rgba(0,0,0,0.6)] border-black w-[140px] h-[250px]"
-              >
-                <h5 class="text-center text-sm font-medium">VCO</h5>
-                <div class="flex justify-around py-1">
-                  <div class="flex flex-col items-center">
-                    <div
-                      class="h-[24px] w-[24px] bg-[#ff0000] flex justify-center items-center rounded-full"
-                    >
-                      <div
-                        class="h-[14px] w-[14px] bg-[#000] rounded-full"
-                      ></div>
-                    </div>
-                    <p class="text-[12px] font-medium">DATA</p>
-                  </div>
-                  <div class="flex flex-col items-center">
-                    <div
-                      class="h-[24px] w-[24px] bg-[#ff0000] flex justify-center items-center rounded-full"
-                    >
-                      <div
-                        class="h-[14px] w-[14px] bg-[#000] rounded-full"
-                      ></div>
-                    </div>
-                    <p class="text-[12px] font-medium">TTL</p>
-                  </div>
+              <div class="flex items-start gap-10">
+                <div>
+                  <img src=".\dsb_sc_mod.png" class="w-[40em] h-[17em]"/>
                 </div>
 
-                <div
-                  class="flex flex-col items-center mt-2 justify-center gap-3"
-                >
-                  <div class="flex flex-col items-center">
-                    <div
-                      class="h-[24px] w-[24px] border-[4px] relative shadow-black shadow-lg border-black bg-[#ffff00] rounded-full"
-                    >
-                      <div
-                        class="w-1 h-2 absolute top-[50%] left-[40%] bg-black"
-                      ></div>
-                    </div>
-                    <p class="text-[12px] font-medium">GAIN</p>
-                  </div>
-                  <div class="flex flex-col items-center">
-                    <div
-                      class="h-[24px] w-[24px] relative border-[4px] shadow-black shadow-md border-black bg-[#ffff00] rounded-full"
-                    >
-                      <div
-                        class="w-1 h-2 absolute top-[50%] left-[40%] bg-black"
-                      ></div>
-                    </div>
-                    <p class="text-[12px] font-medium">fo</p>
-                  </div>
-                </div>
-                <!--  -->
-                <div class="flex absolute bottom-0 w-full justify-around">
-                  <div class="flex flex-col items-center">
-                    <div
-                      class="h-[24px] w-[24px] flex justify-center items-center bg-[#ffff00] rounded-full"
-                    >
-                      <div
-                        class="h-[14px] w-[14px] bg-[#000] rounded-full"
-                      ></div>
-                    </div>
-                    <p class="text-[12px] font-medium">Vin</p>
-                  </div>
-                  <div class="flex flex-col items-center">
-                    <div
-                      class="h-[24px] w-[24px] flex justify-center items-center bg-[#ffff00] rounded-full"
-                    >
-                      <div
-                        class="h-[14px] w-[14px] bg-[#000] rounded-full"
-                      ></div>
-                    </div>
-                    <p class="text-[12px] font-medium">sin(wt)</p>
-                  </div>
-                </div>
-                <div class="absolute -bottom-28">
-                  <!-- carrier frequency -->
-                  <div class="flex flex-col items-center">
-                    
-                  </div>
-                </div>
-              </div>
-              <!-- audio oscillator -->
-              <div
-                class="relative bg-[#a9a9a9] p-1 pt-0 border-4 shadow-[5px_5px_5px_5px_rgba(0,0,0,0.6)] border-black w-[140px] h-[250px]"
-              >
-                <h5 class="text-center text-sm font-medium">
-                  AUDIO OSCILLATOR
-                </h5>
-                <div class="flex justify-around py-1">
-                  <div class="flex flex-col items-center">
-                    <div
-                      class="h-[24px] w-[24px] border-[5px] border-[#ffff00] bg-black rounded-full"
-                    ></div>
-                    <p class="text-[12px] font-medium">SYNC</p>
-                  </div>
-                  <div class="flex flex-col items-center">
-                    <div
-                      class="h-[24px] w-[24px] border-[5px] border-[#ffff00] bg-black rounded-full"
-                    ></div>
-                    <p class="text-[12px] font-medium">cos(wt)</p>
-                  </div>
-                </div>
 
-                <div class="flex flex-col items-end">
-                  <div class="flex flex-col items-start">
-                    <div
-                      class="h-[24px] w-[24px] border-[5px] border-[#ff0000] bg-black rounded-full"
-                    ></div>
-                    <p class="text-[12px] font-medium">TTL</p>
-                  </div>
-                  <div class="flex flex-col items-start">
-                    <div
-                      class="h-[24px] w-[24px] relative left-2 border-[5px] border-[#ffff00] bg-black rounded-full"
-                    ></div>
-                    <p class="text-[12px] font-medium">sin(wt)</p>
-                  </div>
-                </div>
-
-              </div>
-              <!-- Multiplier -->
-              <div
-                class="relative bg-[#a9a9a9] p-1 pt-0 border-4 shadow-[5px_5px_5px_5px_rgba(0,0,0,0.6)] border-black w-[140px] h-[250px]"
-              >
-                <h5 class="text-center text-sm font-medium">Multiplier</h5>
-                <div class="flex flex-col pl-3 pt-[58px] pb-[53px]">
-                  <div
-                    class="h-[24px] w-[24px] relative border-[5px] border-[#ffff00] bg-black rounded-full"
-                  ></div>
-                  <p>X</p>
-                </div>
-                <div class="flex absolute bottom-0 w-full justify-around">
-                  <div class="flex flex-col items-center">
-                    <div
-                      class="h-[24px] w-[24px] flex justify-center items-center bg-[#ffff00] rounded-full"
-                    >
-                      <div
-                        class="h-[14px] w-[14px] bg-[#000] rounded-full"
-                      ></div>
-                    </div>
-                    <p class="text-[12px] font-medium">Y</p>
-                  </div>
-                  <div class="flex flex-col items-center">
-                    <div
-                      class="h-[24px] w-[24px] flex justify-center items-center bg-[#ffff00] rounded-full"
-                    >
-                      <div
-                        class="h-[14px] w-[14px] bg-[#000] rounded-full"
-                      ></div>
-                    </div>
-                    <p class="text-[12px] font-medium">KXY</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="flex justify-end pr-8 mt-16 mb-8 gap-20">
-              <!-- TUNABLE LPF-->
-              <div
-                class="relative bg-[#a9a9a9] p-1 pt-0 border-4 shadow-[5px_5px_5px_5px_rgba(0,0,0,0.6)] border-black w-[140px] h-[250px]"
-              >
-                <h5 class="text-center text-sm font-medium">TUNABLE LPF</h5>
-                <div class="flex mt-6 flex-col items-end">
-                  <div class="flex flex-col items-start">
-                    <div
-                      class="h-[24px] w-[24px] border-[5px] border-[#ff0000] bg-black rounded-full"
-                    ></div>
-                    <p class="text-[12px] font-medium">CLK</p>
-                  </div>
-                </div>
-                <div class="flex flex-col items-center justify-center gap-3">
-                  <div class="flex flex-col items-center">
-                    <div
-                      class="h-[24px] w-[24px] border-[4px] relative shadow-black shadow-lg border-black bg-[#ffff00] rounded-full"
-                    >
-                      <div
-                        class="w-1 h-2 absolute top-[50%] left-[40%] bg-black"
-                      ></div>
-                    </div>
-                    <p class="text-[12px] font-medium">TUNE</p>
-                  </div>
-                  <div class="flex flex-col items-center">
-                    <div
-                      class="h-[24px] w-[24px] relative border-[4px] shadow-black shadow-md border-black bg-[#ffff00] rounded-full"
-                    >
-                      <div
-                        class="w-1 h-2 absolute top-[50%] left-[40%] bg-black"
-                      ></div>
-                    </div>
-                    <p class="text-[12px] font-medium">GAIN</p>
-                  </div>
-                </div>
-                <!--  -->
-                <div
-                  class="flex items-center justify-center gap-8 absolute bottom-3 w-full"
-                >
-                  <div class="flex flex-col items-start">
-                    <div
-                      class="h-[24px] w-[24px] border-[5px] border-[#ffff00] bg-black rounded-full"
-                    ></div>
-                    <p class="text-[12px] font-medium">IN</p>
-                  </div>
-                  <div class="flex flex-col items-start">
-                    <div
-                      class="h-[24px] w-[24px] border-[5px] border-[#ffff00] bg-black rounded-full"
-                    ></div>
-                    <p class="text-[12px] font-medium">OUT</p>
-                  </div>
-                </div>
-              </div>
-              <!-- master signal -->
-              <div
-                class="relative bg-[#a9a9a9] p-1 pt-0 border-4 shadow-[5px_5px_5px_5px_rgba(0,0,0,0.6)] border-black w-[140px] h-[250px]"
-              >
-                <h5 class="text-center text-sm font-medium">Scope Selector</h5>
-                <div class="flex flex-col gap-3 mt-6 items-start">
-                  <div class="flex gap-1 items-start">
-                    <div
-                      class="h-[22px] w-[22px] border-[5px] border-[#ffff00] bg-black rounded-full"
-                    ></div>
-                    <p class="text-[12px] font-medium">A</p>
-                  </div>
-                  <div class="flex gap-1 items-start">
-                    <div
-                      class="h-[22px] w-[22px] border-[5px] border-[#ffff00] bg-black rounded-full"
-                    ></div>
-                    <p class="text-[12px] font-medium">B</p>
-                  </div>
-                  <div class="flex gap-1 items-start">
-                    <div
-                      class="h-[22px] w-[22px] border-[5px] border-[#ffff00] bg-black rounded-full"
-                    ></div>
-                    <p class="text-[12px] font-medium">-TRIG</p>
-                  </div>
-                </div>
-                <div class="flex flex-col gap-2 items-start mt-7">
-                  <div class="flex gap-1 items-start">
-                    <div
-                      class="h-[22px] w-[22px] border-[5px] border-[#ffff00] bg-black rounded-full"
-                    ></div>
-                    <p class="text-[12px] font-medium">A</p>
-                  </div>
-                  <div class="flex gap-1 items-start">
-                    <div
-                      class="h-[22px] w-[22px] border-[5px] border-[#ffff00] bg-black rounded-full"
-                    ></div>
-                    <p class="text-[12px] font-medium">B</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="flex flex-col grow-0 items-center">
-            <div class="flex w-full py-4 gap-4">
-			                <div class="flex flex-col items-center">
-                  <p class="text-[13px] pb-1 text-center font-bold">
-                    Message Frequency (Hz)
-                  </p>
-                  <input
-                    id="messageFrequency"
-                    value="10"
-                    type="range"
-                    step="1"
-                    min="1"
-                    max="200"
-                    onchange="handleMessageFrequencyChange()"
-                  />
-                  <div class="leading-none messageFrequencyDiv">10</div>
-				                    <button
-                    onclick="generateMessage()"
-                    class="bg-[#008000] py-1 px-3 rounded-md hover:bg-[#0c9c0c] hover:scale-105"
-                  >
-                    Generate Message
-                  </button>
-                </div>
-
-				                <div>
-                  <!-- carrier frequency -->
-                  <div class="flex flex-col items-center">
-                    <p class="text-[13px] pb-1 font-bold">Carrier Frequency (Hz)</p>
-                    <input
-                      id="carrierFrequency"
-                      value="100"
-                      type="range"
-                      min="1"
-                      max="1000"
-                      onchange="handleCarrierFrequencyChange()"
-                    />
-                    <div class="leading-none carrierFrequencyDiv">100</div>
-                    <button
-                      onclick="generateCarrier()"
-                      class="bg-[#008000] py-1 px-3 mt-1 rounded-md hover:bg-[#0c9c0c] hover:scale-105"
-                    >
-                      Generate Carrier
-                    </button>
-                  </div>
-                </div>
 				
-				<div>
+				<div class="flex flex-col items-center">
                   <!-- Gain -->
                   <div class="flex flex-col items-center">
-                    <p class="text-[13px] pb-1 font-bold">Gain</p>
+                    <p class="text-[13px] pb-1 font-bold">Message Signal Gain</p>
                     <input
                       id="gain"
                       value="1"
@@ -410,6 +55,51 @@
                     />
                     <div class="leading-none gainDiv">1</div>
                   </div>
+
+                  <div class="flex flex-col items-center">
+                    
+                    <input
+                      id="messageFrequency"
+                      value="10"
+                      type="range"
+                      step="1"
+                      min="1"
+                      max="200"
+                      onchange="handleMessageFrequencyChange()"
+                    />
+                    <div class="leading-none messageFrequencyDiv">10<span class="ml-1">Hz</span></div>
+                    <br/>
+                    
+                              <button
+                      onclick="generateMessage()"
+                      class="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-[#0c9c0c] hover:scale-105"
+                    >
+                      Generate Message
+                    </button>
+                  </div>
+
+                  
+
+                  <div class="flex flex-col items-center">
+                    
+                    <input
+                      id="carrierFrequency"
+                      value="100"
+                      type="range"
+                      min="1"
+                      max="1000"
+                      onchange="handleCarrierFrequencyChange()"
+                    />
+                    <div class="leading-none carrierFrequencyDiv">100<span class="ml-1">Hz</span></div>
+
+                    <button
+                      onclick="generateCarrier()"
+                      class="bg-blue-500 text-white py-1 px-3 mt-1 rounded-md hover:bg-[#0c9c0c] hover:scale-105"
+                    >
+                      Generate Carrier
+                    </button>
+                  </div>
+
                 </div>
 				
               <div class="flex items-center gap-2">
@@ -429,21 +119,34 @@
               >
                 Generate DSB-SC Modulated Signal
               </button>
+              <button 
+              class="bg-blue-500 text-white py-1 px-3 text-sm rounded-md hover:scale-105" id="modtodemod"
+              onclick="frequencySpectrums()">Show Frequency Spectrums</button>
 			                <button
-                class="bg-blue-500 text-white py-1 px-3 text-sm rounded-md hover:scale-105"
+                class="relative left-36 bg-gray-500 text-white py-1 px-3 text-sm rounded-md hover:scale-105"
                 onclick="generatePlots()"
               >
                 Perform DSB-SC Demodulation
               </button>
             </div>
+            <div class="flex flex-col items-center">
             <div class="plotSection">
               <canvas id="dsbscPlotCanvas" class="w-[600px] h-[0px]"></canvas>
               <canvas id="carrierPlotCanvas" class="w-[600px] h-[0px]"></canvas>
               <canvas id="messagePlotCanvas" class="w-[600px] h-[0px]"></canvas>
             </div>
+            </div>
           </div>
         </div>
 
+        <br />
+        <br />
+
+        <div class="plot-container1">
+          <div id="plot-message" class="plot1"></div>
+          <div id="plot-dsb" class="plot1"></div>
+          <div id="plot-demodulated" class="plot1"></div>
+      </div>
         <br />
         <br />
         <hr />
@@ -465,283 +168,12 @@
             </li>
           </ul>
         </div>
-        <div class="flex flex-shrink-0">
-          <div class="relative w-[700px] py-2">
-            <div
-              class="absolute bg-[#ffff00] h-[275px] w-2 rounded-md top-[190px] left-[210px]"
-            ></div>
-            <div
-              class="absolute bg-[#ff0000] h-[17px] w-2 rounded-md top-[130px] left-[210px]"
-            ></div>
-            <div
-              class="z-10 absolute bg-[#ffff00] h-2 w-[72px] rounded-md top-[185px] left-[144px]"
-            ></div>
-            <div
-              class="z-10 absolute bg-[#0000ff] h-2 w-[186px] rounded-md top-[252px] left-[384px]"
-            ></div>
-            <div
-              class="z-10 absolute bg-[#0000ff] h-2 flex justify-end w-[84px] rounded-md top-[252px] -right-[8px]"
-            >
-              <p class="font-medium pt-1">CH2-B</p>
-            </div>
-            <div
-              class="absolute bg-[#0000ff] h-[338px] w-2 rounded-md top-[252px] left-[252px]"
-            ></div>
-            <div
-              class="z-10 absolute bg-[#0000ff] h-2 w-[72px] rounded-md top-[252px] left-[252px]"
-            ></div>
-            <div
-              class="z-10 absolute bg-[#0000ff] flex justify-end h-2 w-[192px] rounded-md top-[322px] left-[252px]"
-            >
-              <p class="font-bold pt-1">CH1-A</p>
-            </div>
-            <div
-              class="z-10 absolute bg-[#0000ff] h-2 w-[72px] rounded-md top-[582px] left-[252px]"
-            ></div>
-            <div
-              class="z-10 absolute bg-[#0000ff] h-2 w-[82px] flex justify-end rounded-md top-[582px] left-[390px]"
-            >
-              <p class="font-bold pt-1">CH2-A</p>
-            </div>
-            <div
-              class="z-10 absolute bg-[#0000ff] h-2 w-[102px] rounded-md top-[570px] left-[152px]"
-            ></div>
+ 
 
-            <div
-              class="z-10 absolute bg-[#ff0000] h-2 w-[70px] rounded-md top-[143px] left-[148px]"
-            ></div>
-            <div
-              class="z-10 absolute bg-[#ffff00] h-2 w-[110px] rounded-md top-[460px] left-[210px]"
-            ></div>
-            <div
-              class="z-10 absolute bg-[#ff0000] h-2 w-[110px] rounded-md top-[130px] left-[210px]"
-            ></div>
-            <div class="flex justify-around p-8 gap-28">
-              <!-- audio oscillator -->
-              <div
-                class="relative bg-[#a9a9a9] p-1 pt-0 border-4 shadow-[5px_5px_5px_5px_rgba(0,0,0,0.6)] border-black w-[140px] h-[250px]"
-              >
-                <h5 class="text-center text-sm font-medium">
-                  AUDIO OSCILLATOR
-                </h5>
-                <div class="flex justify-around py-1">
-                  <div class="flex flex-col items-center">
-                    <div
-                      class="h-[24px] w-[24px] border-[5px] border-[#ffff00] bg-black rounded-full"
-                    ></div>
-                    <p class="text-[12px] font-medium">SYNC</p>
-                  </div>
-                  <div class="flex flex-col items-center">
-                    <div
-                      class="h-[24px] w-[24px] border-[5px] border-[#ffff00] bg-black rounded-full"
-                    ></div>
-                    <p class="text-[12px] font-medium">cos(wt)</p>
-                  </div>
-                </div>
-
-                <div class="flex flex-col items-end">
-                  <div class="flex flex-col items-start">
-                    <div
-                      class="h-[24px] w-[24px] border-[5px] border-[#ff0000] bg-black rounded-full"
-                    ></div>
-                    <p class="text-[12px] font-medium">TTL</p>
-                  </div>
-                  <div class="flex flex-col items-start">
-                    <div
-                      class="h-[24px] w-[24px] relative left-2 border-[5px] border-[#ffff00] bg-black rounded-full"
-                    ></div>
-                    <p class="text-[12px] font-medium">sin(wt)</p>
-                  </div>
-                </div>
-              </div>
-              <!-- Multiplier -->
-              <div
-                class="relative bg-[#a9a9a9] p-1 pt-0 border-4 shadow-[5px_5px_5px_5px_rgba(0,0,0,0.6)] border-black w-[140px] h-[250px]"
-              >
-                <h5 class="text-center text-sm font-medium">Multiplier</h5>
-                <div class="flex flex-col pl-3 pt-[58px] pb-[53px]">
-                  <div
-                    class="h-[24px] w-[24px] relative border-[5px] border-[#ffff00] bg-black rounded-full"
-                  ></div>
-                  <p>X</p>
-                </div>
-                <div class="flex absolute bottom-0 w-full justify-around">
-                  <div class="flex flex-col items-center">
-                    <div
-                      class="h-[24px] w-[24px] flex justify-center items-center bg-[#ffff00] rounded-full"
-                    >
-                      <div
-                        class="h-[14px] w-[14px] bg-[#000] rounded-full"
-                      ></div>
-                    </div>
-                    <p class="text-[12px] font-medium">Y</p>
-                  </div>
-                  <div class="flex flex-col items-center">
-                    <div
-                      class="h-[24px] w-[24px] flex justify-center items-center bg-[#ffff00] rounded-full"
-                    >
-                      <div
-                        class="h-[14px] w-[14px] bg-[#000] rounded-full"
-                      ></div>
-                    </div>
-                    <p class="text-[12px] font-medium">KXY</p>
-                  </div>
-                </div>
-              </div>
-              <!-- TUNABLE LPF-->
-              <div
-                class="mr-2 relative bg-[#a9a9a9] p-1 pt-0 border-4 shadow-[5px_5px_5px_5px_rgba(0,0,0,0.6)] border-black w-[140px] h-[250px]"
-              >
-                <h5 class="text-center text-sm font-medium">TUNABLE LPF</h5>
-                <div class="flex mt-6 flex-col items-end">
-                  <div class="flex flex-col items-start">
-                    <div
-                      class="h-[24px] w-[24px] border-[5px] border-[#ff0000] bg-black rounded-full"
-                    ></div>
-                    <p class="text-[12px] font-medium">CLK</p>
-                  </div>
-                </div>
-                <div class="flex flex-col items-center justify-center gap-4">
-                  <div class="flex flex-col items-center">
-                    <div
-                      class="h-[24px] w-[24px] border-[4px] relative shadow-black shadow-lg border-black bg-[#ffff00] rounded-full"
-                    >
-                      <div
-                        class="w-1 h-2 absolute top-[50%] left-[40%] bg-black"
-                      ></div>
-                    </div>
-                    <p class="text-[12px] font-medium">TUNE</p>
-                  </div>
-                  <div class="flex flex-col items-center">
-                    <div
-                      class="h-[24px] w-[24px] relative border-[4px] shadow-black shadow-md border-black bg-[#ffff00] rounded-full"
-                    >
-                      <div
-                        class="w-1 h-2 absolute top-[50%] left-[40%] bg-black"
-                      ></div>
-                    </div>
-                    <p class="text-[12px] font-medium">GAIN</p>
-                  </div>
-                </div>
-                <!--  -->
-                <div
-                  class="flex items-center justify-center gap-8 absolute bottom-0 w-full"
-                >
-                  <div class="flex flex-col items-start">
-                    <div
-                      class="h-[24px] w-[24px] border-[5px] border-[#ffff00] bg-black rounded-full"
-                    ></div>
-                    <p class="text-[12px] font-medium">IN</p>
-                  </div>
-                  <div class="flex flex-col items-start">
-                    <div
-                      class="h-[24px] w-[24px] border-[5px] border-[#ffff00] bg-black rounded-full"
-                    ></div>
-                    <p class="text-[12px] font-medium">OUT</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="flex px-8 mt-12 mb-8 gap-28">
-              <!-- master signal -->
-              <div
-                class="relative bg-[#a9a9a9] p-1 pt-0 border-4 shadow-[5px_5px_5px_5px_rgba(0,0,0,0.6)] border-black w-[140px] h-[250px]"
-              >
-                <h5 class="text-center text-sm font-medium">Master Signals</h5>
-                <div
-                  class="absolute top-[90px] flex flex-col items-center gap-y-1"
-                >
-
-                </div>
-                <div class="flex flex-col gap-4 mt-4 items-end">
-                  <div class="flex items-center gap-1">
-                    <p class="text-[12px] font-medium">100KHz sin</p>
-                    <div
-                      class="h-[22px] w-[22px] flex justify-center items-center bg-[#ffff00] rounded-full"
-                    >
-                      <div
-                        class="h-[14px] w-[14px] bg-[#000] rounded-full"
-                      ></div>
-                    </div>
-                  </div>
-                  <div class="flex items-center gap-1">
-                    <p class="text-[12px] font-medium">100KHz cos</p>
-                    <div
-                      class="h-[22px] w-[22px] flex justify-center items-center bg-[#ffff00] rounded-full"
-                    >
-                      <div
-                        class="h-[14px] w-[14px] bg-[#000] rounded-full"
-                      ></div>
-                    </div>
-                  </div>
-                  <div class="flex items-center gap-1">
-                    <p class="text-[12px] font-medium">100KHz TTL</p>
-                    <div
-                      class="h-[22px] w-[22px] flex justify-center items-center bg-[#ffff00] rounded-full"
-                    >
-                      <div
-                        class="h-[14px] w-[14px] bg-[#000] rounded-full"
-                      ></div>
-                    </div>
-                  </div>
-                  <div class="flex items-center gap-1">
-                    <p class="text-[12px] font-medium">sample TTL</p>
-                    <div
-                      class="h-[22px] w-[22px] flex justify-center items-center bg-[#ffff00] rounded-full"
-                    >
-                      <div
-                        class="h-[14px] w-[14px] bg-[#000] rounded-full"
-                      ></div>
-                    </div>
-                  </div>
-                  <div class="flex items-center gap-1">
-                    <p class="text-[12px] font-medium">message sin</p>
-                    <div
-                      class="h-[22px] w-[22px] flex justify-center items-center bg-[#ffff00] rounded-full"
-                    >
-                      <div
-                        class="h-[14px] w-[14px] bg-[#000] rounded-full"
-                      ></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- Multiplier -->
-              <div
-                class="relative bg-[#a9a9a9] p-1 pt-0 border-4 shadow-[5px_5px_5px_5px_rgba(0,0,0,0.6)] border-black w-[140px] h-[250px]"
-              >
-                <h5 class="text-center text-sm font-medium">Multiplier</h5>
-                <div class="flex flex-col pl-3 pt-[58px] pb-[53px]">
-                  <div
-                    class="h-[24px] w-[24px] relative border-[5px] border-[#ffff00] bg-black rounded-full"
-                  ></div>
-                  <p>X</p>
-                </div>
-                <div class="flex absolute bottom-0 w-full justify-around">
-                  <div class="flex flex-col items-center">
-                    <div
-                      class="h-[24px] w-[24px] flex justify-center items-center bg-[#ffff00] rounded-full"
-                    >
-                      <div
-                        class="h-[14px] w-[14px] bg-[#000] rounded-full"
-                      ></div>
-                    </div>
-                    <p class="text-[12px] font-medium">Y</p>
-                  </div>
-                  <div class="flex flex-col items-center">
-                    <div
-                      class="h-[24px] w-[24px] flex justify-center items-center bg-[#ffff00] rounded-full"
-                    >
-                      <div
-                        class="h-[14px] w-[14px] bg-[#000] rounded-full"
-                      ></div>
-                    </div>
-                    <p class="text-[12px] font-medium">KXY</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="flex items-start gap-10">
+          <div>
+            <img src=".\dsb_sc_demod.png" class="w-[40em] h-[20em]"/>
+        </div>
           <div class="flex flex-col grow-0 items-center">
             <div class="flex w-full py-4 gap-4">
               <div class="flex flex-1 justify-center gap-1 items-center">
@@ -762,13 +194,13 @@
                   min="1"
                   type="number"
                   id="filterOrder"
-                  value="20"
+                  value="200"
                 />
               </div>
             </div>
             <div class="flex w-full py-4 gap-4">
               <div class="flex items-center gap-2">
-                <p class="font-medium"></p>
+                <p class="font-medium">Cut-off Frequency (Hz)</p>
                 <input
                   class="border px-1 w-[152px] py-1 rounded-sm border-black"
                   type="number"
@@ -784,10 +216,6 @@
               >
                 Perform DSB-SC Demodulation
               </button>
-			  
-			      <button 
-				  class="bg-blue-500 text-white py-1 px-3 text-sm rounded-md hover:scale-105" id="modtodemod"
-				  onclick="frequencySpectrums()">Show Frequency Spectrums</button>
 
             </div>
             <div class="plotSection">
@@ -803,12 +231,6 @@
     </div>
 
 
-
-    <div class="plot-container1">
-        <div id="plot-message" class="plot1"></div>
-        <div id="plot-dsb" class="plot1"></div>
-        <div id="plot-demodulated" class="plot1"></div>
-    </div>
 	
 <script>
     function checkFrequencies() {
@@ -882,10 +304,17 @@
           { length: numSamples },
           (_, i) => i / numSamples
         );
+        const carriernumSamples = 100*parseFloat(
+          document.getElementById("carrierFrequency").value
+        );
+        const carrier_x_values = Array.from(
+          { length: carriernumSamples },
+          (_, i) => i / carriernumSamples
+        );
         const message_signal = x_values.map((x) =>
           gain*Math.sin(2 * Math.PI * messageFrequency * x)
         );
-        const carrier_signal = x_values.map((x) =>
+        const carrier_signal = carrier_x_values.map((x) =>
           Math.cos(2 * Math.PI * carrierFrequency * x)
         );
         const dsbsc_modulated_signal = message_signal.map(
@@ -896,11 +325,15 @@
           y: dsbsc_modulated_signal,
           message: message_signal,
           carrier: carrier_signal,
+          carrier_x: carrier_x_values,
         };
       }
 
       function plotGraph(result, canvasId) {
         const ctx = document.getElementById(canvasId).getContext("2d");
+        const samplingFrequency = 100 * parseFloat(
+          document.getElementById("carrierFrequency").value
+        );
 
         // Destroy existing chart instance
         if (window[canvasId + "Chart"]) {
@@ -908,32 +341,35 @@
         }
 
         const plotData = {
-          labels: result.x,
-          datasets: [
-            {
-              label:
-                canvasId === "messagePlotCanvas"
-                  ? "Message Signal"
-                  : canvasId === "carrierPlotCanvas"
-                  ? "Carrier Signal"
-                  : "DSBSC Modulated Signal",
-              data:
-                canvasId === "messagePlotCanvas"
-                  ? result.message
-                  : canvasId === "carrierPlotCanvas"
-                  ? result.carrier
-                  : result.y,
-              borderColor:
-                canvasId === "messagePlotCanvas"
-                  ? "red"
-                  : canvasId === "carrierPlotCanvas"
-                  ? "green"
-                  : "blue",
-              borderWidth: 1,
-              fill: false,
-            },
-          ],
-        };
+  labels:
+    canvasId === "carrierPlotCanvas" ? result.carrier_x : result.x,
+  datasets: [
+    {
+      label:
+        canvasId === "messagePlotCanvas"
+          ? "Message Signal"
+          : canvasId === "carrierPlotCanvas"
+          ? "Carrier Signal"
+          : "DSBSC Modulated Signal",
+      data:
+        canvasId === "messagePlotCanvas"
+          ? result.message
+          : canvasId === "carrierPlotCanvas"
+          ? result.carrier
+          : result.y,
+      borderColor:
+        canvasId === "messagePlotCanvas"
+          ? "red"
+          : canvasId === "carrierPlotCanvas"
+          ? "green"
+          : "blue",
+      borderWidth: 2,
+      pointRadius: 0,
+      fill: false,
+    },
+  ],
+};
+
         window[canvasId + "Chart"] = new Chart(ctx, {
           type: "line",
           data: plotData,
@@ -944,6 +380,13 @@
                   display: true,
                   text: "Time (s)",
                 },
+                ticks: {
+            callback: function(value) {
+              console.log("X tick label:", value); // Logs each x-value during rendering
+              return Number(value/samplingFrequency).toFixed(1);  // Round to 1 decimal place
+            }
+          }
+
               },
               y: {
                 title: {
@@ -1072,7 +515,9 @@
             const lpfOrder = filterOrder;
             const nyquist = 0.5 * fs;
             const lpfCutoffNormalized = lpf_cutoff / nyquist;
-            const b = butterworthCoefficients(lpfOrder, lpfCutoffNormalized, "low");
+            //const b = butterworthCoefficients(lpfOrder, lpfCutoffNormalized, "low");
+            const b = firLowPassCoefficients(lpfCutoffNormalized, lpfOrder);
+
             const a = [1]; // Denominator coefficients are 1 for an FIR filter
             const dsbsc_demodulated_signal_filtered = applyFilter(
                 b,
@@ -1118,6 +563,23 @@
             return coefficients;
         }
 
+        function firLowPassCoefficients(cutoff, numTaps) {
+    const fc = cutoff; // Normalized cutoff frequency (0 < fc < 0.5)
+    const M = numTaps - 1;
+    const coeffs = [];
+
+    for (let n = 0; n <= M; n++) {
+        if (n === M / 2) {
+            coeffs[n] = 2 * fc;
+        } else {
+            const sinc = Math.sin(2 * Math.PI * fc * (n - M / 2)) / (Math.PI * (n - M / 2));
+            const window = 0.54 - 0.46 * Math.cos((2 * Math.PI * n) / M); // Hamming window
+            coeffs[n] = sinc * window;
+        }
+    }
+    return coeffs;
+}
+
         // Function to apply a filter to a signal
         function applyFilter(b, a, signal) {
             const filteredSignal = [];
@@ -1143,6 +605,9 @@
             const ctx = document
                 .getElementById("dsbscDemodulatedPlotCanvas")
                 .getContext("2d");
+                const carrierFrequency = 10*parseFloat(
+          document.getElementById("carrierFrequency").value
+        );
 
             const plotData = {
                 labels: result.x,
@@ -1151,7 +616,8 @@
                         label: "DSBSC Demodulated Signal",
                         data: result.y,
                         borderColor: "blue",
-                        borderWidth: 1,
+                        borderWidth: 2,
+                        pointRadius: 0,
                         fill: false,
                     },
                 ],
@@ -1172,6 +638,12 @@
                                 display: true,
                                 text: "Time (s)",
                             },
+                            ticks: {
+            callback: function(value) {
+              console.log("X tick label:", value); // Logs each x-value during rendering
+              return Number(value/carrierFrequency).toFixed(1);  // Round to 1 decimal place
+            }
+          }
                         },
                         y: {
                             title: {
@@ -1196,7 +668,7 @@
                         label: "DSBSC Modulated Signal",
                         data: result.modulated_signal,
                         borderColor: "red",
-                        borderWidth: 1,
+                        borderWidth: 0.5,
                         fill: false,
                     },
                 ],
@@ -1241,7 +713,7 @@
                         label: "Message Signal",
                         data: result.message_signal,
                         borderColor: "green",
-                        borderWidth: 1,
+                        borderWidth: 0.5,
                         fill: false,
                     },
                 ],
@@ -1300,7 +772,7 @@
             );
 			
 								            // Scroll to the plot area
-            document.getElementById('modtodemod').scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('dsbscDemodulatedPlotCanvas').scrollIntoView({ behavior: 'smooth' });
 			
             plotDSBSCDemodulatedSignal(result);
             plotDSBSCModulatedSignal(result);
@@ -1347,13 +819,13 @@
             const upperSidebandFrequency = carrierFrequency + messageFrequency;
 
             // Define the magnitudes for each frequency component
-            const lowerSideband = { frequency: lowerSidebandFrequency, magnitude: 10*log10(((0.5*gain)**2)/2), label: 'Lower Sideband' };
-            const upperSideband = { frequency: upperSidebandFrequency, magnitude: 10*log10(((0.5*gain)**2)/2), label: 'Upper Sideband' };
+            const lowerSideband = { frequency: lowerSidebandFrequency, magnitude: -10*log10(((gain)**2)/2) + 10*log10(((0.5*gain)**2)/2), label: 'Lower Sideband' };
+            const upperSideband = { frequency: upperSidebandFrequency, magnitude: -10*log10(((gain)**2)/2) + 10*log10(((0.5*gain)**2)/2), label: 'Upper Sideband' };
 
             // Create trace for the lower sideband
             const traceLowerSideband = {
                 x: [lowerSideband.frequency, lowerSideband.frequency],
-                y: [0, lowerSideband.magnitude],
+                y: [-15, lowerSideband.magnitude],
                 mode: 'lines',
                 type: 'scatter',
                 line: {
@@ -1366,7 +838,7 @@
             // Create trace for the upper sideband
             const traceUpperSideband = {
                 x: [upperSideband.frequency, upperSideband.frequency],
-                y: [0, upperSideband.magnitude],
+                y: [-15, upperSideband.magnitude],
                 mode: 'lines',
                 type: 'scatter',
                 line: {
@@ -1379,7 +851,7 @@
             // Create trace for the message signal spectrum
             const traceMessageSignal = {
                 x: [messageFrequency, messageFrequency],
-                y: [0, 10*log10(((1*gain)**2)/2)], // Amplitude of 1
+                y: [-15, -10*log10(((gain)**2)/2) + 10*log10(((1*gain)**2)/2)], // Amplitude of 1
                 mode: 'lines',
                 type: 'scatter',
                 line: {
@@ -1392,7 +864,7 @@
             // Create trace for the demodulated signal spectrum
             const traceDemodulatedSignal = {
                 x: [messageFrequency, messageFrequency],
-                y: [0, 10*log10((1**2)/2)], // Amplitude of 1
+                y: [-15, -10*log10(((gain)**2)/2) + 10*log10((1**2)/2)], // Amplitude of 1
                 mode: 'lines',
                 type: 'scatter',
                 line: {
@@ -1412,7 +884,7 @@
                     range: [lowerSidebandFrequency - 10, upperSidebandFrequency + 10]
                 },
                 yaxis: {
-                    title: 'Normalized PSD (dB/Hz)',
+                    title: 'Normalized PSD (dB/Hz) w.r.t. message',
                     showgrid: true,
                     zeroline: true,
                     //range: [0, 1.2]
@@ -1428,7 +900,7 @@
                     },
                     bgcolor: '#E2E2E2',
                     bordercolor: '#FFFFFF',
-                    borderwidth: 2
+                    borderwidth: 0.5
                 }
             };
 
@@ -1441,9 +913,9 @@
                     range: [messageFrequency - 10, messageFrequency + 10]
                 },
                 yaxis: {
-                    title: 'Normalized PSD (dB/Hz)',
+                    title: 'Normalized PSD (dB/Hz) w.r.t. itself',
                     showgrid: true,
-                    zeroline: true,
+                    zeroline: false,
                     //range: [0, 1.2]
                 }
             };
@@ -1457,9 +929,9 @@
                     range: [messageFrequency - 10, messageFrequency + 10]
                 },
                 yaxis: {
-                    title: 'Normalized PSD (dB/Hz)',
+                    title: 'Normalized PSD (dB/Hz) w.r.t. message',
                     showgrid: true,
-                    zeroline: true,
+                    zeroline: false,
                     //range: [0, 1.2]
                 }
             };
@@ -1489,7 +961,7 @@
         display: none;
       }
 	  
-	  #filterOrder,#cutoffFrequency,#samplingFrequency_demod {
+	  #filterOrder,#samplingFrequency_demod {
 display: none;
 }
 
