@@ -14,25 +14,21 @@
         <div id="container">
           <h1>Instructions for Double Sideband Suppressed Carrier (DSB-SC) Modulation</h1>
           <ul>
-            <li>
-              Step 1: Click on 'Generate Message' button to generate input
-              message signal
+            <li class="step step1">
+              <strong>Step 1:</strong> Click on 'Generate Message' button to generate input message signal.
             </li>
-            <li>
-              Step 2: Then click on 'Generate Carrier' button to generate
-              carrier signal
+            <li class="step step2">
+              <strong>Step 2:</strong> Then click on 'Generate Carrier' button to generate carrier signal.
             </li>
-            <li>
-              Step 3: The carrier frequency has to be more than the message
-              frequency and You can change frequencies using sliders
+            <li class="step step3">
+              <strong>Step 3:</strong> The carrier frequency must be greater than the message frequency. You can adjust frequencies using the sliders.
             </li>
-            <li>
-              Step 4: Click on 'Generate DSBSC Modulated Signal' button to
-              generate DSBSC Modulated Signal
+            <li class="step step4">
+              <strong>Step 4:</strong> Click on 'Generate DSBSC Modulated Signal' button to generate the modulated signal.
             </li>
           </ul>
-          <br />
         </div>
+        
 
               <div class="flex items-start gap-10">
                 <div>
@@ -57,7 +53,7 @@
                   </div>
 
                   <div class="flex flex-col items-center">
-                    
+                    <p class="text-[13px] pb-1 font-bold">Message Frequency (Hz)</p>
                     <input
                       id="messageFrequency"
                       value="10"
@@ -81,7 +77,7 @@
                   
 
                   <div class="flex flex-col items-center">
-                    
+                    <p class="text-[13px] pb-1 font-bold">Carrier Frequency (Hz)</p> 
                     <input
                       id="carrierFrequency"
                       value="100"
@@ -154,17 +150,17 @@
         <div id="container">
           <h1>Instructions for DSBSC Demodulation</h1>
           <ul>
-            <li>
+            <li class="step step1">
               Step 1: Tunable LPF's Cutoff frequency works in accordance with
               the Message frequency
             </li>
 
-            <li>
+            <li class="step step2">
               Step 2: Click on the 'Perform DSB-SC Demodulation' button to generate the demodulated signal
             </li>
 			
-			            <li>
-              Step 3: Click on the 'Show Frequency Spectrums' button to see spectrums of the message, modulated, and demodulated signal
+			            <li class="step step3">
+              Step 3: Click on the 'Show Frequency Spectrums' button above to see spectra of the message, modulated, and demodulated signals
             </li>
           </ul>
         </div>
@@ -965,41 +961,70 @@
 display: none;
 }
 
-      .container {
-        background-color: #fff;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        border-radius: 8px;
-        padding: 20px 40px;
-        max-width: 1000px; /* Increased max-width to fit three plots side by side */
-        margin: 0 auto; /* Center the container */
-        text-align: center;
-      }
+#container {
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  padding: 25px 40px;
+  max-width: 100%;
+  margin: 20px auto;
+  text-align: left;
+  font-family: 'Segoe UI', sans-serif;
+}
 
-      h1 {
-        color: #333;
-        font-size: 22px; /* Increased font size */
-        margin-bottom: 20px;
-      }
+h1 {
+  color: #1e3a8a;
+  font-size: 24px;
+  margin-bottom: 25px;
+  text-align: justify;
+}
 
-      ul {
-        list-style-type: none;
-        padding: 0;
-      }
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
 
-      li {
-        background-color: #e0e7ff;
-        margin: 5px 0;
-        padding: 5px;
-        border-radius: 4px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        font-size: 14px; /* Set font size for list items */
-      }
+li.step {
+  margin: 12px 0;
+  padding: 12px 15px;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 500;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
 
-      li::before {
-        content: "✔";
-        color: #4caf50;
-        margin-right: 10px;
-      }
+li.step::before {
+  content: "✔";
+  color: #10b981;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+li.step:hover {
+  transform: scale(1.02);
+  background-color: #f3f4f6;
+}
+
+/* Color code each step */
+.step1 {
+  background-color: #ffe0e0;
+  border-left: 5px solid #ef4444;
+}
+.step2 {
+  background-color: #e0f7ff;
+  border-left: 5px solid #0ea5e9;
+}
+.step3 {
+  background-color: #e0ffe5;
+  border-left: 5px solid #22c55e;
+}
+.step4 {
+  background-color: #f5e0ff;
+  border-left: 5px solid #a855f7;
+}
+
 
       .plot-container {
         display: flex;
