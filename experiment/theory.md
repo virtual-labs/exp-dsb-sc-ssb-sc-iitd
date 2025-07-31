@@ -23,7 +23,7 @@
         >
           <ol class="mb-4 pl-4">
             <li>
-              <a href="./theory/DSBSC.html">
+              <a href="./DSBSC.html">
                 <div class="flex">
                   <span class="text-black mr-4">1.</span>
                   <p class="hover:text-[#3e6389] hover:underline">
@@ -33,7 +33,7 @@
               </a>
             </li>
             <li>
-              <a href="./theory/SSBSC.html">
+              <a href="./SSBSC.html">
                 <div class="flex">
                   <span class="text-black mr-4">3.</span>
                   <p class="hover:text-[#3e6389] hover:underline">
