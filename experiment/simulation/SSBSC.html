@@ -19,19 +19,19 @@
             </li>
             <li class="step step2">
               Step 2: Then click on 'Generate Carrier' button to generate
-              carrier signal
-            </li>
-            <li class="step step3">
-              Step 3: The carrier frequency has to be more than the message
+              carrier signal. The carrier frequency has to be more than the message
               frequency and You can change frequencies using sliders
             </li>
             <li class="step step4">
-              Step 4: Click on 'Generate Upper SSB-SC Signal' button to generate
+              Step 3: Click on 'Generate Upper SSB-SC Signal' button to generate
               Generate Upper Sideband SSB-SC Signal
             </li>
             <li class="step step1">
-              Step 5: Click on 'Generate Lower SSB-SC Signal' to generate
+              Step 4: Click on 'Generate Lower SSB-SC Signal' to generate
               Generate Lower Sideband SSB-SC Signal
+            </li>
+            <li class="step step4">
+            Step 5: Click the 'Show Frequency Spectrums' button to view the SSB-SC spectra.
             </li>
           </ul>
           <br />
@@ -53,12 +53,17 @@
                   max="200"
                   onchange="handleMessageFrequencyChange()"
                 />
+
+                <div class="inline-flex items-center">
+                  <span><strong>Step 1:</strong></span>
                           <button
                   onclick="generateMessage()"
                   class="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-[#0c9c0c] hover:scale-105"
                 >
                   Generate Message
                 </button>
+              </div>
+
               </div>
 
                   <div class="flex flex-col items-center">
@@ -71,12 +76,17 @@
                       max="1000"
                       onchange="handleCarrierFrequencyChange()"
                     />
+
+                    <div class="inline-flex items-center gap-1">
+                      <span><strong>Step 2:</strong></span>
                     <button
                       onclick="generateCarrier()"
                       class="bg-blue-500 text-white py-1 px-3 mt-1 rounded-md hover:bg-[#0c9c0c] hover:scale-105"
                     >
                       Generate Carrier
                     </button>
+                    </div>
+
                   </div>
 				
 	              <div>
@@ -106,26 +116,36 @@
                   placeholder="sampling frequency in Hz"
                 />
               </div>
+
+              <div class="flex flex-col items-center gap-1">
+                <span><strong>Step 3:</strong></span>
 			  			              <button
                 class="bg-blue-500 text-white py-1 px-3 font-medium text-sm rounded-md hover:scale-105"
                 onclick="generateUpperSSBSC()"
               >
                 Generate Upper SSB-SC Signal
               </button>
+              </div>
 			  
+              <div class="flex flex-col items-center gap-1">
+                <span><strong>Step 4:</strong></span>
 			  <button
                 class="bg-blue-500 text-white py-[6px] font-medium px-3 text-sm rounded-md hover:scale-105"
                 onclick="generateLowerSSBSC()"
               >
                 Generate Lower SSB-SC Signal
               </button>
+              </div>
 			  
+              <div class="flex flex-col items-center gap-1">
+                <span><strong>Step 5:</strong></span>
               <button
                 class="bg-blue-500 text-white py-[6px] px-3 text-sm rounded-md hover:scale-105"
                 onclick="frequencySpectrums()"
               >
                 Show Frequency Spectrums
               </button>
+              </div>
 			  
             </div>
 			  

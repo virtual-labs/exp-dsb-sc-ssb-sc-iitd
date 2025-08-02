@@ -18,13 +18,13 @@
               <strong>Step 1:</strong> Click on 'Generate Message' button to generate input message signal.
             </li>
             <li class="step step2">
-              <strong>Step 2:</strong> Then click on 'Generate Carrier' button to generate carrier signal.
-            </li>
-            <li class="step step3">
-              <strong>Step 3:</strong> The carrier frequency must be greater than the message frequency. You can adjust frequencies using the sliders.
+              <strong>Step 2:</strong> Then click on 'Generate Carrier' button to generate carrier signal. The carrier frequency must be greater than the message frequency. You can adjust frequencies using the sliders.
             </li>
             <li class="step step4">
-              <strong>Step 4:</strong> Click on 'Generate DSBSC Modulated Signal' button to generate the modulated signal.
+              <strong>Step 3:</strong> Click on 'Generate DSBSC Modulated Signal' button to generate the modulated signal.
+            </li>
+            <li class="step step4">
+              <strong>Step 4:</strong> Click the 'Show Frequency Spectrums' button to view the DSB-SC spectra.
             </li>
           </ul>
         </div>
@@ -66,12 +66,16 @@
                     <div class="leading-none messageFrequencyDiv">10<span class="ml-1">Hz</span></div>
                     <br/>
                     
+                    <div class="inline-flex items-center gap-2">
+                      <span><strong>Step 1:</strong></span>
                               <button
                       onclick="generateMessage()"
                       class="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-[#0c9c0c] hover:scale-105"
                     >
                       Generate Message
                     </button>
+                    </div>
+
                   </div>
 
                   
@@ -88,12 +92,16 @@
                     />
                     <div class="leading-none carrierFrequencyDiv">100<span class="ml-1">Hz</span></div>
 
+                    <div class="inline-flex items-center gap-2">
+                      <span><strong>Step 2:</strong></span>
                     <button
                       onclick="generateCarrier()"
                       class="bg-blue-500 text-white py-1 px-3 mt-1 rounded-md hover:bg-[#0c9c0c] hover:scale-105"
                     >
                       Generate Carrier
                     </button>
+                    </div>
+
                   </div>
 
                 </div>
@@ -109,21 +117,24 @@
                   placeholder="sampling frequency in Hz"
                 />
               </div>
+
+              <div class="inline-flex items-center gap-2">
+                <span><strong>Step 3:</strong></span>
               <button
                 class="bg-blue-500 text-white py-1 px-3 text-sm rounded-md hover:scale-105"
                 onclick="generateDSBSC()"
               >
                 Generate DSB-SC Modulated Signal
               </button>
+              </div>
+
+              <div class="inline-flex items-center gap-2">
+                <span><strong>Step 4:</strong></span>
               <button 
               class="bg-blue-500 text-white py-1 px-3 text-sm rounded-md hover:scale-105" id="modtodemod"
               onclick="frequencySpectrums()">Show Frequency Spectrums</button>
-			                <button
-                class="relative left-36 bg-gray-500 text-white py-1 px-3 text-sm rounded-md hover:scale-105"
-                onclick="generatePlots()"
-              >
-                Perform DSB-SC Demodulation
-              </button>
+              </div>
+              
             </div>
             <div class="flex flex-col items-center">
             <div class="plotSection">
