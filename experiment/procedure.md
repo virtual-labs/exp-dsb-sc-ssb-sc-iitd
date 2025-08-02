@@ -6,9 +6,9 @@
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
-    <h3>1. Select Frequencies</h3>
+    <h3>1. Input <strong>Message Frequency (Hz)</strong>, <strong>Carrier Frequency (Hz),</strong> and <strong>Message Signal Gain</strong>:<br></h3>
     <p>
-        Begin by choosing the message and carrier frequencies using the provided slider inputs. 
+        Begin by choosing the message signal gain, message and carrier frequencies using the provided slider inputs. 
         Adjust the sliders to set your desired frequency values.
     </p>
     <h3>2. Generate Modulated Signal</h3>
