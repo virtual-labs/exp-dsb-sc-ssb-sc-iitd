@@ -127,12 +127,20 @@
               <button 
               class="bg-blue-500 text-white py-1 px-3 text-sm rounded-md hover:scale-105" id="modtodemod"
               onclick="frequencySpectrums()">Show Frequency Spectrums</button>
+              <br/><br/><br/><br/>
+              <button 
+              class="bg-green-500 text-white rounded-md px-3 py-1 hover:scale-105 mt-3"
+              onclick="location.reload();"
+            >
+              Reset Simulator
+            </button>
               </div>
               
             </div>
             <div class="flex flex-col items-center">
             <div class="plotSection">
               <canvas id="dsbscPlotCanvas" class="w-[600px] h-[0px]"></canvas>
+              <canvas id="superimposedPlotCanvas" class="w-[600px] h-[0px]"></canvas>
               <canvas id="carrierPlotCanvas" class="w-[600px] h-[0px]"></canvas>
               <canvas id="messagePlotCanvas" class="w-[600px] h-[0px]"></canvas>
             </div>
@@ -146,7 +154,17 @@
         <div class="plot-container1">
           <div id="plot-message" class="plot1"></div>
           <div id="plot-dsb" class="plot1"></div>
-          <div id="plot-demodulated" class="plot1"></div>
+          <div id="plot-demodulated" class="hidden plot1"></div>
+      </div>
+
+      <div align = "center">
+        <a href = ".\DSBSC_Demod.html">
+        <button
+        class="bg-blue-500 text-white py-1 px-3  rounded-md hover:scale-105"
+      >
+        Perform DSB-SC Demodulation
+      </button>
+      </a>
       </div>
         <br />
         <br />
@@ -334,74 +352,120 @@
       }
 
       function plotGraph(result, canvasId) {
-        const ctx = document.getElementById(canvasId).getContext("2d");
-        const samplingFrequency = 100 * parseFloat(
-          document.getElementById("carrierFrequency").value
-        );
+  const ctx = document.getElementById(canvasId).getContext("2d");
 
-        // Destroy existing chart instance
-        if (window[canvasId + "Chart"]) {
-          window[canvasId + "Chart"].destroy();
-        }
+  // Destroy existing chart instance if any
+  if (window[canvasId + "Chart"]) {
+    window[canvasId + "Chart"].destroy();
+  }
 
-        const plotData = {
-  labels:
-    canvasId === "carrierPlotCanvas" ? result.carrier_x : result.x,
-  datasets: [
-    {
-      label:
-        canvasId === "messagePlotCanvas"
-          ? "Message Signal"
-          : canvasId === "carrierPlotCanvas"
-          ? "Carrier Signal"
-          : "DSBSC Modulated Signal",
-      data:
-        canvasId === "messagePlotCanvas"
-          ? result.message
-          : canvasId === "carrierPlotCanvas"
-          ? result.carrier
-          : result.y,
-      borderColor:
-        canvasId === "messagePlotCanvas"
-          ? "red"
-          : canvasId === "carrierPlotCanvas"
-          ? "green"
-          : "blue",
-      borderWidth: 2,
-      pointRadius: 0,
-      fill: false,
-    },
-  ],
-};
+  // Determine datasets based on canvas
+  const datasets =
+    canvasId === "superimposedPlotCanvas"
+      ? [
+          {
+            label: "Message Signal",
+            data: result.message,
+            borderColor: "red",
+            borderWidth: 2,
+            pointRadius: 0,
+            fill: false,
+          },
+          {
+            label: "Carrier Signal",
+            data: result.carrier,
+            borderColor: "green",
+            borderWidth: 2,
+            pointRadius: 0,
+            fill: false,
+          },
+        ]
+      : [
+          {
+            label:
+              canvasId === "messagePlotCanvas"
+                ? "Message Signal"
+                : canvasId === "carrierPlotCanvas"
+                ? "Carrier Signal"
+                : "DSBSC Modulated Signal",
+            data:
+              canvasId === "messagePlotCanvas"
+                ? result.message
+                : canvasId === "carrierPlotCanvas"
+                ? result.carrier
+                : result.y,
+            borderColor:
+              canvasId === "messagePlotCanvas"
+                ? "red"
+                : canvasId === "carrierPlotCanvas"
+                ? "green"
+                : "blue",
+            borderWidth: 2,
+            pointRadius: 0,
+            fill: false,
+          },
+        ];
 
-        window[canvasId + "Chart"] = new Chart(ctx, {
-          type: "line",
-          data: plotData,
-          options: {
-            scales: {
-              x: {
-                title: {
-                  display: true,
-                  text: "Time (s)",
-                },
-                ticks: {
-            callback: function(value) {
-              console.log("X tick label:", value); // Logs each x-value during rendering
-              return Number(value/samplingFrequency).toFixed(1);  // Round to 1 decimal place
-            }
-          }
+  // Set x-axis labels
+  // For superimposed plot, generate from sample indices if result.x not available
 
-              },
-              y: {
-                title: {
-                  display: true,
-                  text: "Amplitude",
-                },
-              },
+  //const dt = 1/(100*parseFloat(document.getElementById("carrierFrequency").value));
+  const labels =
+    canvasId === "superimposedPlotCanvas"
+      ? result.x || result.message.map((_, i) => i * result.dt || i) // dt = 1/samplingFrequency
+      : result.x;
+
+/*
+const labels =
+  canvasId === "superimposedPlotCanvas"
+    ? result.x // already in seconds
+    : result.x;
+*/
+  const plotData = {
+    labels: labels,
+    datasets: datasets,
+  };
+
+  window[canvasId + "Chart"] = new Chart(ctx, {
+    type: "line",
+    data: plotData,
+    options: {
+      responsive: true,
+      //maintainAspectRatio: false,
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: "Time (s)",
+          },
+          ticks: {
+            callback: function (value, index) {
+              return Number(labels[index]).toFixed(3); // show proper time
             },
           },
-        });
-      }
+        },
+        y: {
+          title: {
+            display: true,
+            text: "Amplitude",
+          },
+        },
+      },
+      plugins: {
+        legend: {
+          display: true,
+          position: "top",
+        },
+      },
+    },
+  });
+}
+
+
+
+      let messageSignal = null;
+let carrierSignal = null;
+/*
 
       function generateMessage() {
         const messageFrequency = parseFloat(
@@ -425,6 +489,12 @@
           samplingFrequency,
 		  gain
         );
+
+        messageSignal = {
+    x: result.time,    // time axis
+    values: result.message  // signal values
+  };
+
         plotGraph(result, "messagePlotCanvas");
       }
 
@@ -444,10 +514,64 @@
           carrierFrequency,
           samplingFrequency
         );
+
+        carrierSignal = {
+    x: result.time,     // time axis
+    values: result.carrier
+  };
+
         plotGraph(result, "carrierPlotCanvas");
       }
 
+*/
+
+function generateMessage() {
+  const messageFrequency = parseFloat(document.getElementById("messageFrequency").value);
+  const carrierFrequency = parseFloat(document.getElementById("carrierFrequency").value);
+  const samplingFrequency = 100 * carrierFrequency;
+  const gain = parseFloat(document.getElementById("gain").value);
+
+  const result = dsbsc_modulation(messageFrequency, carrierFrequency, samplingFrequency, gain);
+
+  // Save globally
+  window.messageSignal = { x: result.x, y: result.message };
+
+  plotGraph(result, "messagePlotCanvas");
+}
+
+function generateCarrier() {
+  const messageFrequency = parseFloat(document.getElementById("messageFrequency").value);
+  const carrierFrequency = parseFloat(document.getElementById("carrierFrequency").value);
+  const samplingFrequency = parseFloat(document.getElementById("samplingFrequency").value);
+
+  const result = dsbsc_modulation(messageFrequency, carrierFrequency, samplingFrequency);
+
+  // Save globally
+  window.carrierSignal = { x: result.x, y: result.carrier };
+
+  plotGraph(result, "carrierPlotCanvas");
+}
+
+function superimposed() {
+  if (!window.messageSignal || !window.carrierSignal) {
+    alert("Please generate both Message and Carrier first!");
+    return;
+  }
+
+  const result = {
+    x: window.messageSignal.x, // shared time axis
+    message: window.messageSignal.y,
+    carrier: window.carrierSignal.y,
+  };
+
+  plotGraph(result, "superimposedPlotCanvas"); // Chart.js handles it
+}
+
+
+
+
       function generateDSBSC() {
+        superimposed();
         const messageFrequency = parseFloat(
           document.getElementById("messageFrequency").value
         );

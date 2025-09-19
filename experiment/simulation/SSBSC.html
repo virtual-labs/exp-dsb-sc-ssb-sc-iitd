@@ -136,6 +136,12 @@
               >
                 Show Frequency Spectrums
               </button>
+              <button 
+              class="bg-green-500 text-white rounded-md px-3 py-1 hover:scale-105 mt-2"
+              onclick="location.reload();"
+            >
+              Reset Simulator
+            </button>
               </div>
 			  
             </div>
@@ -144,6 +150,7 @@
             <div class="plotSection relative -top-[10em]">
               <div id="recoveredUSBPlot" class="w-[600px] max-h-[410px]"></div>
               <div id="lsbPlot" class="w-[600px] max-h-[410px]"></div>
+              <div id="superimposed" class="w-[600px] max-h-[410px]"></div>
               <div id="usbPlot" class="w-[600px] max-h-[410px]"></div>
               <div id="messagePlot" class="w-[600px] max-h-[410px]"></div>
               <!-- <div id="recoveredLSBPlot" class="w-[600px] h-[450px]"></div> -->
@@ -173,9 +180,19 @@
         
             <!-- Demodulated Signal -->
             <div class="bg-white p-4 rounded shadow">
-              <div id="plot-demodulated" class="h-128"></div>
+              <div id="plot-demodulated" class="hidden h-128"></div>
             </div>
           </div>
+        </div>
+
+        <div align = "center">
+          <a href = ".\SSBSC_Demod.html">
+          <button
+          class="bg-blue-500 text-white py-1 px-3  rounded-md hover:scale-105"
+        >
+          Perform SSB-SC Demodulation
+        </button>
+        </a>
         </div>
         <br />
         <br />
@@ -302,6 +319,9 @@
             document.querySelector(".gainDiv").innerHTML = gainValue;
         }
       // Generate Message Signal
+      let messageTrace = null;
+let carrierTrace = null;
+
       function generateMessage() {
         const fm = parseFloat(
           document.getElementById("messageFrequency").value
@@ -315,7 +335,7 @@
           document.getElementById("gain").value
         );
         const m = t.map((time) => Am * Math.cos(2 * Math.PI * fm * time));
-        const trace = {
+        messageTrace = {
           x: t.slice(1,parseInt(3/fm * F)),
           y: m.slice(1,parseInt(3/fm * F)),
           mode: "lines",
@@ -330,11 +350,14 @@
             title: "Amplitude",
           },
         };
-        Plotly.newPlot("messagePlot", [trace], layout);
+        Plotly.newPlot("messagePlot", [messageTrace], layout);
       }
 
       // Generate Carrier Signal
       function generateCarrier() {
+        const fm = parseFloat(
+          document.getElementById("messageFrequency").value
+        );
         const fc = parseFloat(
           document.getElementById("carrierFrequency").value
         );
@@ -344,9 +367,9 @@
         const T = 1 / F;
         const t = Array.from({ length: F }, (_, i) => i * T);
         const c = t.map((time) => Math.cos(2 * Math.PI * fc * time));
-        const trace = {
-          x: t.slice(1,parseInt(3/fc * F)),
-          y: c.slice(1,parseInt(3/fc * F)),
+        carrierTrace = {
+          x: t.slice(1,parseInt(3/fm * F)),
+          y: c.slice(1,parseInt(3/fm * F)),
           mode: "lines",
           name: "Carrier Signal",
         };
@@ -359,11 +382,29 @@
             title: "Amplitude",
           },
         };
-        Plotly.newPlot("usbPlot", [trace], layout);
+        Plotly.newPlot("usbPlot", [carrierTrace], layout);
       }
+
+      function superimposed() {
+  if (!messageTrace || !carrierTrace) {
+    alert("Please generate both Message and Carrier first!");
+    return;
+  }
+
+  const layout = {
+    title: "Superimposition of Message and Carrier Signals",
+    xaxis: { title: "Time (s)" },
+    yaxis: { title: "Amplitude" },
+  };
+
+  Plotly.newPlot("superimposed", [messageTrace, carrierTrace], layout, {
+    responsive: true,
+  });
+}
 
       // Generate Upper Sideband SSB-SC Signal
       function generateUpperSSBSC() {
+        superimposed();
         const fm = parseFloat(
           document.getElementById("messageFrequency").value
         );
@@ -788,7 +829,7 @@ function movingAverageWithCutoff(signal, cutoffFreq, samplingFreq) {
     Plotly.newPlot('plot-demodulated', [traceDemodulatedSignal], layoutDemodulated);
 
     // Smooth scroll to the plot container
-    document.getElementById('plot-message').scrollIntoView({ behavior: 'smooth' });
+    document.getElementById('plot-upper-sideband').scrollIntoView({ behavior: 'smooth' });
 }
 
 	</script>
