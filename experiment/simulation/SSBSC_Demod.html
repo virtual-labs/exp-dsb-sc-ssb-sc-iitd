@@ -215,6 +215,13 @@
         </div>
         <br />
         <div class="flex items-start gap-10">
+          
+          <button
+          onclick="SSBSCInput();"
+          class="bg-blue-500 text-white py-1 px-3 mt-1 rounded-md hover:bg-[#0c9c0c] hover:scale-105"
+        >
+          SSBSC Input
+        </button>
           <!-- Image Section -->
           <div>
             <img src="./ssb_sc_demod.png" class="w-[50em] h-[25em]" />
@@ -224,6 +231,7 @@
           <div class="flex flex-col gap-4 w-full">
             <!-- Buttons -->
             <div class="flex py-1 gap-3">
+              <div class = "hidden">
               <p class="font-medium">Message Frequency (Hz)</p>
               <input
               class="border px-1 w-[152px] py-1 rounded-sm border-black"
@@ -246,6 +254,7 @@
             max="1000"
             onchange="handleCarrierFrequencyChange()"
           />
+        </div>
             </div>
 
             <p class="font-medium">Cut-off Frequency (Hz)</p>
@@ -273,17 +282,34 @@
             </div>
         
             <!-- Plots -->
-            <div class="plotSection grid grid-cols-2 gap-4">
-              <div id="recoveredUSBPlot_demod" class="w-[600px] max-h-[410px]"></div>
-              <div id="recoveredLSBPlot_demod" class="w-[600px] max-h-[410px]"></div>
-              <div id="lsbPlot_demod" class="w-[600px] max-h-[410px]"></div>
-              <div id="usbPlot_demod" class="w-[600px] max-h-[410px]"></div>
-              <div id="messagePlot_demod" class="w-[600px] max-h-[410px]"></div>
-            </div>
+<!-- Plots -->
+<div class="plotSection flex flex-col gap-4">
+  <!-- Row 1 -->
+  <div id="SSBSCInput1" class="flex gap-4">
+    <!-- Time-domain plot -->
+    <div id="SSBSCInput" class="flex-1"></div>
+    <!-- Frequency-domain plot -->
+    <div id="plot-spectrum" class="flex-1"></div>
+  </div>
+
+  <!-- Row 2 -->
+  <div id="SSBSCInput2" class="flex gap-4">
+    <div id="recoveredUSBPlot_demod" class="flex-1"></div>
+    <div id="recoveredLSBPlot_demod" class="flex-1"></div>
+  </div>
+
+  <!-- Row 3 -->
+  <div class="flex gap-4">
+    <div id="lsbPlot_demod" class="flex-1"></div>
+    <div id="usbPlot_demod" class="flex-1"></div>
+  </div>
+
+  <!-- Row 4 (single plot spanning full width) -->
+  <div id="messagePlot_demod" class="w-full"></div>
+</div>
           </div>
         </div>
         
-	
 <script>
     function checkFrequencies() {
         // Get values from input fields
@@ -679,6 +705,120 @@ function movingAverageWithCutoff(signal, cutoffFreq, samplingFreq) {
 	  
 
     }
+
+
+
+    function SSBSCInput() {
+    // Show modal
+    //document.getElementById("ssbscModal").style.display = "flex";
+
+    // Get input values
+    const fm = parseFloat(document.getElementById("messageFrequency").value);
+    const fc = parseFloat(document.getElementById("carrierFrequency").value);
+    const F = 10 * fc; // sampling frequency
+    const T = 1 / F;
+    const t = Array.from({ length: F }, (_, i) => i * T);
+    const Am = parseFloat(document.getElementById("gain").value);
+
+    if (isNaN(fm) || isNaN(fc)) {
+        alert("Please enter valid inputs first!");
+        return;
+    }
+
+    // Message signal
+    const m = t.map((time) => Am * Math.cos(2 * Math.PI * fm * time));
+
+    // SSB-SC Upper Sideband using Hilbert method (approximation)
+    const y1 = m.map((sample, index) => sample * Math.cos(2 * Math.PI * fc * t[index]));
+    const y2 = m.map((sample, index) =>
+        Math.sin(2 * Math.PI * fc * (t[index] + Math.PI / 2)) *
+        Math.sin(2 * Math.PI * fc * t[index])
+    );
+    const ssbsc = y1.map((sample, index) => sample - y2[index]);
+
+    // -------- Time domain plot --------
+    const ssbscPlotDiv = document.getElementById("SSBSCInput");
+    Plotly.newPlot(
+        ssbscPlotDiv,
+        [
+            {
+                x: t.slice(1, parseInt((3 / fm) * F)),
+                y: m.slice(1, parseInt((3 / fm) * F)),
+                mode: "lines",
+                name: "Message Signal",
+                line: { color: "green" },
+            },
+            {
+                x: t.slice(1, parseInt((3 / fm) * F)),
+                y: ssbsc.slice(1, parseInt((3 / fm) * F)),
+                mode: "lines",
+                name: "Upper Sideband SSB-SC Signal",
+                line: { color: "blue" },
+            },
+        ],
+        {
+            title: "Message and SSB-SC (Upper Sideband)",
+            xaxis: { title: "Time (s)" },
+            yaxis: { title: "Amplitude" },
+        }
+    );
+
+    // -------- Frequency domain spectrum --------
+    const lowerSidebandFrequency = fc - fm;
+    const upperSidebandFrequency = fc + fm;
+
+    const traceLowerSideband = {
+        x: [lowerSidebandFrequency, lowerSidebandFrequency],
+        y: [0, 1],
+        mode: "lines",
+        line: { width: 3, color: "blue" },
+        name: "Lower Sideband"
+    };
+
+    const traceUpperSideband = {
+        x: [upperSidebandFrequency, upperSidebandFrequency],
+        y: [0, 1],
+        mode: "lines",
+        line: { width: 3, color: "red" },
+        name: "Upper Sideband"
+    };
+
+    Plotly.newPlot('plot-spectrum', [traceLowerSideband, traceUpperSideband], {
+        title: "SSB-SC Spectrum",
+        xaxis: { title: "Frequency (Hz)", showgrid: true, zeroline: true },
+        yaxis: { title: "Normalized Amplitude", showgrid: true, zeroline: true }
+    });
+}
+
+
+
+// Utility: linspace
+function linspace(start, stop, num) {
+    const arr = [];
+    const step = (stop - start) / (num - 1);
+    for (let i = 0; i < num; i++) {
+        arr.push(start + step * i);
+    }
+    return arr;
+}
+
+
+
+    function loadData() {
+  const data = localStorage.getItem('sharedData');
+  if (data) {
+    const parsed = JSON.parse(data);
+
+    document.getElementById('messageFrequency').value = parsed.fm ?? '';
+    document.getElementById('carrierFrequency').value = parsed.fc ?? '';
+  }
+}
+
+// Load immediately
+loadData();
+
+// Sync across tabs
+window.addEventListener('storage', loadData);
   </script>
 	
 	<script>
