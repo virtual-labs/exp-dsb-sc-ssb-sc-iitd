@@ -179,6 +179,12 @@ A LPF's cutoff frequency is set near the message frequency to pass desired signa
  
 
         <div class="flex items-start gap-10">
+          <button
+          onclick="DSBSCInput();"
+          class="bg-blue-500 text-white py-1 px-3 mt-1 rounded-md hover:bg-[#0c9c0c] hover:scale-105"
+        >
+          DSBSC Input
+        </button>
           <div>
             <img src=".\dsb_sc_demod.png" class="w-[33em] h-[20em]"/>
         </div>
@@ -208,6 +214,7 @@ A LPF's cutoff frequency is set near the message frequency to pass desired signa
             </div>
             <div class="flex w-full py-4 gap-4">
 
+              <div class = "hidden">
               <div class="flex items-center gap-2">
                 <p class="font-medium">Message Frequency (Hz)</p>
                 <input
@@ -234,6 +241,7 @@ A LPF's cutoff frequency is set near the message frequency to pass desired signa
               onchange="handleCarrierFrequencyChange()"
             />
             </div>
+          </div>
 
               <div class="flex items-center gap-2">
                 <p class="font-medium">Cut-off Frequency (Hz)</p>
@@ -248,17 +256,26 @@ A LPF's cutoff frequency is set near the message frequency to pass desired signa
               <button
                 class="bg-blue-500 text-white py-1 px-3 text-sm rounded-md hover:scale-105"
 				
-                onclick="generatePlots()"
+                onclick="refreshAndRun()"
               >
                 Perform DSB-SC Demodulation
               </button>
 
             </div>
-            <div class="plotSection">
-              <canvas
-                id="dsbscDemodulatedPlotCanvas"
-                class="w-[600px] h-[0px]"
-              ></canvas>
+
+            <div class="plotSection flex flex-col gap-4">
+              <!-- Row 1 -->
+              <div id="SSBSCInput1" class="flex gap-4">
+                <!-- Time-domain plot -->
+                <div id="DSBSCInput" class="flex-1"></div>
+                <!-- Frequency-domain plot -->
+                <div id="plot-spectrum" class="flex-1"></div>
+              </div>
+             </div> 
+             <div class="plotSection flex">
+              <canvas id="dsbscDemodulatedPlotCanvas" class="w-[100px] h-[0px]"></canvas>
+              <canvas id="demodSpectrumCanvas" class="w-[100px] h-[0px]"></canvas>
+            </div>
 
             </div>
           </div>
@@ -267,7 +284,6 @@ A LPF's cutoff frequency is set near the message frequency to pass desired signa
     </div>
 
 
-	
 <script>
     function checkFrequencies() {
         // Get values from input fields
@@ -782,40 +798,92 @@ A LPF's cutoff frequency is set near the message frequency to pass desired signa
             });
         }
 
-        function generatePlots() {
-            const messageFrequency = parseFloat(
-                document.getElementById("messageFrequency").value
-            );
-            const carrierFrequency = parseFloat(
-                document.getElementById("carrierFrequency").value
-            );
-            const samplingFrequency = 10 * parseFloat(
-                document.getElementById("carrierFrequency").value
-            );
-            const cutoffFrequency = parseFloat(
-                document.getElementById("cutoffFrequency").value
-            );
-            const filterOrder = parseInt(
-                document.getElementById("filterOrder").value
-            );
+        function refreshAndRun() {
+  localStorage.setItem("runGeneratePlots", "1"); // set flag
+  location.reload(); // refresh page
+}
 
-            const result = dsbsc_demodulation(
-                messageFrequency,
-                carrierFrequency,
-                samplingFrequency,
-                cutoffFrequency,
-                filterOrder
-            );
-			
-								            // Scroll to the plot area
-            document.getElementById('dsbscDemodulatedPlotCanvas').scrollIntoView({ behavior: 'smooth' });
-			
-            plotDSBSCDemodulatedSignal(result);
-            plotDSBSCModulatedSignal(result);
-            plotMessageSignal(result);
-			
+window.addEventListener("DOMContentLoaded", () => {
+  if (localStorage.getItem("runGeneratePlots") === "1") {
+    localStorage.removeItem("runGeneratePlots"); // clear flag
+    generatePlots(); // ✅ run your function after reload
+  }
+});
+function generatePlots() {
+    const messageFrequency = parseFloat(document.getElementById("messageFrequency").value);
+    const carrierFrequency = parseFloat(document.getElementById("carrierFrequency").value);
+    const samplingFrequency = 10 * carrierFrequency;
+    const cutoffFrequency = parseFloat(document.getElementById("cutoffFrequency").value);
+    const filterOrder = parseInt(document.getElementById("filterOrder").value);
 
+    const result = dsbsc_demodulation(
+        messageFrequency,
+        carrierFrequency,
+        samplingFrequency,
+        cutoffFrequency,
+        filterOrder
+    );
+
+    // Scroll to the plot area
+    document.querySelector('.plotSection').scrollIntoView({ behavior: 'smooth' });
+
+    // Plot time-domain demodulated signal
+    plotGraph(result, "dsbscDemodulatedPlotCanvas");
+
+    // Plot demodulated spectrum (vertical line at message frequency)
+    plotDemodulatedSpectrumChart(result, "demodSpectrumCanvas");
+}
+
+function plotDemodulatedSpectrumChart(result, canvasId) {
+    const messageFrequency = parseFloat(document.getElementById("messageFrequency").value);
+    const ctx = document.getElementById(canvasId).getContext("2d");
+
+    // Destroy previous chart if it exists
+    if (window[canvasId + "Chart"]) {
+        window[canvasId + "Chart"].destroy();
+    }
+
+    // Vertical impulse at message frequency (x repeated twice)
+    const plotData = {
+        datasets: [
+            {
+                label: "Demodulated Spectrum",
+                data: [
+                    { x: messageFrequency, y: 0 },
+                    { x: messageFrequency, y: 1 }
+                ],
+                borderColor: "orange",
+                borderWidth: 3,
+                fill: false,
+                showLine: true, // ensures line between points
+                pointRadius: 0
+            }
+        ]
+    };
+
+    window[canvasId + "Chart"] = new Chart(ctx, {
+        type: "line",
+        data: plotData,
+        options: {
+            scales: {
+                x: {
+                    type: "linear",
+                    title: { display: true, text: "Frequency (Hz)" },
+                    min: messageFrequency - 10,
+                    max: messageFrequency + 10
+                },
+                y: {
+                    title: { display: true, text: "Normalized Amplitude" },
+                    min: 0,
+                    max: 1
+                }
+            }
         }
+    });
+}
+
+
+
     </script>
 	
 	
@@ -985,6 +1053,131 @@ A LPF's cutoff frequency is set near the message frequency to pass desired signa
 		 // Smooth scroll to the plot container
             document.querySelector('.plot-container1').scrollIntoView({ behavior: 'smooth' });
         }
+
+
+        function DSBSCInput() {
+    // Show modal
+
+    // Get input values
+    var messageFrequency = parseFloat(
+        document.getElementById("messageFrequency").value
+    );
+    var carrierFrequency = parseFloat(
+        document.getElementById("carrierFrequency").value
+    );
+    var samplingFrequency = 100 * carrierFrequency;
+    var gain = parseFloat(document.getElementById("gain").value);
+
+    // Run DSBSC modulation
+    var data = dsbsc_modulation(
+        messageFrequency,
+        carrierFrequency,
+        samplingFrequency,
+        gain
+    );
+
+    if (isNaN(messageFrequency) || isNaN(carrierFrequency)) {
+        alert("Please enter valid inputs first!");
+        return;
+    }
+
+    // Plot message + DSBSC signal together
+    var dsbscPlotDiv = document.getElementById("DSBSCInput");
+
+    Plotly.newPlot(
+        dsbscPlotDiv,
+        [
+            {
+                x: data.x,
+                y: data.message,
+                mode: "lines",
+                name: "Message Signal",
+                line: { color: "green" },
+            },
+            {
+                x: data.x,
+                y: data.y,
+                mode: "lines",
+                name: "DSBSC Modulated Signal",
+                line: { color: "blue" },
+            },
+        ],
+        {
+            title: "Superimposition of Message and DSBSC Signals",
+            xaxis: { title: "Time" },
+            yaxis: { title: "Amplitude" },
+        }
+    );
+    const fm = messageFrequency;
+    const fc = carrierFrequency;
+    const lowerSidebandFrequency = fc - fm;
+    const upperSidebandFrequency = fc + fm;
+
+    const traceLowerSideband = {
+        x: [lowerSidebandFrequency, lowerSidebandFrequency],
+        y: [0, 1],
+        mode: "lines",
+        line: { width: 3, color: "blue" },
+        name: "Lower Sideband"
+    };
+
+    const traceUpperSideband = {
+        x: [upperSidebandFrequency, upperSidebandFrequency],
+        y: [0, 1],
+        mode: "lines",
+        line: { width: 3, color: "red" },
+        name: "Upper Sideband"
+    };
+
+    Plotly.newPlot('plot-spectrum', [traceLowerSideband, traceUpperSideband], {
+        title: "SSB-SC Spectrum",
+        xaxis: { title: "Frequency (Hz)", showgrid: true, zeroline: true },
+        yaxis: { title: "Normalized Amplitude", showgrid: true, zeroline: true }
+    });
+}
+
+
+// Utility: linspace
+function linspace(start, stop, num) {
+    const arr = [];
+    const step = (stop - start) / (num - 1);
+    for (let i = 0; i < num; i++) {
+        arr.push(start + step * i);
+    }
+    return arr;
+}
+
+
+        function loadData() {
+  const data = localStorage.getItem('chartInputs');
+  if (data) {
+    const parsed = JSON.parse(data);
+    document.getElementById('messageFrequency').value = parsed.messageFrequency ?? '';
+    document.getElementById('carrierFrequency').value = parsed.carrierFrequency ?? '';
+    updateChart(parsed.messageFrequency, parsed.carrierFrequency); // recreate chart
+  }
+}
+
+// Example chart update function
+function updateChart(messageFreq, carrierFreq) {
+  const t = Array.from({length: 500}, (_, i) => i/500);
+  const y = t.map(v => Math.sin(2 * Math.PI * messageFreq * v) * Math.cos(2 * Math.PI * carrierFreq * v));
+
+  const ctx = document.getElementById('myChart').getContext('2d');
+  
+  // Destroy existing chart if it exists
+  if (window.myChartInstance) window.myChartInstance.destroy();
+
+  window.myChartInstance = new Chart(ctx, {
+    type: 'line',
+    data: { labels: t, datasets: [{ label: 'Signal', data: y }] },
+    options: {}
+  });
+}
+
+loadData();
+// Load immediately
+window.addEventListener('storage', loadData);
     </script>
 	
 

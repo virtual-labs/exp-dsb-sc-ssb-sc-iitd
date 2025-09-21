@@ -405,10 +405,10 @@ let carrierTrace = null;
       // Generate Upper Sideband SSB-SC Signal
       function generateUpperSSBSC() {
         superimposed();
-        const fm = parseFloat(
+        fm = parseFloat(
           document.getElementById("messageFrequency").value
         );
-        const fc = parseFloat(
+        fc = parseFloat(
           document.getElementById("carrierFrequency").value
         );
         const F = parseFloat(
@@ -445,6 +445,7 @@ let carrierTrace = null;
           },
         };
         Plotly.newPlot("lsbPlot", [trace], layout);
+        saveData();
       }
 
       // Generate Lower Sideband SSB-SC Signal
@@ -490,6 +491,19 @@ let carrierTrace = null;
         };
         Plotly.newPlot("recoveredUSBPlot", [trace], layout);
       }
+
+      function saveData() {
+  const fm = parseFloat(document.getElementById('messageFrequency').value);
+  const fc = parseFloat(document.getElementById('carrierFrequency').value);
+
+
+  const myData = { 
+fm:fm,
+fc:fc
+  };
+
+  localStorage.setItem('sharedData', JSON.stringify(myData));
+}
     </script>
 	
 	

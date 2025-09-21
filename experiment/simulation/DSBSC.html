@@ -568,14 +568,14 @@ function superimposed() {
 }
 
 
-
+let messageFrequency, carrierFrequency;
 
       function generateDSBSC() {
         superimposed();
-        const messageFrequency = parseFloat(
+        messageFrequency = parseFloat(
           document.getElementById("messageFrequency").value
         );
-        const carrierFrequency = parseFloat(
+        carrierFrequency = parseFloat(
           document.getElementById("carrierFrequency").value
         );
         const samplingFrequency = 100 * parseFloat(
@@ -591,7 +591,16 @@ function superimposed() {
 		  gain
         );
         plotGraph(result, "dsbscPlotCanvas");
+        saveData();
       }
+
+      function saveData() {
+  const messageFrequency = parseFloat(document.getElementById('messageFrequency').value);
+  const carrierFrequency = parseFloat(document.getElementById('carrierFrequency').value);
+
+  const myData = { messageFrequency, carrierFrequency };
+  localStorage.setItem('chartInputs', JSON.stringify(myData));
+} 
     </script>
     <!-- demod script -->
      <script>
@@ -874,11 +883,12 @@ function superimposed() {
             });
         }
 
+        
         function generatePlots() {
-            const messageFrequency = parseFloat(
+            var messageFrequency = parseFloat(
                 document.getElementById("messageFrequency").value
             );
-            const carrierFrequency = parseFloat(
+            var carrierFrequency = parseFloat(
                 document.getElementById("carrierFrequency").value
             );
             const samplingFrequency = 10 * parseFloat(
@@ -906,8 +916,9 @@ function superimposed() {
             plotDSBSCModulatedSignal(result);
             plotMessageSignal(result);
 			
-
         }
+
+
     </script>
 	
 	
@@ -1077,7 +1088,9 @@ function superimposed() {
 		 // Smooth scroll to the plot container
             document.querySelector('.plot-container1').scrollIntoView({ behavior: 'smooth' });
         }
-    </script>
+
+
+ </script>
 	
 
     <style>
