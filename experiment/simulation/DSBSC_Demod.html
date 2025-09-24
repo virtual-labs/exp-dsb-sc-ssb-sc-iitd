@@ -1130,8 +1130,8 @@ function plotDemodulatedSpectrumChart(result, canvasId) {
     };
 
     Plotly.newPlot('plot-spectrum', [traceLowerSideband, traceUpperSideband], {
-        title: "SSB-SC Spectrum",
-        xaxis: { title: "Frequency (Hz)", showgrid: true, zeroline: true },
+        title: "DSB-SC Spectrum",
+        xaxis: { title: "Frequency (Hz)", showgrid: true, zeroline: true, range: [lowerSidebandFrequency-5, upperSidebandFrequency + 5] },
         yaxis: { title: "Normalized Amplitude", showgrid: true, zeroline: true }
     });
 }
