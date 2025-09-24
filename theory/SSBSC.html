@@ -1,0 +1,486 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+	    <script type="text/javascript" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    <title>Virtual Labs</title>
+    <link rel="stylesheet" href="../css/vlabs-style.css" />
+    <link rel="shortcut icon" href="../images/favicon.ico" />
+  </head>
+  <body>
+    <header class="border-b-orange-500 border-b-8">
+      <nav class="flex justify-between">
+        <button class="px-4 py-1 rounded-r-md border-r" onclick="showModal()">
+          <img class="w-[30px] h-[30px]" src="../images/menu.png" />
+        </button>
+        <div class="flex justify-center">
+          <a href="https://vlab.co.in" class="navbar-brand">
+            <img
+              src="../images/vlabs-color-small-moe.jpg"
+              alt="vlabs logo"
+              class="mx-4 px-4 max-md:w-[118px] max-md:h-[64px] py-2"
+            />
+          </a>
+        </div>
+        <div id="headerNavbar" class="flex items-center ml-auto max-md:hidden">
+          <ul
+            class="flex text-center text-[#2c98cd]"
+            style="font-family: Raleway, sans-serif"
+          >
+            <li class="px-2 m-1">
+              <a
+                class="mx-4 px-4 py-2 hover:bg-[#99cc3e] hover:underline hover:text-white rounded-lg"
+                href="https://vlab.co.in"
+                >HOME</a
+              >
+            </li>
+            <li class="px-2 m-1">
+              <a
+                class="mx-4 px-4 py-2 hover:bg-[#99cc3e] hover:underline hover:text-white rounded-lg"
+                href="https://vlab.co.in/participating-institutes"
+                >PARTNERS</a
+              >
+            </li>
+            <li class="px-2 m-1">
+              <a
+                class="mx-4 px-4 py-2 hover:bg-[#99cc3e] hover:underline hover:text-white rounded-lg"
+                href="https://vlab.co.in/contact-us"
+                >CONTACT</a
+              >
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <!-- overlaynavbar -->
+      <div
+        class="overlaycontainer w-[100%] h-[100vh] bg-[#00000080] fixed top-[0%] -z-50 opacity-0"
+      ></div>
+      <div
+        class="overlaysignupform ease-in-out duration-100 fixed -top-[150%] left-[50%] -translate-x-1/2 z-50"
+      >
+        <div class="flex justify-center items-center px-4 h-[100vh] w-[100vw]">
+          <div
+            class="relative bg-white border border-solid border-[#00000033] rounded-md w-[498px] flex flex-col overflow-y-auto"
+          >
+            <div class="p-4 flex justify-between items-center border-b">
+              <div class="w-[87px] h-[50px] flex justify-center items-center">
+                <a href="https://vlab.co.in">
+                  <img
+                    src="../images/vlabs-color-small-moe.jpg"
+                    alt="vlabs logo"
+                    class="w-[71px] h-[40px]"
+                  />
+                </a>
+              </div>
+              <button class="w-[24px] h-[24px]" onclick="closeModal()">
+                <img src="../images/close.png" />
+              </button>
+            </div>
+            <div
+              class="p-4 flex flex-col text-[19.2px] font-bold text-[#3e6389]"
+            >
+              <div class="flex justify-center">
+                <a
+                  href="../index.html"
+                  class="p-2 hover:text-[#343a40] hover:underline"
+                >
+                  Aim
+                </a>
+              </div>
+              <div class="flex justify-center">
+                <a
+                  href="../theory.html"
+                  class="p-2 text-[#FF6600] hover:underline"
+                >
+                  Theory
+                </a>
+              </div>
+              <div class="flex justify-center">
+                <a
+                  href="../pretest.html"
+                  class="p-2 hover:text-[#343a40] hover:underline"
+                >
+                  Pretest
+                </a>
+              </div>
+              <div class="flex justify-center">
+                <a
+                  href="../procedure.html"
+                  class="p-2 hover:text-[#343a40] hover:underline"
+                >
+                  Procedure
+                </a>
+              </div>
+              <div class="flex justify-center">
+                <a
+                  href="../simulation.html"
+                  class="p-2 hover:text-[#343a40] hover:underline"
+                >
+                  Simulation
+                </a>
+              </div>
+              <div class="flex justify-center">
+                <a
+                  href="../posttest.html"
+                  class="p-2 hover:text-[#343a40] hover:underline"
+                >
+                  Posttest
+                </a>
+              </div>
+              <div class="flex justify-center">
+                <a
+                  href="../references.html"
+                  class="p-2 hover:text-[#343a40] hover:underline"
+                >
+                  References
+                </a>
+              </div>
+              <div class="flex justify-center">
+                <a
+                  href="../feedback.html"
+                  class="p-2 hover:text-[#343a40] hover:underline"
+                >
+                  Feedback
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- sidebar and body -->
+    <div class="flex min-h-[380px]">
+      <div class="maincontent px-8 pb-6 flex-1">
+        <div
+          class="w-full text-[19.2px] text-[#313636]"
+          style="font-family: Raleway, sans-serif"
+        >
+          <h2
+            class="text-center pt-6 border-b pb-2 mb-2 text-[#2C99CE] text-[32px]"
+          >
+            SSB-SC Modulation
+          </h2>
+		  
+          <h3 class="text-[24px] font-semibold text-black">Theory</h3>		  
+		      <p>The SSB-SC modulated signal \( S(t) \) can be expressed as:</p>
+    <p>
+        \( S(t) = \frac{A_c}{2} \left[ m(t) \cos(2\pi f_c t) \pm \hat{m}(t) \sin(2\pi f_c t) \right] \)
+    </p>
+    <p>Where:</p>
+    <ul>
+        <li>\( A_c \) is the amplitude of the carrier signal.</li>
+        <li>\( m(t) \) is the baseband (modulating) signal.</li>
+        <li>\( f_c \) is the frequency of the carrier signal.</li>
+        <li>\( \hat{m}(t) \) is the Hilbert transform of the modulating signal \( m(t) \).</li>
+    </ul>
+    <p>
+        In SSB-SC modulation, either the upper sideband (USB) or the lower sideband (LSB) is transmitted by choosing the corresponding sign (plus or minus) in the equation.
+        The carrier \( A_c \cos(2\pi f_c t) \) is suppressed, and only one sideband is transmitted. This reduces the bandwidth required for transmission to half that of DSB-SC.
+    </p>
+    <br>
+	
+          <h3 class="text-[24px] font-semibold text-black">Block Diagram</h3>
+
+          <div class="flex justify-center">
+            <img
+              src="../images/theory/ssbsc1.png"
+              alt="ssbsc_image1"
+              class="h-[280px]"
+            />
+          </div>
+          <p class="mb-4 text-center font-semibold text-black">Figure 1</p>
+          <h3 class="text-[24px] font-semibold text-black">Procedures :</h3>
+          <p class="ml-3">
+            <span class="font-semibold">1. </span> Before patching up an SSB
+            phasing generator system, first examine the performance of the
+            QUADRATURE PHASE SPLITTER module. With the oscilloscope adjusted to
+            give equal gain in each channel it should show a circle. This will
+            give a quick confirmation that there is a phase difference of
+            approximately 90 degrees between the two output sine waves at the
+            measurement frequency. Phase or amplitude errors should be too small
+            for this to degenerate visibly into an ellipse. For the input signal
+            source use an AUDIO OSCILLATOR module. For correct QPS operation the
+            display should be an approximate circle. We will not attempt to
+            measure phase error from this display
+            <br />
+            <span class="font-semibold">2. </span>Vary the frequency of the
+            AUDIO OSCILLATOR, and check that the approximate circle is
+            maintained over at least the speech range of frequencies.
+            <br />
+            <span class="font-semibold">3. </span> When satisfied that the QPS
+            is operating satisfactorily, you are now ready to model the SSB
+            generator. Patch up a model of the phasing SSB generator, following
+            the arrangement illustrated in Figure above. Remember to set the
+            on-board switch of the PHASE SHIFTER (perform 180 degree phase
+            shift) to the ‘HI’ (indicates ‘high frequency range’) (100 kHz)
+            range before plugging it in.
+            <br />
+            <span class="font-semibold">4. </span>
+            Set the AUDIO OSCILLATOR to about 1 kHz.
+            <br />
+            <span class="font-semibold">5. </span> Switch the oscilloscope sweep
+            to ‘auto’ mode, and connect the ‘ext trig’ to an output from the
+            AUDIO OSCILLATOR. It is now synchronized to the message.
+            <br />
+            <span class="font-semibold">6. </span> Display one or two periods of
+            the message on the upper channel CH1-A of the oscilloscope for
+            reference purposes. Note that this signal is used for external
+            triggering of the oscilloscope. This will maintain a stationary
+            envelope while balancing takes place. Make sure you appreciate the
+            convenience of this mode of triggering. Separate DSBSC signals
+            should already exist at the output of each MULTIPLIER. These need to
+            be of equal amplitudes at the output of the ADDER. You will set this
+            up, at first approximately and independently, then jointly and with
+            precision, to achieve the required output result.
+            <br />
+            <span class="font-semibold">7. </span> Check that out of each
+            MULTIPLIER there is a DSBSC signal.
+            <br />
+            <span class="font-semibold">8. </span>Turn the ADDER gain ‘G’ fully
+            anti-clockwise. Adjust the magnitude of the other DSBSC, ‘g’, viewed
+            at the ADDER output on CH2-A, to about 4 volts peak-to-peak. Line it
+            up to be coincident with two convenient horizontal lines on the
+            oscilloscope graticule (say 4 cm apart).
+            <br />
+            <span class="font-semibold">9. </span> Remove the ‘g’ input patch
+            cord from the ADDER. Adjust the ‘G’ input to give approximately 4
+            volts peak-to-peak at the ADDER output, using the same two graticule
+            lines as for the previous adjustment
+            <br />
+            <span class="font-semibold">10. </span>Replace the ‘g’ input patch
+            cord to the ADDER. The two DSBSC are now appearing simultaneously at
+            the ADDER output. Now use the same techniques as were used for
+            balancing in the experiment entitled Modelling an equation in this
+            Volume. Choose one of the ADDER gain controls (‘g’ or ‘G’) for the
+            amplitude adjustment, and the PHASE SHIFTER for the carrier phase
+            adjustment.
+            <br />
+            <span class="font-semibold">11. </span>Balance the SSB generator so
+            as to minimize the envelope amplitude. During the process it may be
+            necessary to increase the oscilloscope sensitivity as appropriate,
+            and to shift the display vertically so that the envelope remains on
+            the screen.
+            <br />
+            <span class="font-semibold">12. </span> When the best balance has
+            been achieved, record results. Although you need the magnitudes P
+            and Q, it is more accurate to measure (P and Q are Vmax and Vmin of
+            the SSB-SC modulated signal)
+            <br />
+            <span class="pl-8"
+              >a) 2P directly, which is the peak-to-peak of the SSB
+            </span>
+            <br />
+            <span class="pl-8"
+              >b) Q indirectly, by measuring (P-Q), which is the peak-to-peak of
+              the envelope.
+            </span>
+            <br />
+            <span class="font-semibold">13. </span> As already stated, the TIMS
+            QPS is not a precision device, and a sideband suppression of better
+            than 26 dB is unlikely. You will not achieve a perfectly flat
+            envelope. But its amplitude may be small or comparable with respect
+            to the noise floor of the TIMS system. The presence of a residual
+            envelope can be due to any one or more of:
+            <br />
+            <span class="pl-6"
+              >• leakage of a component at carrier frequency (a fault of one or
+              other MULTIPLIER )
+            </span>
+            <br />
+            <span class="pl-6"
+              >• incomplete cancellation of the unwanted sideband due to
+              imperfections of the QPS .
+            </span>
+            <br />
+            <span class="pl-6"
+              >• Distortion components generated by the MULTIPLIER modules.
+            </span>
+            <br />
+            Any of the above will give an envelope ripple period comparable with
+            the period of the message, rather than that of the carrier. Do you
+            agree with this statement? If the envelope shape is sinusoidal, and
+            the frequency is:
+            <br />
+            <span class="pl-6"
+              >• Twice that of the message, then the largest unwanted component
+              is due to incomplete cancellation of the unwanted sideband.
+            </span>
+            <br />
+            <span class="pl-6"
+              >• The same as the message, then the largest unwanted component is
+              at carrier frequency (‘carrier leak’)
+            </span>
+            <br />
+          </p>
+          <div class="pl-9 flex gap-2">
+            <span>•</span
+            ><span
+              >If it is difficult to identify the shape of the envelope, then it
+              is probably a combination of these two; or just the inevitable
+              system noise. An engineering estimate must then be made of the
+              wanted-to-unwanted power ratio (which could be a statement of the
+              form ‘better than 45 dB’), and an attempt made to describe the
+              nature of these residual signals </span
+            >
+          </div>
+          <div class="flex pl-9 gap-2">
+            <span>•</span
+            ><span>
+              If not already done so, use the FREQUENCY COUNTER to identify your
+              sideband as either upper (USSB) or lower (LSSB). Record also the
+              exact frequency of the message sine wave from the AUDIO
+              OSCILLATOR. From a knowledge of carrier and message frequencies,
+              confirm your sideband is on one or other of the expected
+              frequencies. To enable the sideband identification to be confirmed
+              analytically you will need to make a careful note of the model
+              configuration, and in particular the sign and magnitude of the
+              phase shift introduced by the PHASE SHIFTER, and the sign of the
+              phase difference between the I and Q outputs of the QPS
+              (Quadrature Phase Shifter). I and Q are output terminals of QPS
+              and Phase difference between then are 90 degree). Without these
+              you cannot check results against theory</span
+            >
+          </div>
+
+
+<br>
+<hr>
+<br>
+         <h2
+            class="text-center pt-6 border-b pb-2 mb-2 text-[#2C99CE] text-[32px]"
+          >
+            SSB-SC Demodulation
+          </h2>
+          <h3 class="text-[24px] font-semibold text-black">Block Diagram</h3>
+
+          <div class="flex justify-center">
+            <img
+              src="../images/theory/ssbsc_demod1.png"
+              alt="ssbsc_demod1"
+              class="h-[280px]"
+            />
+          </div>
+          <p class="mb-4 text-center font-semibold text-black">Figure 1</p>
+          <h3 class="text-[24px] font-semibold text-black">Procedures :</h3>
+          <p class="ml-3">
+            <span class="font-semibold">1. </span> This is an asynchronous
+            demodulation process. Here frequency of the VCO is adjusted with the
+            frequency counter.
+
+            <br />
+            <span class="font-semibold">2. </span>It is quite easy to make small
+            frequency adjustments (fractions of a Hertz) by connecting a small
+            negative DC voltage into the VCO Vin input, and tuning with the GAIN
+            control.
+
+            <br />
+            <span class="font-semibold">3. </span>Here, VCO facilitates fine
+            tuning. Even if the frequency difference between the original
+            carrier frequency (e.g., 100 KHz) and the frequency of the VCO
+            differs by 10 Hz, then demodulated signal / speech will be quite
+            intelligible
+
+            <br />
+            <span class="font-semibold">4. </span>A recommended method of
+            showing the small frequency difference between the VCO and the 100
+            kHz reference is to display each on separate oscilloscope traces -
+            the speed of drift between the two gives an immediate and easily
+            recognised indication of the frequency difference.
+
+            <br />
+            <span class="font-semibold">5. </span>Connect an SSB signal, derived
+            from speech, to the input ‘X’ of the multiplier as shown in the
+            figure 1. Tune the VCO slowly around the 100 kHz region, and listen.
+            Report results. <br />
+            <br />
+          </p>
+
+
+          <!--  -->
+        </div>
+      </div>
+    </div>
+    <footer class="">
+      <div class="flex max-sm:flex-col text-white bg-[#111111] px-6">
+        <div class="flex-1 flex flex-col px-[15px]">
+          <span class="font-weight-bold vlabs-footer-sect-name pb-2 mb-3"
+            >Community Links</span
+          >
+          <a href="https://www.sakshat.ac.in/" class="text-light"
+            >Sakshat Portal</a
+          >
+          <a href="http://outreach.vlabs.ac.in/" class="text-light"
+            >Outreach Portal</a
+          >
+          <a href="https://vlab.co.in/faq" class="text-light"
+            >FAQ: Virtual Labs</a
+          >
+        </div>
+        <div class="flex-1 flex flex-col px-[15px]">
+          <span class="font-bold vlabs-footer-sect-name pb-2 mb-3"
+            >Contact Us</span
+          >
+          <span> Phone: General Information: 011-26582050 </span>
+          <span> Email: support@vlabs.ac.in </span>
+        </div>
+        <div class="flex-1 flex flex-col px-[15px]">
+          <span class="font-bold vlabs-footer-sect-name pb-2 mb-3"
+            >Follow Us</span
+          >
+          <div class="flex pb-2">
+            <a
+              class="p-2 mt-1 mr-2 rounded-full flex justify-center items-center"
+              style="background: #55acee"
+              href="https://twitter.com/TheVirtualLabs"
+            >
+              <img src="../images/twitter.png" alt="twitter" />
+            </a>
+            <a
+              class="p-2 mt-1 mr-2 flex rounded-full justify-center items-center"
+              style="background: #3b5998"
+              href="https://www.facebook.com/Virtual-Labs-IIT-Delhi-301510159983871/"
+            >
+              <img src="../images/facebook.png" alt="facebook" />
+            </a>
+            <a
+              class="p-2 mt-1 mr-2 flex rounded-full justify-center items-center"
+              style="background: #e52d27"
+              href="https://www.youtube.com/watch?v=asxRaOgk6a0"
+            >
+              <img src="../images/youtube.png" alt="youtube" />
+            </a>
+            <a
+              class="p-2 mt-1 mr-2 flex rounded-full justify-center items-center"
+              style="background: #2867b2"
+              href="https://in.linkedin.com/in/virtual-labs-008ba9136"
+            >
+              <img src="../images/linkedin.png" alt="linkedin" />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div
+        class="m-0 py-2 text-center text-white text-sm max-sm:text-[12px]"
+        style="font-family: 'Open Sans', sans-serif; background: #212121"
+      >
+        <a
+          class="text-[#007bff] hover:text-[#3273dc] hover:underline font-bold"
+          href="https://www.gnu.org/licenses/agpl-3.0.en.html"
+        >
+          AGPL 3.0
+        </a>
+        &nbsp;&amp;&nbsp;
+        <a
+          class="text-[#007bff] hover:text-[#3273dc] hover:underline font-bold"
+          href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
+        >
+          Creative Commons (CC BY-NC-SA 4.0)
+        </a>
+      </div>
+    </footer>
+    <script src="../js/toggleSidebar.js"></script>
+  </body>
+</html>

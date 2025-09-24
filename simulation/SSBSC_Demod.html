@@ -1,0 +1,1069 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Virtual Labs</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  </head>
+  <body>
+    <!-- sidebar and body -->
+    <div id = "modulation">
+    <div class="flex min-h-[80vh]">
+      <div class="px-6 pb-6 flex-1">
+        <div id="container">
+          <h1>Instructions for Single Sideband Suppressed Carrier (SSB-SC) Modulation</h1>
+          <ul>
+            <li class="step step1">
+              Step 1: Click on 'Generate Message' button to generate input
+              message signal
+            </li>
+            <li class="step step2">
+              Step 2: Then click on 'Generate Carrier' button to generate
+              carrier signal. The carrier frequency has to be more than the message
+              frequency and You can change frequencies using sliders
+            </li>
+            <li class="step step4">
+              Step 3: Click on 'Generate Upper SSB-SC Signal' button to generate
+              Generate Upper Sideband SSB-SC Signal
+            </li>
+            <li class="step step1">
+              Step 4: Click on 'Generate Lower SSB-SC Signal' to generate
+              Generate Lower Sideband SSB-SC Signal
+            </li>
+            <li class="step step4">
+            Step 5: Click the 'Show Frequency Spectrums' button to view the SSB-SC spectra.
+            </li>
+          </ul>
+          <br />
+        </div>
+
+        <div class="flex items-start gap-10">
+          <div>
+            <img src=".\ssb_sc_mod.png" class="w-[50em] h-[20em]"/>
+          </div>
+          
+              <div class="flex flex-col items-center">
+                <!---
+                <div class="leading-none messageFrequencyDiv">10<span class="ml-1">Hz</span></div>
+                <input
+                  id="messageFrequency"
+                  value="10"
+                  type="range"
+                  step="1"
+                  min="1"
+                  max="200"
+                  onchange="handleMessageFrequencyChange()"
+                />
+               ------>
+
+                <div class="inline-flex items-center">
+                  <span><strong>Step 1:</strong></span>
+                          <button
+                  onclick="generateMessage()"
+                  class="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-[#0c9c0c] hover:scale-105"
+                >
+                  Generate Message
+                </button>
+              </div>
+
+              </div>
+
+                  <div class="flex flex-col items-center">
+                    <div class="leading-none carrierFrequencyDiv">100<span class="ml-1">Hz</span></div>
+                    <!---
+                    <input
+                      id="carrierFrequency"
+                      value="100"
+                      type="range"
+                      min="1"
+                      max="1000"
+                      onchange="handleCarrierFrequencyChange()"
+                    />
+                    ---->
+
+                    <div class="inline-flex items-center gap-1">
+                      <span><strong>Step 2:</strong></span>
+                    <button
+                      onclick="generateCarrier()"
+                      class="bg-blue-500 text-white py-1 px-3 mt-1 rounded-md hover:bg-[#0c9c0c] hover:scale-105"
+                    >
+                      Generate Carrier
+                    </button>
+                    </div>
+
+                  </div>
+				
+	              <div>
+                  <!-- carrier frequency -->
+                  <div class="flex flex-col items-center">
+                    <p class="text-[13px] pb-1 font-bold">Message Signal Gain</p>
+                    <input
+                      id="gain"
+                      value="1"
+                      type="range"
+                      min="1"
+                      max="10"
+                      onchange="handleGainChange()"
+                    />
+                    <div class="leading-none gainDiv">1</div>
+                  </div>
+                </div>
+				
+              <div class="flex justify-center gap-1 items-center">
+                <p class="text-nowrap font-medium"></p>
+                <input
+                  class="border px-1 w-[142px] py-1 rounded-sm border-black"
+                  min="1"
+                  type="number"
+                  id="samplingFrequency"
+                  value="10000"
+                  placeholder="sampling frequency in Hz"
+                />
+              </div>
+
+              <div class="flex flex-col items-center gap-1">
+                <span><strong>Step 3:</strong></span>
+			  			              <button
+                class="bg-blue-500 text-white py-1 px-3 font-medium text-sm rounded-md hover:scale-105"
+                onclick="generateUpperSSBSC()"
+              >
+                Generate Upper SSB-SC Signal
+              </button>
+              </div>
+			  
+              <div class="flex flex-col items-center gap-1">
+                <span><strong>Step 4:</strong></span>
+			  <button
+                class="bg-blue-500 text-white py-[6px] font-medium px-3 text-sm rounded-md hover:scale-105"
+                onclick="generateLowerSSBSC()"
+              >
+                Generate Lower SSB-SC Signal
+              </button>
+              </div>
+			  
+              <div class="flex flex-col items-center gap-1">
+                <span><strong>Step 5:</strong></span>
+              <button
+                class="bg-blue-500 text-white py-[6px] px-3 text-sm rounded-md hover:scale-105"
+                onclick="frequencySpectrums()"
+              >
+                Show Frequency Spectrums
+              </button>
+              </div>
+			  
+            </div>
+			  
+            <div class="flex flex-col items-center">
+            <div class="plotSection relative -top-[10em]">
+              <div id="recoveredUSBPlot" class="w-[600px] max-h-[410px]"></div>
+              <div id="lsbPlot" class="w-[600px] max-h-[410px]"></div>
+              <div id="usbPlot" class="w-[600px] max-h-[410px]"></div>
+              <div id="messagePlot" class="w-[600px] max-h-[410px]"></div>
+              <!-- <div id="recoveredLSBPlot" class="w-[600px] h-[450px]"></div> -->
+            </div>
+            <div>
+          </div>
+        </div>
+        
+        <br />
+        <br />
+        <div class="max-w-7xl mx-auto px-4 py-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Message Signal -->
+            <div class="bg-white p-4 rounded shadow">
+              <div id="plot-message" class="h-128"></div>
+            </div>
+        
+            <!-- Lower Sideband -->
+            <div class="bg-white p-4 rounded shadow">
+              <div id="plot-lower-sideband" class="h-128"></div>
+            </div>
+        
+            <!-- Upper Sideband -->
+            <div class="bg-white p-4 rounded shadow">
+              <div id="plot-upper-sideband" class="h-128"></div>
+            </div>
+        
+            <!-- Demodulated Signal -->
+            <div class="bg-white p-4 rounded shadow">
+              <div id="plot-demodulated" class="h-128"></div>
+            </div>
+          </div>
+        </div>
+        <br />
+        <br />
+        <hr />
+        <br />
+      </div>
+    </div>
+  </div>
+
+        <div id="container">
+          <h1>Instructions for SSBSC Demodulation</h1>
+          <ul>
+            <li class="step step1">
+			 Step 1: Click on 'Generate Recovered Message Signal(from USB SSB-SC)' button
+              to generate message signal from Upper Sideband SSB-SC Signal
+
+            </li>
+            <li class="step step2">
+              Step 2: Click on 'Generate Recovered Message Signal(from LSB SSB-SC)' button
+              to generate message signal from lower Sideband SSB-SC Signal
+            </li>
+          </ul>
+        </div>
+        <br />
+        <div class="flex items-start gap-10">
+          
+          <button
+          onclick="SSBSCInput();"
+          class="bg-blue-500 text-white py-1 px-3 mt-1 rounded-md hover:bg-[#0c9c0c] hover:scale-105"
+        >
+          SSBSC Input
+        </button>
+          <!-- Image Section -->
+          <div>
+            <img src="./ssb_sc_demod.png" class="w-[50em] h-[25em]" />
+          </div>
+        
+          <!-- Button and Plot Section -->
+          <div class="flex flex-col gap-4 w-full">
+            <!-- Buttons -->
+            <div class="flex py-1 gap-3">
+              <div class = "hidden">
+              <p class="font-medium">Message Frequency (Hz)</p>
+              <input
+              class="border px-1 w-[152px] py-1 rounded-sm border-black"
+              id="messageFrequency"
+              value="10"
+              type="number"
+              step="1"
+              min="1"
+              max="200"
+              onchange="handleMessageFrequencyChange()"
+            />
+            <div class="flex py-1 gap-3">
+              <p class="font-medium">Carrier Frequency (Hz)</p>   
+            <input
+            class="border px-1 w-[152px] py-1 rounded-sm border-black"
+            id="carrierFrequency"
+            value="100"
+            type="number"
+            min="1"
+            max="1000"
+            onchange="handleCarrierFrequencyChange()"
+          />
+        </div>
+            </div>
+
+            <p class="font-medium">Cut-off Frequency (Hz)</p>
+              <input
+                class="border px-1 w-[152px] py-1 rounded-sm border-black"
+                type="number"
+                id="cutoff"
+                min="1"
+                value="10"
+              />
+              <button
+                class="bg-blue-500 text-white py-[6px] px-3 text-sm rounded-md hover:scale-105"
+                onclick="generateRecoveredUSB()"
+              >
+                Generate Recovered Message Signal (from USB SSB-SC)
+              </button>
+              <button
+                class="bg-blue-500 text-white py-[6px] px-3 text-sm rounded-md hover:scale-105"
+                onclick="generateRecoveredLSB()"
+              >
+                Generate Recovered Message Signal (from LSB SSB-SC)
+              </button>
+              <div                 id="modtodemod"></div>
+
+            </div>
+        
+            <!-- Plots -->
+<!-- Plots -->
+<div class="plotSection flex flex-col gap-4">
+  <!-- Row 1 -->
+  <div id="SSBSCInput1" class="flex gap-4">
+    <!-- Time-domain plot -->
+    <div id="SSBSCInput" class="flex-1"></div>
+    <!-- Frequency-domain plot -->
+    <div id="plot-spectrum" class="flex-1"></div>
+  </div>
+
+  <!-- Row 2 -->
+  <div id="SSBSCInput2" class="flex gap-4">
+    <div id="recoveredUSBPlot_demod" class="flex-1"></div>
+    <div id="recoveredLSBPlot_demod" class="flex-1"></div>
+  </div>
+
+  <!-- Row 3 -->
+  <div class="flex gap-4">
+    <div id="lsbPlot_demod" class="flex-1"></div>
+    <div id="usbPlot_demod" class="flex-1"></div>
+  </div>
+
+  <!-- Row 4 (single plot spanning full width) -->
+  <div id="messagePlot_demod" class="w-full"></div>
+</div>
+          </div>
+        </div>
+        
+<script>
+    function checkFrequencies() {
+        // Get values from input fields
+        let carrierFrequency = parseFloat(document.getElementById('carrierFrequency').value);
+        let messageFrequency = parseFloat(document.getElementById('messageFrequency').value);
+        
+        // Check the frequencies
+        if (carrierFrequency <= messageFrequency) {
+            alert("Carrier frequency should be greater than message frequency.");
+            
+            // Force a hard refresh after the alert is dismissed
+            setTimeout(() => {
+                window.location.href = window.location.href; // This forces a hard reload
+            }, 0); // Set a small delay to allow the alert to be dismissed first
+        } else {
+            console.log("Carrier frequency is greater than message frequency.");
+        }
+    }
+
+    // Function to attach event listeners to all buttons
+    function attachEventListeners() {
+        let buttons = document.querySelectorAll('button');
+        buttons.forEach(button => {
+            button.addEventListener('click', checkFrequencies);
+        });
+    }
+
+    // Attach event listeners when the DOM is fully loaded
+    document.addEventListener('DOMContentLoaded', attachEventListeners);
+</script>
+
+	
+    <script>
+      function handleMessageFrequencyChange() {
+        const messageValue = parseFloat(
+          document.getElementById("messageFrequency").value
+        );
+        document.querySelector(".messageFrequencyDiv").innerHTML = messageValue;
+      }
+      function handleCarrierFrequencyChange() {
+        const messageValue = parseFloat(
+          document.getElementById("carrierFrequency").value
+        );
+        document.querySelector(".carrierFrequencyDiv").innerHTML = messageValue;
+      }
+	  
+	  		        function handleGainChange() {
+            const gainValue = parseFloat(
+                document.getElementById("gain").value
+            );
+            document.querySelector(".gainDiv").innerHTML = gainValue;
+        }
+      // Generate Message Signal
+      function generateMessage() {
+        const fm = parseFloat(
+          document.getElementById("messageFrequency").value
+        );
+        const F = 10*parseFloat(
+          document.getElementById("carrierFrequency").value
+        );
+        const T = 1 / F;
+        const t = Array.from({ length: F }, (_, i) => i * T);
+        const Am = parseFloat(
+          document.getElementById("gain").value
+        );
+        const m = t.map((time) => Am * Math.cos(2 * Math.PI * fm * time));
+        const trace = {
+          x: t.slice(1,parseInt(3/fm * F)),
+          y: m.slice(1,parseInt(3/fm * F)),
+          mode: "lines",
+          name: "Message Signal",
+        };
+        const layout = {
+          title: "Message Signal",
+          xaxis: {
+            title: "Time (s)",
+          },
+          yaxis: {
+            title: "Amplitude",
+          },
+        };
+        Plotly.newPlot("messagePlot", [trace], layout);
+      }
+
+      // Generate Carrier Signal
+      function generateCarrier() {
+        const fc = parseFloat(
+          document.getElementById("carrierFrequency").value
+        );
+        const F = parseFloat(
+          document.getElementById("samplingFrequency").value
+        );
+        const T = 1 / F;
+        const t = Array.from({ length: F }, (_, i) => i * T);
+        const c = t.map((time) => Math.cos(2 * Math.PI * fc * time));
+        const trace = {
+          x: t.slice(1,parseInt(3/fc * F)),
+          y: c.slice(1,parseInt(3/fc * F)),
+          mode: "lines",
+          name: "Carrier Signal",
+        };
+        const layout = {
+          title: "Carrier Signal",
+          xaxis: {
+            title: "Time (s)",
+          },
+          yaxis: {
+            title: "Amplitude",
+          },
+        };
+        Plotly.newPlot("usbPlot", [trace], layout);
+      }
+
+      // Generate Upper Sideband SSB-SC Signal
+      function generateUpperSSBSC() {
+        const fm = parseFloat(
+          document.getElementById("messageFrequency").value
+        );
+        const fc = parseFloat(
+          document.getElementById("carrierFrequency").value
+        );
+        const F = parseFloat(
+          document.getElementById("samplingFrequency").value
+        );
+        const T = 1 / F;
+        const t = Array.from({ length: F }, (_, i) => i * T);
+        const Am = parseFloat(
+          document.getElementById("gain").value
+        );
+        const m = t.map((time) => Am * Math.cos(2 * Math.PI * fm * time));
+        const y1 = m.map(
+          (sample, index) => sample * Math.cos(2 * Math.PI * fc * t[index])
+        );
+        const y2 = m.map(
+          (sample, index) =>
+            Math.sin(2 * Math.PI * fc * (t[index] + Math.PI / 2)) *
+            Math.sin(2 * Math.PI * fc * t[index])
+        );
+        const x = y1.map((sample, index) => sample - y2[index]);
+        const trace = {
+          x: t.slice(1,parseInt(3/fm * F)),
+          y: x.slice(1,parseInt(3/fm * F)),
+          mode: "lines",
+          name: "Upper Sideband SSB-SC Signal",
+        };
+        const layout = {
+          title: "Upper Sideband SSB-SC Signal",
+          xaxis: {
+            title: "Time (s)",
+          },
+          yaxis: {
+            title: "Amplitude",
+          },
+        };
+        Plotly.newPlot("lsbPlot", [trace], layout);
+      }
+
+      // Generate Lower Sideband SSB-SC Signal
+      function generateLowerSSBSC() {
+        const fm = parseFloat(
+          document.getElementById("messageFrequency").value
+        );
+        const fc = parseFloat(
+          document.getElementById("carrierFrequency").value
+        );
+        const F = parseFloat(
+          document.getElementById("samplingFrequency").value
+        );
+        const T = 1 / F;
+        const t = Array.from({ length: F }, (_, i) => i * T);
+        const Am = parseFloat(
+          document.getElementById("gain").value
+        );
+        const m = t.map((time) => Am * Math.cos(2 * Math.PI * fm * time));
+        const y1 = m.map(
+          (sample, index) => sample * Math.cos(2 * Math.PI * fc * t[index])
+        );
+        const y2 = m.map(
+          (sample, index) =>
+            Math.sin(2 * Math.PI * fc * (t[index] + Math.PI / 2)) *
+            Math.sin(2 * Math.PI * fc * t[index])
+        );
+        const x = y1.map((sample, index) => sample + y2[index]);
+        const trace = {
+          x: t.slice(1,parseInt(3/fm * F)),
+          y: x.slice(1,parseInt(3/fm * F)),
+          mode: "lines",
+          name: "Lower Sideband SSB-SC Signal",
+        };
+        const layout = {
+          title: "Lower Sideband SSB-SC Signal",
+          xaxis: {
+            title: "Time (s)",
+          },
+          yaxis: {
+            title: "Amplitude",
+          },
+        };
+        Plotly.newPlot("recoveredUSBPlot", [trace], layout);
+      }
+    </script>
+	
+	
+    <!--ssbsc demod script -->
+   <script>
+    let Am = 1; // Amplitude of message signal
+    let Ac = 1; // Amplitude of carrier wave
+    let fm = parseInt(document.getElementById("messageFrequency").value); // Frequency of message signal (Hz)
+    let fc = parseInt(document.getElementById("carrierFrequency").value); // Frequency of carrier wave (Hz)
+    let F = 10 * parseInt(document.getElementById("carrierFrequency").value); // Sampling frequency (Hz)
+    let T = 1 / F;
+    let t = Array.from({ length: F }, (_, i) => i * T); // Time vector
+
+    // Update parameters based on user input
+    function updateParameters() {
+      Am = parseFloat(document.getElementById("messageFrequency").value);
+      Ac = parseFloat(document.getElementById("carrierFrequency").value);
+      fm = parseFloat(document.getElementById("messageFrequency").value);
+      fc = parseFloat(document.getElementById("carrierFrequency").value);
+      F = 10 * parseFloat(document.getElementById("carrierFrequency").value);
+      T = 1 / F;
+      t = Array.from({ length: F }, (_, i) => i * T); // Time vector
+    }
+
+
+		
+    // Function to generate message signal
+    function generateMessage_demod() {
+      updateParameters();
+      const m = t.map((time) => Am * Math.cos(2 * Math.PI * fm * time));
+      const trace = {
+        x: t,
+        y: m,
+        mode: "lines",
+        name: "Message Signal",
+      };
+      Plotly.newPlot("messagePlot_demod", [trace], getLayout("Message Signal"));
+    }
+
+    // Function to generate upper sideband SSB-SC signal
+    function generateUpperSideband() {
+      updateParameters();
+      const m = t.map((time) => Am * Math.cos(2 * Math.PI * fm * time));
+      const c1 = t.map((time) => Math.cos(2 * Math.PI * fc * time));
+      const c2 = t.map((time) => Math.sin(2 * Math.PI * fc * time));
+      const y1 = m.map((sample, index) => sample * c1[index]);
+      const y2 = m.map(
+        (sample, index) =>
+          Math.sin(2 * Math.PI * fc * (t[index] + Math.PI / 2)) * c2[index]
+      ); // Quadrature component (90 degree phase shift)
+      const x_usb = y1.map((sample, index) => sample - y2[index]);
+      const trace = {
+        x: t,
+        y: x_usb,
+        mode: "lines",
+        name: "Upper Sideband SSB-SC Signal",
+      };
+      Plotly.newPlot("usbPlot_demod", [trace], getLayout("Upper Sideband SSB-SC Signal"));
+
+    }
+
+    // Function to generate lower sideband SSB-SC signal
+    function generateLowerSideband() {
+      updateParameters();
+      const m = t.map((time) => Am * Math.cos(2 * Math.PI * fm * time));
+      const c1 = t.map((time) => Math.cos(2 * Math.PI * fc * time));
+      const c2 = t.map((time) => Math.sin(2 * Math.PI * fc * time));
+      const y1 = m.map((sample, index) => sample * c1[index]);
+      const y2 = m.map(
+        (sample, index) =>
+          Math.sin(2 * Math.PI * fc * (t[index] + Math.PI / 2)) * c2[index]
+      ); // Quadrature component (90 degree phase shift)
+      const x_lsb = y1.map((sample, index) => sample + y2[index]);
+      const trace = {
+        x: t,
+        y: x_lsb,
+        mode: "lines",
+        name: "Lower Sideband SSB-SC Signal",
+      };
+      Plotly.newPlot("lsbPlot_demod", [trace], getLayout("Lower Sideband SSB-SC Signal"));
+    }
+
+    // Function to generate recovered message signal from upper sideband
+    function generateRecoveredUSB() {
+      updateParameters();
+      const m = t.map((time) => Am * Math.cos(2 * Math.PI * fm * time));
+      const c1 = t.map((time) => Math.cos(2 * Math.PI * fc * time));
+      const y1 = m.map((sample, index) => sample * c1[index]);
+      const y2 = m.map(
+        (sample, index) =>
+          Math.sin(2 * Math.PI * fc * (t[index] + Math.PI / 2)) * c1[index]
+      ); // Quadrature component (90 degree phase shift)
+      const x_usb = y1.map((sample, index) => sample - y2[index]);
+      const demodulated_usb = x_usb.map(
+        (sample, index) => sample * c1[index]
+      ); // Demodulate by multiplying with carrier
+      //const recovered_message_usb = movingAverage(demodulated_usb, windowSize); // Apply low-pass filter
+      const cutoffFreq = document.getElementById("cutoff").value;
+      const fs = document.getElementById("carrierFrequency").value;
+      const recovered_message_usb0 = movingAverageWithCutoff(demodulated_usb, cutoffFreq, fs)
+      const windowSize = 9; // Adjust window size as needed
+      const recovered_message_usb = movingAverage(recovered_message_usb0, windowSize);
+      const normalized_message_usb = normalizeSignal(recovered_message_usb); // Normalize
+      const trace = {
+        x: t,
+        y: normalized_message_usb,
+        mode: "lines",
+        name: "Recovered Message Signal from Upper Sideband",
+      };
+      Plotly.newPlot("recoveredUSBPlot_demod", [trace], getLayout("Recovered Message Signal from Upper Sideband SSB-SC"));
+	  document.getElementById('modtodemod').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Function to generate recovered message signal from lower sideband
+    function generateRecoveredLSB() {
+      updateParameters();
+      const m = t.map((time) => Am * Math.cos(2 * Math.PI * fm * time));
+      const c1 = t.map((time) => Math.cos(2 * Math.PI * fc * time));
+      const y1 = m.map((sample, index) => sample * c1[index]);
+      const y2 = m.map(
+        (sample, index) =>
+          Math.sin(2 * Math.PI * fc * (t[index] + Math.PI / 2)) * c1[index]
+      ); // Quadrature component (90 degree phase shift)
+      const x_lsb = y1.map((sample, index) => sample + y2[index]);
+      const demodulated_lsb = x_lsb.map(
+        (sample, index) => sample * c1[index]
+      ); // Demodulate by multiplying with carrier
+      //const recovered_message_lsb = movingAverage(demodulated_lsb, windowSize); // Apply low-pass filter
+      const cutoffFreq = document.getElementById("cutoff").value;
+      const fs = document.getElementById("carrierFrequency").value;
+      const recovered_message_lsb0 = movingAverageWithCutoff(demodulated_lsb, cutoffFreq, fs)
+      const windowSize = 9; // Adjust window size as needed
+      const recovered_message_lsb = movingAverage(recovered_message_lsb0, windowSize);
+      const normalized_message_lsb = normalizeSignal(recovered_message_lsb); // Normalize
+      const trace = {
+        x: t,
+        y: normalized_message_lsb,
+        mode: "lines",
+        name: "Recovered Message Signal from Lower Sideband",
+      };
+      Plotly.newPlot("recoveredLSBPlot_demod", [trace], getLayout("Recovered Message Signal from Lower Sideband SSB-SC"));
+    }
+
+    // Function to normalize a signal to range -1 to +1
+    function normalizeSignal(signal) {
+      const max = Math.max(...signal);
+      const min = Math.min(...signal);
+      return signal.map(value => 2 * (value - min) / (max - min) - 1);
+    }
+
+    // Simple Moving Average (SMA) low-pass filter function
+    function movingAverage(signal, windowSize) {
+      const filteredSignal = [];
+      for (let i = 0; i < signal.length; i++) {
+        const start = Math.max(0, i - Math.floor(windowSize / 2));
+        const end = Math.min(signal.length - 1, i + Math.floor(windowSize / 2));
+        const sum = signal.slice(start, end + 1).reduce((acc, val) => acc + val, 0);
+        const average = sum / (end - start + 1);
+        filteredSignal.push(average);
+      }
+      return filteredSignal;
+    }
+
+    // Apply SMA using cutoff frequency and sampling frequency
+function movingAverageWithCutoff(signal, cutoffFreq, samplingFreq) {
+  // Derive window size from cutoff
+  const windowSize = Math.round(0.443 * samplingFreq / cutoffFreq);
+
+  const filteredSignal = [];
+  for (let i = 0; i < signal.length; i++) {
+    const start = Math.max(0, i - Math.floor(windowSize / 2));
+    const end = Math.min(signal.length - 1, i + Math.floor(windowSize / 2));
+    const sum = signal.slice(start, end + 1).reduce((acc, val) => acc + val, 0);
+    const average = sum / (end - start + 1);
+    filteredSignal.push(average);
+  }
+  return filteredSignal;
+}
+
+	
+
+    // Function to generate layout
+    function getLayout(title) {
+      return {
+        title: title,
+        xaxis: {
+          title: "Time (s)",
+        },
+        yaxis: {
+          title: "Normalized Amplitude",
+        },
+      };
+	  
+
+    }
+
+
+
+    function SSBSCInput() {
+    // Show modal
+    //document.getElementById("ssbscModal").style.display = "flex";
+
+    // Get input values
+    const fm = parseFloat(document.getElementById("messageFrequency").value);
+    const fc = parseFloat(document.getElementById("carrierFrequency").value);
+    const F = 10 * fc; // sampling frequency
+    const T = 1 / F;
+    const t = Array.from({ length: F }, (_, i) => i * T);
+    const Am = parseFloat(document.getElementById("gain").value);
+
+    if (isNaN(fm) || isNaN(fc)) {
+        alert("Please enter valid inputs first!");
+        return;
+    }
+
+    // Message signal
+    const m = t.map((time) => Am * Math.cos(2 * Math.PI * fm * time));
+
+    // SSB-SC Upper Sideband using Hilbert method (approximation)
+    const y1 = m.map((sample, index) => sample * Math.cos(2 * Math.PI * fc * t[index]));
+    const y2 = m.map((sample, index) =>
+        Math.sin(2 * Math.PI * fc * (t[index] + Math.PI / 2)) *
+        Math.sin(2 * Math.PI * fc * t[index])
+    );
+    const ssbsc = y1.map((sample, index) => sample - y2[index]);
+
+    // -------- Time domain plot --------
+    const ssbscPlotDiv = document.getElementById("SSBSCInput");
+    Plotly.newPlot(
+        ssbscPlotDiv,
+        [
+            {
+                x: t.slice(1, parseInt((3 / fm) * F)),
+                y: m.slice(1, parseInt((3 / fm) * F)),
+                mode: "lines",
+                name: "Message Signal",
+                line: { color: "green" },
+            },
+            {
+                x: t.slice(1, parseInt((3 / fm) * F)),
+                y: ssbsc.slice(1, parseInt((3 / fm) * F)),
+                mode: "lines",
+                name: "Upper Sideband SSB-SC Signal",
+                line: { color: "blue" },
+            },
+        ],
+        {
+            title: "Message and SSB-SC (Upper Sideband)",
+            xaxis: { title: "Time (s)" },
+            yaxis: { title: "Amplitude" },
+        }
+    );
+
+    // -------- Frequency domain spectrum --------
+    const lowerSidebandFrequency = fc - fm;
+    const upperSidebandFrequency = fc + fm;
+
+    const traceLowerSideband = {
+        x: [lowerSidebandFrequency, lowerSidebandFrequency],
+        y: [0, 1],
+        mode: "lines",
+        line: { width: 3, color: "blue" },
+        name: "Lower Sideband"
+    };
+
+    const traceUpperSideband = {
+        x: [upperSidebandFrequency, upperSidebandFrequency],
+        y: [0, 1],
+        mode: "lines",
+        line: { width: 3, color: "red" },
+        name: "Upper Sideband"
+    };
+
+    Plotly.newPlot('plot-spectrum', [traceLowerSideband, traceUpperSideband], {
+        title: "SSB-SC Spectrum",
+        xaxis: { title: "Frequency (Hz)", showgrid: true, zeroline: true, range: [lowerSidebandFrequency-5, upperSidebandFrequency + 5] },
+        yaxis: { title: "Normalized Amplitude", showgrid: true, zeroline: true }
+    });
+}
+
+
+
+// Utility: linspace
+function linspace(start, stop, num) {
+    const arr = [];
+    const step = (stop - start) / (num - 1);
+    for (let i = 0; i < num; i++) {
+        arr.push(start + step * i);
+    }
+    return arr;
+}
+
+
+
+    function loadData() {
+  const data = localStorage.getItem('sharedData');
+  if (data) {
+    const parsed = JSON.parse(data);
+
+    document.getElementById('messageFrequency').value = parsed.fm ?? '';
+    document.getElementById('carrierFrequency').value = parsed.fc ?? '';
+  }
+}
+
+// Load immediately
+loadData();
+
+// Sync across tabs
+window.addEventListener('storage', loadData);
+  </script>
+	
+	<script>
+	function log10(value) {
+    return Math.log(value) / Math.log(10);
+    }
+	function frequencySpectrums() {
+    // Get user inputs
+    const carrierFrequency = parseFloat(document.getElementById('carrierFrequency').value);
+    const messageFrequency = parseFloat(document.getElementById('messageFrequency').value);
+    const gain = parseFloat(document.getElementById('gain').value);
+	
+    // Calculate sideband frequencies
+    const lowerSidebandFrequency = carrierFrequency - messageFrequency;
+    const upperSidebandFrequency = carrierFrequency + messageFrequency;
+
+    // Define the magnitudes for each frequency component
+    const lowerSideband = { frequency: lowerSidebandFrequency, magnitude: -10*log10(((gain)**2)/2) + 10*log10(((0.5*gain)**2)/2), label: 'Lower Sideband' };
+    const upperSideband = { frequency: upperSidebandFrequency, magnitude: -10*log10(((gain)**2)/2) + 10*log10(((0.5*gain)**2)/2), label: 'Upper Sideband' };
+
+    // Create trace for the lower sideband
+    const traceLowerSideband = {
+        x: [lowerSideband.frequency, lowerSideband.frequency],
+        y: [-15, lowerSideband.magnitude],
+        mode: 'lines',
+        type: 'scatter',
+        line: {
+            width: 3,
+            color: 'blue'
+        },
+        name: lowerSideband.label
+    };
+
+    // Create trace for the upper sideband
+    const traceUpperSideband = {
+        x: [upperSideband.frequency, upperSideband.frequency],
+        y: [-15, upperSideband.magnitude],
+        mode: 'lines',
+        type: 'scatter',
+        line: {
+            width: 3,
+            color: 'red'
+        },
+        name: upperSideband.label
+    };
+
+    // Create trace for the message signal spectrum
+    const traceMessageSignal = {
+        x: [messageFrequency, messageFrequency],
+        y: [-15, -10*log10(((gain)**2)/2) + 10*log10(((1*gain)**2)/2)], // Amplitude of 1
+        mode: 'lines',
+        type: 'scatter',
+        line: {
+            width: 3,
+            color: 'green'
+        },
+        name: 'Message Signal'
+    };
+
+    // Create trace for the demodulated signal spectrum
+    const traceDemodulatedSignal = {
+        x: [messageFrequency, messageFrequency],
+        y: [-15, -10*log10(((gain)**2)/2) + 10*log10((1**2)/2)], // Amplitude of 1
+        mode: 'lines',
+        type: 'scatter',
+        line: {
+            width: 3,
+            color: 'orange'
+        },
+        name: 'Demodulated Signal'
+    };
+
+    // Define layouts for each plot
+    const layoutLowerSideband = {
+        title: 'Lower Sideband SSB-SC Spectrum',
+        xaxis: {
+            title: 'Frequency (Hz)',
+            showgrid: true,
+            zeroline: true,
+            range: [lowerSidebandFrequency - 10, lowerSidebandFrequency + 10]
+        },
+        yaxis: {
+            title: 'Normalized PSD (dB/Hz) w.r.t. message',
+            showgrid: true,
+            zeroline: true,
+            //range: [0, 1.2]
+        }
+    };
+
+    const layoutUpperSideband = {
+        title: 'Upper Sideband SSb-SC Spectrum',
+        xaxis: {
+            title: 'Frequency (Hz)',
+            showgrid: true,
+            zeroline: true,
+            range: [upperSidebandFrequency - 10, upperSidebandFrequency + 10]
+        },
+        yaxis: {
+            title: 'Normalized PSD (dB/Hz) w.r.t. message',
+            showgrid: true,
+            zeroline: true,
+            //range: [0, 1.2]
+        }
+    };
+
+    const layoutMessage = {
+        title: 'Message Signal Spectrum',
+        xaxis: {
+            title: 'Frequency (Hz)',
+            showgrid: true,
+            zeroline: true,
+            range: [messageFrequency - 10, messageFrequency + 10]
+        },
+        yaxis: {
+            title: 'Normalized PSD (dB/Hz) w.r.t. itself',
+            showgrid: true,
+            zeroline: false,
+            //range: [0, 1.2]
+        }
+    };
+
+    const layoutDemodulated = {
+        title: 'Demodulated Signal Spectrum',
+        xaxis: {
+            title: 'Frequency (Hz)',
+            showgrid: true,
+            zeroline: true,
+            range: [messageFrequency - 10, messageFrequency + 10]
+        },
+        yaxis: {
+            title: 'Normalized PSD (dB/Hz) w.r.t. message',
+            showgrid: true,
+            zeroline: false,
+            //range: [0, 1.2]
+        }
+    };
+
+    // Render the plots
+    Plotly.newPlot('plot-message', [traceMessageSignal], layoutMessage);
+    Plotly.newPlot('plot-lower-sideband', [traceLowerSideband], layoutLowerSideband);
+    Plotly.newPlot('plot-upper-sideband', [traceUpperSideband], layoutUpperSideband);
+    Plotly.newPlot('plot-demodulated', [traceDemodulatedSignal], layoutDemodulated);
+
+    // Smooth scroll to the plot container
+    document.getElementById('plot-message').scrollIntoView({ behavior: 'smooth' });
+}
+
+	</script>
+	
+    <style>
+        #modulation {
+    display: none;
+  }
+#samplingFrequency,  #samplingFrequency_demod {
+        display: none;
+}
+#container {
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  padding: 25px 40px;
+  max-width: 100%;
+  margin: 20px auto;
+  text-align: left;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+h1 {
+  color: #1e3a8a;
+  font-size: 24px;
+  margin-bottom: 25px;
+  text-align: justify;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+li.step {
+  margin: 12px 0;
+  padding: 12px 15px;
+  border-radius: 6px;
+  font-size: 18px;
+  font-weight: 500;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+li.step::before {
+  content: "✔";
+  color: #10b981;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+li.step:hover {
+  transform: scale(1.02);
+  background-color: #f3f4f6;
+}
+
+/* Color code each step */
+.step1 {
+  background-color: #ffe0e0;
+  border-left: 5px solid #ef4444;
+}
+.step2 {
+  background-color: #e0f7ff;
+  border-left: 5px solid #0ea5e9;
+}
+.step3 {
+  background-color: #e0ffe5;
+  border-left: 5px solid #22c55e;
+}
+.step4 {
+  background-color: #f5e0ff;
+  border-left: 5px solid #a855f7;
+}
+
+
+      .plot-container {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px; /* Add space between plots */
+        flex-wrap: wrap; /* Allow wrapping for smaller screens */
+        margin-bottom: 20px; /* Add space below the plots */
+      }
+
+      .plot {
+        flex: 1 1 calc(33.33% - 20px); /* Responsive width for three plots side by side */
+        min-width: 300px; /* Minimum width to ensure responsiveness */
+        height: 400px;
+      }
+	  
+	     .plot-container1 {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        .plot1 {
+            width: 30%;
+            height: 400px; /* Adjust height as needed */
+            margin: 10px;
+        }
+    </style>
+  </body>
+</html>
