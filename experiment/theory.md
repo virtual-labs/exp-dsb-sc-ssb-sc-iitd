@@ -12,8 +12,8 @@
           style="font-family: Raleway, sans-serif"
         >
         <p>
-        Similar to amplitude-modulated (AM) signals, double sideband full carrier (DSB-FC) signals include both the upper and lower sidebands along with the carrier signal. <br>In contrast, double sideband suppressed carrier (DSB-SC) modulation transmits only the sidebands of the modulated signal, omitting the carrier signal itself. For single sideband suppressed carrier (SSB-SC) modulation, the original message signal can be reconstructed using only one sideband—either the upper or the lower. In this case, only the selected sideband (upper or lower) is transmitted. Hence transmission bandwidth can be cut by half if one sideband is entirely suppressed. This leads to single sideband modulation (SSB). In SSB modulation bandwidth saving is accompanied by a considerable increase in equipment complexity.
-        </p>
+Similar to amplitude-modulated (AM) signals, double sideband full carrier (DSB-FC) signals include both the upper and lower sidebands along with the carrier signal. In contrast, double sideband suppressed carrier (DSB-SC) modulation transmits only the sidebands of the modulated signal, omitting the carrier signal itself. In single sideband suppressed carrier (SSB-SC) modulation, the original message signal can be reconstructed using only one sideband—either the upper or the lower. In this case, only the selected sideband is transmitted. Hence, the transmission bandwidth can be reduced by half if one sideband is entirely suppressed. This leads to single sideband (SSB) modulation. In SSB modulation, bandwidth savings are accompanied by a considerable increase in equipment complexity.
+</p>
         </div>
         </div>
       <div class="px-6 pb-6 flex-1">
@@ -35,7 +35,7 @@
             <li>
               <a href="./SSBSC.html">
                 <div class="flex">
-                  <span class="text-black mr-4">3.</span>
+                  <span class="text-black mr-4">2.</span>
                   <p class="hover:text-[#3e6389] hover:underline">
                     SSB-SC Modulation
                   </p>
