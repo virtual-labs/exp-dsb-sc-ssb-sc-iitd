@@ -592,66 +592,112 @@
       Plotly.newPlot("lsbPlot_demod", [trace], getLayout("Lower Sideband SSB-SC Signal"));
     }
 
-    // Function to generate recovered message signal from upper sideband
-    function generateRecoveredUSB() {
-      updateParameters();
-      const m = t.map((time) => Am * Math.cos(2 * Math.PI * fm * time));
-      const c1 = t.map((time) => Math.cos(2 * Math.PI * fc * time));
-      const y1 = m.map((sample, index) => sample * c1[index]);
-      const y2 = m.map(
-        (sample, index) =>
-          Math.sin(2 * Math.PI * fc * (t[index] + Math.PI / 2)) * c1[index]
-      ); // Quadrature component (90 degree phase shift)
-      const x_usb = y1.map((sample, index) => sample - y2[index]);
-      const demodulated_usb = x_usb.map(
-        (sample, index) => sample * c1[index]
-      ); // Demodulate by multiplying with carrier
-      //const recovered_message_usb = movingAverage(demodulated_usb, windowSize); // Apply low-pass filter
-      const cutoffFreq = document.getElementById("cutoff").value;
-      const fs = document.getElementById("carrierFrequency").value;
-      const recovered_message_usb0 = movingAverageWithCutoff(demodulated_usb, cutoffFreq, fs)
-      const windowSize = 9; // Adjust window size as needed
-      const recovered_message_usb = movingAverage(recovered_message_usb0, windowSize);
-      const normalized_message_usb = normalizeSignal(recovered_message_usb); // Normalize
-      const trace = {
+// First-order Butterworth LPF
+function butterworthLPF(signal, cutoffFreq, Fs) {
+    const w0 = 2 * Math.PI * cutoffFreq / Fs;
+    const alpha = w0 / (w0 + 1);
+    let filtered = [];
+    let y = 0;
+    for (let i = 0; i < signal.length; i++) {
+        y = alpha * signal[i] + (1 - alpha) * y;
+        filtered.push(y);
+    }
+    return filtered;
+}
+
+// Forward-backward zero-phase filtering
+function zeroPhaseFilter(signal, cutoffFreq, Fs) {
+    const fwd = butterworthLPF(signal, cutoffFreq, Fs);
+    const rev = butterworthLPF(fwd.slice().reverse(), cutoffFreq, Fs);
+    return rev.reverse();
+}
+
+// Remove DC offset
+function removeDC(signal) {
+    const mean = signal.reduce((sum,v)=>sum+v,0)/signal.length;
+    return signal.map(v => v - mean);
+}
+// Upper sideband recovery with actual LPF
+function generateRecoveredUSB() {
+    updateParameters();
+    const fm = parseFloat(document.getElementById("messageFrequency").value);
+    const fc = parseFloat(document.getElementById("carrierFrequency").value);
+    const Am = 1;//parseFloat(document.getElementById("amplitude").value);
+    const Fs = parseFloat(document.getElementById("samplingFrequency").value);
+    const cutoff = parseFloat(document.getElementById("cutoff").value);
+
+    const T = 1; // 1-second duration
+    const N = Math.floor(Fs*T);
+    let t = [];
+    for (let i=0;i<N;i++) t.push(i/Fs);
+
+    // Message signal
+    const m = t.map(time => Am * Math.cos(2*Math.PI*fm*time));
+
+    // Carrier
+    const c = t.map(time => Math.cos(2*Math.PI*fc*time));
+    const s = t.map(time => Math.sin(2*Math.PI*fc*time)); // quadrature
+
+    // --- USB modulation ---
+    const y1_usb = m.map((v,i)=>v*c[i]);
+    const y2_usb = m.map((v,i)=>v*s[i]);
+    const usb_mod = y1_usb.map((v,i)=>v - y2_usb[i]); // USB
+
+    // Demodulate USB
+    let demod_usb = usb_mod.map((v,i)=>v*c[i]); // multiply by carrier
+    demod_usb = zeroPhaseFilter(demod_usb, cutoff, Fs); // zero-phase LPF
+    demod_usb = removeDC(demod_usb).map(v => v * 2); // remove DC offset
+
+    const trace = {
         x: t,
-        y: normalized_message_usb,
+        y: demod_usb,
         mode: "lines",
         name: "Recovered Message Signal from Upper Sideband",
-      };
-      Plotly.newPlot("recoveredUSBPlot_demod", [trace], getLayout("Recovered Message Signal from Upper Sideband SSB-SC"));
-	  document.getElementById('modtodemod').scrollIntoView({ behavior: 'smooth' });
-    }
+    };
+    Plotly.newPlot("recoveredUSBPlot_demod", [trace], getLayout("Recovered Message Signal from Upper Sideband SSB-SC"));
+    document.getElementById('modtodemod').scrollIntoView({ behavior: 'smooth' });
+}
 
-    // Function to generate recovered message signal from lower sideband
-    function generateRecoveredLSB() {
-      updateParameters();
-      const m = t.map((time) => Am * Math.cos(2 * Math.PI * fm * time));
-      const c1 = t.map((time) => Math.cos(2 * Math.PI * fc * time));
-      const y1 = m.map((sample, index) => sample * c1[index]);
-      const y2 = m.map(
-        (sample, index) =>
-          Math.sin(2 * Math.PI * fc * (t[index] + Math.PI / 2)) * c1[index]
-      ); // Quadrature component (90 degree phase shift)
-      const x_lsb = y1.map((sample, index) => sample + y2[index]);
-      const demodulated_lsb = x_lsb.map(
-        (sample, index) => sample * c1[index]
-      ); // Demodulate by multiplying with carrier
-      //const recovered_message_lsb = movingAverage(demodulated_lsb, windowSize); // Apply low-pass filter
-      const cutoffFreq = document.getElementById("cutoff").value;
-      const fs = document.getElementById("carrierFrequency").value;
-      const recovered_message_lsb0 = movingAverageWithCutoff(demodulated_lsb, cutoffFreq, fs)
-      const windowSize = 9; // Adjust window size as needed
-      const recovered_message_lsb = movingAverage(recovered_message_lsb0, windowSize);
-      const normalized_message_lsb = normalizeSignal(recovered_message_lsb); // Normalize
-      const trace = {
+// Lower sideband recovery with actual LPF
+function generateRecoveredLSB() {
+    updateParameters();
+    const fm = parseFloat(document.getElementById("messageFrequency").value);
+    const fc = parseFloat(document.getElementById("carrierFrequency").value);
+    const Am = 1;//parseFloat(document.getElementById("amplitude").value);
+    const Fs = parseFloat(document.getElementById("samplingFrequency").value);
+    const cutoff = parseFloat(document.getElementById("cutoff").value);
+
+    const T = 1; // 1-second duration
+    const N = Math.floor(Fs*T);
+    let t = [];
+    for (let i=0;i<N;i++) t.push(i/Fs);
+
+    // Message signal
+    const m = t.map(time => Am * Math.cos(2*Math.PI*fm*time));
+
+    // Carrier
+    const c = t.map(time => Math.cos(2*Math.PI*fc*time));
+    const s = t.map(time => Math.sin(2*Math.PI*fc*time)); // quadrature
+	
+	    // --- LSB modulation ---
+    const y1_lsb = m.map((v,i)=>v*c[i]);
+    const y2_lsb = m.map((v,i)=>v*s[i]);
+    const lsb_mod = y1_lsb.map((v,i)=>v + y2_lsb[i]); // LSB
+
+    // Demodulate LSB
+    let demod_lsb = lsb_mod.map((v,i)=>v*c[i]);
+    demod_lsb = zeroPhaseFilter(demod_lsb, cutoff, Fs); // zero-phase LPF
+    demod_lsb = removeDC(demod_lsb).map(v => v * 2); // remove DC offset
+
+    const trace = {
         x: t,
-        y: normalized_message_lsb,
+        y: demod_lsb,
         mode: "lines",
         name: "Recovered Message Signal from Lower Sideband",
-      };
-      Plotly.newPlot("recoveredLSBPlot_demod", [trace], getLayout("Recovered Message Signal from Lower Sideband SSB-SC"));
-    }
+    };
+    Plotly.newPlot("recoveredLSBPlot_demod", [trace], getLayout("Recovered Message Signal from Lower Sideband SSB-SC"));
+}
+
 
     // Function to normalize a signal to range -1 to +1
     function normalizeSignal(signal) {

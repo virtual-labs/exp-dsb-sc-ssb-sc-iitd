@@ -402,7 +402,7 @@ A LPF's cutoff frequency is set near the message frequency to pass desired signa
           ? "Message Signal"
           : canvasId === "carrierPlotCanvas"
           ? "Carrier Signal"
-          : "DSBSC Modulated Signal",
+          : "DSBSC Demodulated Signal",
       data:
         canvasId === "messagePlotCanvas"
           ? result.message
@@ -561,7 +561,79 @@ A LPF's cutoff frequency is set near the message frequency to pass desired signa
             const dsbsc_demodulated_signal = dsbsc_modulated_signal.map(
                 (value, index) => value * carrier_signal[index]
             );
+			
+			/////////////////////////////////////////////
+			  const f_msg = parseFloat(document.getElementById('messageFrequency').value);
+  const f_carrier = parseFloat(document.getElementById('carrierFrequency').value);
+  const Fs = fs; //parseFloat(document.getElementById('samplingFrequency').value);
+  const cutoff = parseFloat(document.getElementById('cutoffFrequency').value);
 
+  const T = 1; // duration 1s
+  const N = Fs * T;
+  let t = [];
+  for (let i = 0; i < N; i++) t.push(i / Fs);
+
+  // Message signal
+  const message = t.map(tt => Math.sin(2 * Math.PI * f_msg * tt));
+
+  // Carrier
+  const carrier = t.map(tt => Math.cos(2 * Math.PI * f_carrier * tt));
+
+  // DSB-SC modulated
+  const dsbsc = message.map((m, i) => m * carrier[i]);
+
+  // Demodulation: multiply by carrier again
+  const demod_raw = dsbsc.map((x, i) => x * 2 * carrier[i]); // multiply by 2 for scaling
+
+  // LPF
+  const dsbsc_demodulated_signal1 = lowPassFilter(demod_raw, cutoff, Fs);
+
+/////////////////////////////////////////////////////////
+// Basic LPF (moving average) for demo
+function lowPassFilter(signal, cutoff, Fs) {
+  const RC = 1 / (2 * Math.PI * cutoff);
+  const dt = 1 / Fs;
+  const alpha = dt / (RC + dt);
+  let filtered = [];
+  let y = 0;
+  for (let i = 0; i < signal.length; i++) {
+    y = alpha * signal[i] + (1 - alpha) * y;
+    filtered.push(y);
+  }
+  return filtered;
+}
+
+// Perform DSB-SC modulation and demodulation
+function performDemodulation() {
+  const f_msg = parseFloat(document.getElementById('messageFrequency').value);
+  const f_carrier = parseFloat(document.getElementById('carrierFrequency').value);
+  const Fs = parseFloat(document.getElementById('samplingFrequency').value);
+  const cutoff = parseFloat(document.getElementById('cutoffFrequency').value);
+
+  const T = 1; // duration 1s
+  const N = Fs * T;
+  let t = [];
+  for (let i = 0; i < N; i++) t.push(i / Fs);
+
+  // Message signal
+  const message = t.map(tt => Math.sin(2 * Math.PI * f_msg * tt));
+
+  // Carrier
+  const carrier = t.map(tt => Math.cos(2 * Math.PI * f_carrier * tt));
+
+  // DSB-SC modulated
+  const dsbsc = message.map((m, i) => m * carrier[i]);
+
+  // Demodulation: multiply by carrier again
+  const demod_raw = dsbsc.map((x, i) => x * 2 * carrier[i]); // multiply by 2 for scaling
+
+  // LPF
+  const demod_filtered = lowPassFilter(demod_raw, cutoff, Fs);
+
+  // Plot
+  plotSignal('demodCanvas', t, demod_filtered);
+}
+///////////////////////////////////////////////////////
             // Low-pass filter the demodulated signal
             const lpf_cutoff = cutoffFrequency;
             const lpfOrder = filterOrder;
@@ -588,7 +660,7 @@ A LPF's cutoff frequency is set near the message frequency to pass desired signa
 
             return {
                 x: x_values,
-                y: dsbsc_demodulated_signal_normalized,
+                y: dsbsc_demodulated_signal1,
                 modulated_signal: dsbsc_modulated_signal,
                 message_signal: message_signal,
             };
@@ -806,7 +878,7 @@ A LPF's cutoff frequency is set near the message frequency to pass desired signa
 window.addEventListener("DOMContentLoaded", () => {
   if (localStorage.getItem("runGeneratePlots") === "1") {
     localStorage.removeItem("runGeneratePlots"); // clear flag
-    generatePlots(); // ✅ run your function after reload
+    generatePlots(); // 
   }
 });
 function generatePlots() {
