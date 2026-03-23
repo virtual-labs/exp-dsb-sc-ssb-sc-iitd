@@ -339,144 +339,164 @@
         <script type="text/javascript" async
         src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
       </script>
-    <!-- sidebar and body -->
-    <div class="flex min-h-[380px]">
-      <div class="maincontent px-8 pb-6 flex-1">
-        <div
-          class="w-full text-[19.2px] text-[#313636]"
-          style="font-family: Raleway, sans-serif"
-        >
-          <h2
-            class="text-center pt-6 border-b pb-2 mb-2 text-[#2C99CE] text-[32px]"
-          >
-            SSB-SC Modulation
-          </h2>
-		  
-          <h2>Theory</h2>		  
-		      <p>The SSB-SC modulated signal \( S(t) \) can be expressed as:</p>
-    <p>
-        \( S(t) = \frac{A_c}{2} \left[ m(t) \cos(2\pi f_c t) \pm \hat{m}(t) \sin(2\pi f_c t) \right] \)
-    </p>
-    <p>Where:</p>
-    <ul>
+<!-- sidebar and body -->
+<div class="flex min-h-[380px]">
+  <div class="maincontent px-8 pb-6 flex-1">
+    <div
+      class="w-full text-[19.2px] text-[#313636]"
+      style="font-family: Raleway, sans-serif"
+    >
+
+      <h2 class="text-center pt-6 border-b pb-2 mb-2 text-[#2C99CE] text-[32px]">
+        SSB-SC Modulation
+      </h2>
+
+      <h2>Theory</h2>
+
+      <p>
+        Single Sideband Suppressed Carrier (SSB-SC) modulation is a bandwidth-efficient form of amplitude modulation 
+        in which only one sideband of the modulated signal is transmitted, while the carrier component is completely suppressed. 
+        Let the message signal \( m(t) \) be band-limited to a bandwidth \( B \).
+      </p>
+
+      <p>The SSB-SC modulated signal \( s(t) \) is expressed as:</p>
+
+      <p>
+        \( s(t) = \frac{A_c}{2} \left[ m(t)\cos(2\pi f_c t) \pm \hat{m}(t)\sin(2\pi f_c t) \right] \)
+      </p>
+
+      <p>Where:</p>
+      <ul>
         <li>\( A_c \) is the amplitude of the carrier signal.</li>
         <li>\( m(t) \) is the baseband (modulating) signal.</li>
-        <li>\( f_c \) is the frequency of the carrier signal.</li>
-        <li>\( \hat{m}(t) \) is the Hilbert transform of the modulating signal \( m(t) \).</li>
-    </ul>
-    <p>
-        In SSB-SC modulation, either the upper sideband (USB) or the lower sideband (LSB) is transmitted by choosing the corresponding sign (plus or minus) in the equation.
-        The carrier \( A_c \cos(2\pi f_c t) \) is suppressed, and only one sideband is transmitted. This reduces the bandwidth required for transmission to half that of DSB-SC.
-    </p>
-    <br>
-	
-          <h2>Block Diagram</h2>
+        <li>\( f_c \) is the carrier frequency.</li>
+        <li>\( \hat{m}(t) \) is the Hilbert transform of \( m(t) \), representing a 90° phase-shifted version of the signal.</li>
+      </ul>
 
-          <div class="flex justify-center">
-            <img
-              src=".\simulation\ssb_sc_mod.png"
-              alt="ssbsc_image1"
-              class="h-[280px]"
-            />
-          </div>
-          <p class="mb-4 text-center font-semibold text-black">Fig: SSB-SC Modulation</p>
-          <h2>Frequency Domain Description</h2>
+      <p>
+        The positive sign corresponds to the upper sideband (USB), while the negative sign corresponds to the lower sideband (LSB). 
+        Since only one sideband is transmitted, the required transmission bandwidth is equal to \( B \), which is half that of 
+        DSB-SC modulation.
+      </p>
 
-          <p>
-            The precise frequency-domain description of an SSB modulated wave depends on which sideband is transmitted.
-            To investigate this issue, consider a message signal <em>m(t)</em> with a spectrum <em>M(jω)</em> limited to the band 
-            <em>ω<sub>a</sub> ≤ |ω| ≤ ω<sub>m</sub></em>, as in the figure below.
-          </p>
-          <p>
-            The spectrum of the DSB-SC modulated wave, obtained by multiplying <em>m(t)</em> by the carrier wave 
-            <em>A<sub>c</sub> cos(ω<sub>c</sub>t)</em>, is shown in the figure below. 
-            The upper sideband is represented in duplicate by the frequencies above <em>ω<sub>c</sub></em> 
-            and those below <em>–ω<sub>c</sub></em>; and when only the upper sideband is transmitted, 
-            the resulting SSB modulated wave has the spectrum shown in the figure below.
-          </p>
-          <p>
-            Likewise, the lower sideband is represented in duplicate by the frequencies below 
-            <em>ω<sub>c</sub></em> (for positive frequencies) and those above 
-            <em>–ω<sub>c</sub></em> (for negative frequencies); and when only the lower sideband is transmitted, 
-            the spectrum of the corresponding SSB modulated wave is as shown in the figure below.
-          </p>
-          <p>
-            Thus the essential function of SSB modulation is to translate the spectrum of the 
-            modulating wave, either with or without inversion, to a new location in the frequency domain. 
-            Moreover, the transmission bandwidth requirement of an SSB modulation...
-          </p>
-          <br/>
-          <div class="flex justify-center gap-20">
-            <img
-              src="./ssbsc_spectrum.png"
-              alt="dsbsc_image1"
-            />
-          </div>
-          <p class="mb-4 text-center font-semibold text-black">Fig:  Frequency-domain characteristics of SSB modulation.
-            (a) Magnitude spectrum of message signal, with energy gap from −ωₐ to ωₐ.
-            (b) Magnitude spectrum of DSB-SC signal.
-            (c) Magnitude spectrum of SSB modulated wave, containing upper sideband only.
-            (d) Magnitude spectrum of SSB modulated wave, containing lower sideband only.
-            </p>
-         <h2
-            class="text-center pt-6 border-b pb-2 mb-2 text-[#2C99CE] text-[32px]"
-          >
-            SSB-SC Demodulation
-          </h2>
-          <h2>Block Diagram</h2>
+      <br>
 
-          <div class="flex justify-center">
-            <img
-              src=".\simulation\ssb_sc_demod.png"
-              alt="ssbsc_demod1"
-              class="h-[280px]"
-            />
-          </div>
-          <p class="mb-4 text-center font-semibold text-black">Fig: SSB-SC Demodulation</p>
-          <h3>Demodulation using Coherent Detection</h3>
+      <h2>Block Diagram</h2>
+      <div class="flex justify-center">
+        <img
+          src="./simulation/ssb_sc_mod.png"
+          alt="ssbsc_image1"
+          class="h-[280px]"
+        />
+      </div>
+      <p class="mb-4 text-center font-semibold text-black">Fig 1: SSB-SC Modulation</p>
 
-          <p>To retrieve \( m(t) \), the SSB-SC signal is multiplied with a coherent carrier:</p>
-        
-          <p>
-            \(
-            S(t) \cdot 2 \cos(2\pi f_c t)
-            \)
-          </p>
-        
-          <p>Substituting for \( S(t) \):</p>
-        
-          <p>
-            \(
-            2 S(t) \cos(2\pi f_c t) = A_c m(t) \cos^2(2\pi f_c t) \pm A_c \hat{m}(t) \sin(2\pi f_c t) \cos(2\pi f_c t)
-            \)
-          </p>
-        
-          <p>Using trigonometric identities:</p>
-          <ul>
-            <li>\( \cos^2(2\pi f_c t) = \frac{1 + \cos(4\pi f_c t)}{2} \)</li>
-            <li>\( \sin(2\pi f_c t) \cos(2\pi f_c t) = \frac{1}{2} \sin(4\pi f_c t) \)</li>
-          </ul>
-        
-          <p>This simplifies the expression to:</p>
-        
-          <p>
-            \(
-            S(t) \cdot 2\cos(2\pi f_c t) = \frac{A_c}{2} m(t) + \frac{A_c}{2} m(t) \cos(4\pi f_c t) \pm \frac{A_c}{2} \hat{m}(t) \sin(4\pi f_c t)
-            \)
-          </p>
-        
-          <h3>Low-Pass Filtering</h3>
-        
-          <p>The components \( \cos(4\pi f_c t) \) and \( \sin(4\pi f_c t) \) lie in the high-frequency range. A low-pass filter removes these, leaving only:</p>
-        
-          <p>
-            \(
-            \frac{A_c}{2} m(t)
-            \)
-          </p>
-        
-          <p>Finally, scaling by \( \frac{2}{A_c} \) gives the original message signal \( m(t) \).</p>
-        
+      <h2>Frequency Domain Description</h2>
+      <p>
+        Here, \( \omega_c = 2 \pi f_c \) is the carrier's angular frequency in radians per second. 
+        Using \( \omega \) in the frequency-domain representation simplifies the mathematical expressions for 
+        Fourier transforms and spectral analysis. The relationship between angular frequency \( \omega \) and 
+        linear frequency \( f \) is \( \omega = 2 \pi f \).
+        </p>
+      <p>
+        Let \( M(j\omega) \) denote the Fourier transform of \( m(t) \). In DSB-SC modulation, the spectrum of the message signal 
+        is shifted to \( \pm \omega_c \), producing two symmetric sidebands.
+      </p>
+
+      <p>
+        In SSB-SC modulation, one of these sidebands is completely suppressed. Therefore:
+      </p>
+
+      <ul>
+        <li>For the upper sideband (USB): \( S(j\omega) = \frac{A_c}{2} M(j(\omega - \omega_c)) \)</li>
+        <li>For the lower sideband (LSB): \( S(j\omega) = \frac{A_c}{2} M(j(\omega + \omega_c) \))</li>
+      </ul>
+
+      <br/>
+      <div class="flex justify-center gap-20">
+        <img
+          src="./ssbsc_spectrum.png"
+          alt="ssbsc_image2"
+          width="900"
+          height="300"
+        />
+      </div>
+      <p class="mb-4 text-center font-semibold text-black">Fig 2: Frequency-domain characteristics of SSB modulation.
+        (a) Magnitude spectrum of message signal, with energy gap from −ωₐ to ωₐ.
+        (b) Magnitude spectrum of DSB-SC signal.
+        (c) Magnitude spectrum of SSB modulated wave, containing upper sideband only.
+        (d) Magnitude spectrum of SSB modulated wave, containing lower sideband only.
+        </p>
+
+      <h2 class="text-center pt-6 border-b pb-2 mb-2 text-[#2C99CE] text-[32px]">
+        SSB-SC Demodulation
+      </h2>
+
+      <h2>Block Diagram</h2>
+      <div class="flex justify-center">
+        <img
+          src="./simulation/ssb_sc_demod.png"
+          alt="ssbsc_demod1"
+          class="h-[280px]"
+        />
+      </div>
+      <p class="mb-4 text-center font-semibold text-black">Fig 3: SSB-SC Demodulation</p>
+
+      <h3>Demodulation using Coherent Detection</h3>
+
+      <p>
+        The recovery of the message signal requires coherent detection, in which the received signal is multiplied 
+        by a locally generated carrier that is perfectly synchronized in both phase and frequency.
+      </p>
+
+      <p>
+        \( s(t) \cdot 2\cos(2\pi f_c t) \)
+      </p>
+
+      <p>Substituting for \( s(t) \):</p>
+
+      <p>
+        \(
+        2 s(t)\cos(2\pi f_c t) =
+        A_c m(t)\cos^2(2\pi f_c t)
+        \pm A_c \hat{m}(t)\sin(2\pi f_c t)\cos(2\pi f_c t)
+        \)
+      </p>
+
+      <p>Using trigonometric identities:</p>
+      <ul>
+        <li>\( \cos^2(2\pi f_c t) = \frac{1}{2}\left[1 + \cos(4\pi f_c t)\right] \)</li>
+        <li>\( \sin(2\pi f_c t)\cos(2\pi f_c t) = \frac{1}{2}\sin(4\pi f_c t) \)</li>
+      </ul>
+
+      <p>This simplifies to:</p>
+
+      <p>
+        \(
+        = \frac{A_c}{2} m(t)
+        + \frac{A_c}{2} m(t)\cos(4\pi f_c t)
+        \pm \frac{A_c}{2} \hat{m}(t)\sin(4\pi f_c t)
+        \)
+      </p>
+
+      <h3>Low-Pass Filtering</h3>
+
+      <p>
+        The components at frequency \( 2f_c \) are removed using a low-pass filter (LPF), leaving only the baseband term:
+      </p>
+
+      <p>
+        \( \hat{m}_{out}(t) = \frac{A_c}{2} m(t) \)
+      </p>
+
+      <p>
+        After appropriate scaling, the original message signal \( m(t) \) is recovered. Accurate carrier synchronization 
+        is essential; otherwise, phase or frequency errors will introduce distortion in the recovered signal.
+      </p>
+
+    </div>
+  </div>
+</div>
 
         </div>
         <div class="bug-report-mobile">
