@@ -2,7 +2,7 @@
   "version": 2.0,
   "questions": [
     {
-      "question": "1. How is the carrier signal used in the demodulation of a DSB-SC signal?",
+      "question": "How is the carrier signal used in the demodulation of a DSB-SC signal?",
       "answers": {
         "a": "The carrier signal is needed at the receiver to recover the original message signal.",
         "b": "The carrier signal is not needed for demodulation; only the modulated signal is required.",
@@ -19,7 +19,7 @@
       "difficulty": "beginner"
     },
     {
-      "question": "2. In Single Sideband Suppressed Carrier (SSB-SC) modulation, how is the message signal typically reconstructed?",
+      "question": "In Single Sideband Suppressed Carrier (SSB-SC) modulation, how is the message signal typically reconstructed?",
       "answers": {
         "a": "By mixing the received signal with a local oscillator that has the same frequency as the carrier used in modulation.",
         "b": "By filtering out the unwanted sideband from the received signal.",
@@ -36,41 +36,39 @@
       "difficulty": "beginner"
     },
     {
-      "question": "3. Which of the following best describes the phase relationship between the message signal and carrier in DSB-SC modulation?",
+      "question": "In DSB-SC modulation, why is carrier phase synchronization important at the receiver?",
       "answers": {
-        "a": "The message signal and carrier are in phase.",
-        "b": "The message signal and carrier are out of phase by 90 degrees.",
-        "c": "The phase relationship is irrelevant in DSB-SC modulation.",
-        "d": "The message signal and carrier are out of phase by 180 degrees."
+        "a": "To ensure proper amplitude scaling of the message signal",
+        "b": "To correctly recover the message signal during coherent detection",
+        "c": "To eliminate noise from the received signal",
+        "d": "To increase bandwidth efficiency"
       },
       "explanations": {
-        "a": "Incorrect! In DSB-SC modulation, the message signal modulates the carrier without fixing a specific phase relationship.",
-        "b": "Incorrect! The phase relationship is not defined as 90 degrees in DSB-SC modulation.",
-        "c": "Correct! The phase relationship is not inherently specified in DSB-SC modulation.",
-        "d": "Incorrect! The phase relationship is not inherently fixed at 180 degrees."
+        "a": "Incorrect! Amplitude scaling is not the main reason.",
+        "b": "Correct! Incorrect phase causes distortion or complete signal loss during demodulation.",
+        "c": "Incorrect! Noise cannot be eliminated by phase synchronization.",
+        "d": "Incorrect! Bandwidth is not affected by phase synchronization."
       },
-      "correctAnswer": "c",
-      "difficulty": "intermediate"
+      "correctAnswer": "b"
     },
     {
-      "question": "4. Which filter type is typically used to extract the original message signal from an SSB-SC signal?",
+      "question": "In SSB-SC demodulation, what combination of operations is required to recover the message signal?",
       "answers": {
-        "a": "Band-pass filter",
-        "b": "Low-pass filter",
-        "c": "High-pass filter",
-        "d": "Band-stop filter"
+        "a": "Envelope detection only",
+        "b": "Band-pass filtering only",
+        "c": "Mixing with carrier followed by low-pass filtering",
+        "d": "High-pass filtering only"
       },
       "explanations": {
-        "a": "Incorrect! Band-pass filters are not used to recover the baseband message signal.",
-        "b": "Correct! Low-pass filters are suitable for extracting the message signal after demodulation.",
-        "c": "Incorrect! High-pass filters are not appropriate for SSB-SC message extraction.",
-        "d": "Incorrect! Band-stop filters eliminate specific frequencies and are not used for recovery."
+        "a": "Incorrect! Envelope detection does not work for suppressed carrier signals.",
+        "b": "Incorrect! Filtering alone cannot recover the baseband signal.",
+        "c": "Correct! Coherent detection requires mixing followed by LPF.",
+        "d": "Incorrect! High-pass filtering is not used for demodulation."
       },
-      "correctAnswer": "b",
-      "difficulty": "intermediate"
+      "correctAnswer": "c"
     },
     {
-      "question": "5. In DSB-SC modulation, how is the amplitude of the carrier signal affected by the modulation process?",
+      "question": "In DSB-SC modulation, how is the amplitude of the carrier signal affected by the modulation process?",
       "answers": {
         "a": "The amplitude of the carrier signal is suppressed or removed.",
         "b": "The amplitude of the carrier signal increases proportionally with the message signal.",
@@ -87,7 +85,7 @@
       "difficulty": "intermediate"
     },
         {
-          "question": "6. What is the key difference between DSB-SC and SSB-SC in terms of bandwidth usage?",
+          "question": "What is the key difference between DSB-SC and SSB-SC in terms of bandwidth usage?",
           "answers": {
             "a": "DSB-SC uses twice the bandwidth of SSB-SC.",
             "b": "SSB-SC uses twice the bandwidth of DSB-SC.",
@@ -104,7 +102,7 @@
           "difficulty": "intermediate"
         },
         {
-          "question": "7. In an SSB-SC signal, what happens to the carrier frequency?",
+          "question": "In an SSB-SC signal, what happens to the carrier frequency?",
           "answers": {
             "a": "The carrier frequency is completely removed from the signal.",
             "b": "The carrier frequency is present but at a reduced amplitude.",
@@ -121,55 +119,55 @@
           "difficulty": "intermediate"
         },
         {
-          "question": "8. In a DSB-SC system, how is the demodulated signal obtained?",
+          "question": "What is the total bandwidth required to transmit a DSB-SC signal if the message signal has a maximum frequency of f_m?",
           "answers": {
-            "a": "By multiplying the received signal with a locally generated carrier signal.",
-            "b": "By directly filtering the received signal with a low-pass filter.",
-            "c": "By using an envelope detector on the received signal.",
-            "d": "By applying a frequency demodulator to the received signal."
+            "a": "f_m",
+            "b": "2 f_m",
+            "c": "4 f_m",
+            "d": "f_m / 2"
           },
           "explanations": {
-            "a": "Correct! Demodulation in DSB-SC involves multiplying the received signal with a locally generated carrier of the same frequency.",
-            "b": "Incorrect! Filtering alone is not sufficient; multiplication with a carrier is required.",
-            "c": "Incorrect! Envelope detection is not suitable for DSB-SC because it requires coherent detection.",
-            "d": "Incorrect! Frequency demodulation is not used for DSB-SC signals."
+            "a": "Incorrect! DSB-SC includes both upper and lower sidebands, so the bandwidth is larger than f_m.",
+            "b": "Correct! The total bandwidth of a DSB-SC signal is twice the maximum frequency of the message signal.",
+            "c": "Incorrect! 4 f_m is too large; it would correspond to other modulation schemes or redundant duplication.",
+            "d": "Incorrect! Half the message frequency is too small for DSB-SC."
+          },
+          "correctAnswer": "b",
+          "difficulty": "intermediate"
+        },
+        {
+          "question": "Which of the following best explains why SSB-SC is preferred over DSB-SC in long-distance communication systems?",
+          "answers": {
+            "a": "It uses less bandwidth and avoids transmitting redundant sideband power",
+            "b": "It eliminates the need for coherent detection",
+            "c": "It increases the carrier power for better transmission",
+            "d": "It simplifies receiver design significantly"
+          },
+          "explanations": {
+            "a": "Correct! SSB-SC transmits only one sideband, reducing bandwidth and saving power by eliminating redundant components.",
+            "b": "Incorrect! SSB-SC still requires coherent detection.",
+            "c": "Incorrect! The carrier is suppressed, not increased.",
+            "d": "Incorrect! SSB-SC receivers are actually more complex."
           },
           "correctAnswer": "a",
           "difficulty": "intermediate"
         },
         {
-          "question": "9. Which property of SSB-SC modulation makes it preferable for long-distance communication compared to DSB-SC?",
+          "question": "In a communication system using DSB-SC, what is the main reason a coherent detector is preferred over an envelope detector?",
           "answers": {
-            "a": "Higher bandwidth efficiency.",
-            "b": "Lower power consumption.",
-            "c": "Greater resistance to interference.",
-            "d": "Simpler demodulation process."
+            "a": "Coherent detection accurately recovers the message signal even when the carrier is suppressed.",
+            "b": "Envelope detection is faster than coherent detection.",
+            "c": "Coherent detection requires less power than envelope detection.",
+            "d": "Envelope detection can recover SSB-SC signals reliably."
           },
           "explanations": {
-            "a": "Correct! SSB-SC's higher bandwidth efficiency allows more effective use of the available spectrum.",
-            "b": "Incorrect! Lower power consumption is not the primary advantage compared to DSB-SC.",
-            "c": "Incorrect! Both SSB-SC and DSB-SC have similar resistance to interference.",
-            "d": "Incorrect! SSB-SC demodulation is generally more complex, not simpler."
+            "a": "Correct! Since DSB-SC suppresses the carrier, envelope detection fails, and coherent detection using a locally generated carrier is required to correctly demodulate the signal.",
+            "b": "Incorrect! Speed is not the main reason; coherent detection is needed for accuracy.",
+            "c": "Incorrect! Coherent detection generally consumes more resources due to carrier synchronization.",
+            "d": "Incorrect! Envelope detection cannot recover SSB-SC or DSB-SC signals."
           },
           "correctAnswer": "a",
           "difficulty": "intermediate"
-        },
-        {
-          "question": "10. In evaluating the efficiency of various amplitude modulation schemes, which key limitation makes DSB-SC less bandwidth-efficient than its alternatives, particularly SSB-SC?",
-          "answers": {
-            "a": "DSB-SC transmits both sidebands without utilizing the carrier, effectively doubling the required bandwidth compared to SSB-SC.",
-            "b": "DSB-SC experiences higher power losses due to redundant sideband transmission.",
-            "c": "DSB-SC is highly susceptible to phase distortion during demodulation.",
-            "d": "DSB-SC necessitates precise synchronization due to its suppressed carrier, complicating implementation."
-          },
-          "explanations": {
-            "a": "Correct! DSB-SC includes both upper and lower sidebands, unlike SSB-SC, which eliminates one sideband and halves the bandwidth requirement.",
-            "b": "Incorrect! While redundant sidebands affect efficiency, the primary limitation here is bandwidth usage.",
-            "c": "Incorrect! Phase distortion is not the defining disadvantage of DSB-SC in terms of bandwidth efficiency.",
-            "d": "Incorrect! Synchronization complexity is not the main reason DSB-SC is less bandwidth-efficient."
-          },
-          "correctAnswer": "a",
-          "difficulty": "intermediate"
-    }
+        }
   ]
 }
