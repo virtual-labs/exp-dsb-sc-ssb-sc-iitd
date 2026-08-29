@@ -1,0 +1,173 @@
+{
+  "version": 2.0,
+  "questions": [
+    {
+      "question": "How is the carrier signal used in the demodulation of a DSB-SC signal?",
+      "answers": {
+        "a": "The carrier signal is needed at the receiver to recover the original message signal.",
+        "b": "The carrier signal is not needed for demodulation; only the modulated signal is required.",
+        "c": "The carrier signal is used to filter out the sidebands.",
+        "d": "The carrier signal is used to amplify the modulated signal."
+      },
+      "explanations": {
+        "a": "Correct! The carrier signal is essential for coherent detection of a DSB-SC signal to recover the original message.",
+        "b": "Incorrect! The carrier is crucial for the demodulation process in DSB-SC.",
+        "c": "Incorrect! The carrier signal is not used for filtering sidebands but for mixing.",
+        "d": "Incorrect! Amplification is not the role of the carrier signal in demodulation."
+      },
+      "correctAnswer": "a",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "In Single Sideband Suppressed Carrier (SSB-SC) modulation, how is the message signal typically reconstructed?",
+      "answers": {
+        "a": "By mixing the received signal with a local oscillator that has the same frequency as the carrier used in modulation.",
+        "b": "By filtering out the unwanted sideband from the received signal.",
+        "c": "By using an envelope detector to extract the message signal.",
+        "d": "By direct demodulation without any further processing."
+      },
+      "explanations": {
+        "a": "Correct! Reconstruction requires mixing with a local oscillator to retrieve the original message signal.",
+        "b": "Incorrect! Filtering out the sideband is not sufficient; mixing is required.",
+        "c": "Incorrect! Envelope detection is not suitable for SSB-SC as it requires coherent detection.",
+        "d": "Incorrect! Direct demodulation is not feasible without additional processing in SSB-SC."
+      },
+      "correctAnswer": "a",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "In DSB-SC modulation, why is carrier phase synchronization important at the receiver?",
+      "answers": {
+        "a": "To ensure proper amplitude scaling of the message signal",
+        "b": "To correctly recover the message signal during coherent detection",
+        "c": "To eliminate noise from the received signal",
+        "d": "To increase bandwidth efficiency"
+      },
+      "explanations": {
+        "a": "Incorrect! Amplitude scaling is not the main reason.",
+        "b": "Correct! Incorrect phase causes distortion or complete signal loss during demodulation.",
+        "c": "Incorrect! Noise cannot be eliminated by phase synchronization.",
+        "d": "Incorrect! Bandwidth is not affected by phase synchronization."
+      },
+      "correctAnswer": "b"
+    },
+    {
+      "question": "In SSB-SC demodulation, what combination of operations is required to recover the message signal?",
+      "answers": {
+        "a": "Envelope detection only",
+        "b": "Band-pass filtering only",
+        "c": "Mixing with carrier followed by low-pass filtering",
+        "d": "High-pass filtering only"
+      },
+      "explanations": {
+        "a": "Incorrect! Envelope detection does not work for suppressed carrier signals.",
+        "b": "Incorrect! Filtering alone cannot recover the baseband signal.",
+        "c": "Correct! Coherent detection requires mixing followed by LPF.",
+        "d": "Incorrect! High-pass filtering is not used for demodulation."
+      },
+      "correctAnswer": "c"
+    },
+    {
+      "question": "In DSB-SC modulation, how is the amplitude of the carrier signal affected by the modulation process?",
+      "answers": {
+        "a": "The amplitude of the carrier signal is suppressed or removed.",
+        "b": "The amplitude of the carrier signal increases proportionally with the message signal.",
+        "c": "The amplitude of the carrier signal remains unchanged.",
+        "d": "The amplitude of the carrier signal is modulated in a manner similar to amplitude modulation."
+      },
+      "explanations": {
+        "a": "Correct! In DSB-SC modulation, the carrier signal's amplitude is suppressed; only the sidebands carry the information.",
+        "b": "Incorrect! The carrier amplitude does not increase; it is suppressed.",
+        "c": "Incorrect! The carrier amplitude is not unchanged; it is suppressed.",
+        "d": "Incorrect! The carrier is suppressed, not amplitude-modulated in DSB-SC."
+      },
+      "correctAnswer": "a",
+      "difficulty": "intermediate"
+    },
+        {
+          "question": "What is the key difference between DSB-SC and SSB-SC in terms of bandwidth usage?",
+          "answers": {
+            "a": "DSB-SC uses twice the bandwidth of SSB-SC.",
+            "b": "SSB-SC uses twice the bandwidth of DSB-SC.",
+            "c": "DSB-SC and SSB-SC use the same bandwidth.",
+            "d": "Bandwidth usage depends on the modulation index of the signal."
+          },
+          "explanations": {
+            "a": "Correct! DSB-SC has twice the bandwidth of SSB-SC because it includes both sidebands.",
+            "b": "Incorrect! SSB-SC is more bandwidth efficient and uses half the bandwidth of DSB-SC.",
+            "c": "Incorrect! The bandwidth of DSB-SC is double that of SSB-SC.",
+            "d": "Incorrect! The bandwidth difference is not dependent on the modulation index."
+          },
+          "correctAnswer": "a",
+          "difficulty": "intermediate"
+        },
+        {
+          "question": "In an SSB-SC signal, what happens to the carrier frequency?",
+          "answers": {
+            "a": "The carrier frequency is completely removed from the signal.",
+            "b": "The carrier frequency is present but at a reduced amplitude.",
+            "c": "The carrier frequency is modulated along with the message signal.",
+            "d": "The carrier frequency is used for phase modulation of the message signal."
+          },
+          "explanations": {
+            "a": "Correct! The carrier is removed or suppressed in SSB-SC, leaving only one sideband.",
+            "b": "Incorrect! The carrier is not present at a reduced amplitude; it is suppressed.",
+            "c": "Incorrect! The carrier frequency is not transmitted in SSB-SC.",
+            "d": "Incorrect! Phase modulation is not related to SSB-SC since the carrier is suppressed."
+          },
+          "correctAnswer": "a",
+          "difficulty": "intermediate"
+        },
+        {
+          "question": "What is the total bandwidth required to transmit a DSB-SC signal if the message signal has a maximum frequency of f_m?",
+          "answers": {
+            "a": "f_m",
+            "b": "2 f_m",
+            "c": "4 f_m",
+            "d": "f_m / 2"
+          },
+          "explanations": {
+            "a": "Incorrect! DSB-SC includes both upper and lower sidebands, so the bandwidth is larger than f_m.",
+            "b": "Correct! The total bandwidth of a DSB-SC signal is twice the maximum frequency of the message signal.",
+            "c": "Incorrect! 4 f_m is too large; it would correspond to other modulation schemes or redundant duplication.",
+            "d": "Incorrect! Half the message frequency is too small for DSB-SC."
+          },
+          "correctAnswer": "b",
+          "difficulty": "intermediate"
+        },
+        {
+          "question": "Which of the following best explains why SSB-SC is preferred over DSB-SC in long-distance communication systems?",
+          "answers": {
+            "a": "It uses less bandwidth and avoids transmitting redundant sideband power",
+            "b": "It eliminates the need for coherent detection",
+            "c": "It increases the carrier power for better transmission",
+            "d": "It simplifies receiver design significantly"
+          },
+          "explanations": {
+            "a": "Correct! SSB-SC transmits only one sideband, reducing bandwidth and saving power by eliminating redundant components.",
+            "b": "Incorrect! SSB-SC still requires coherent detection.",
+            "c": "Incorrect! The carrier is suppressed, not increased.",
+            "d": "Incorrect! SSB-SC receivers are actually more complex."
+          },
+          "correctAnswer": "a",
+          "difficulty": "intermediate"
+        },
+        {
+          "question": "In a communication system using DSB-SC, what is the main reason a coherent detector is preferred over an envelope detector?",
+          "answers": {
+            "a": "Coherent detection accurately recovers the message signal even when the carrier is suppressed.",
+            "b": "Envelope detection is faster than coherent detection.",
+            "c": "Coherent detection requires less power than envelope detection.",
+            "d": "Envelope detection can recover SSB-SC signals reliably."
+          },
+          "explanations": {
+            "a": "Correct! Since DSB-SC suppresses the carrier, envelope detection fails, and coherent detection using a locally generated carrier is required to correctly demodulate the signal.",
+            "b": "Incorrect! Speed is not the main reason; coherent detection is needed for accuracy.",
+            "c": "Incorrect! Coherent detection generally consumes more resources due to carrier synchronization.",
+            "d": "Incorrect! Envelope detection cannot recover SSB-SC or DSB-SC signals."
+          },
+          "correctAnswer": "a",
+          "difficulty": "intermediate"
+        }
+  ]
+}

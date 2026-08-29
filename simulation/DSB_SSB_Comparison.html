@@ -1,0 +1,124 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Virtual Labs</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  </head>
+  <body>
+  <div id="container">
+    <h1>Instructions for DSB-SC / SSB-SC Side-by-Side Comparison</h1>
+    <ul>
+      <li class="step step4"><strong>Note:</strong> This page generates one message signal and modulates it with both DSB-SC and SSB-SC (upper sideband), so you can directly compare the two.</li>
+      <li class="step step1"><strong>Step 1:</strong> Use the sliders to set message frequency, carrier frequency, and message gain.</li>
+      <li class="step step2"><strong>Step 2:</strong> Click <em>"Generate Comparison"</em> to plot the DSB-SC and SSB-SC signals side by side, both from the same message and carrier.</li>
+      <li class="step step1"><strong>Tip:</strong> DSB-SC keeps both sidebands (twice the bandwidth of the message); SSB-SC keeps only one, so its spectrum occupies half the bandwidth.</li>
+    </ul>
+  </div>
+  <br/>
+
+  <div class="flex items-start gap-10 flex-wrap">
+    <div class="flex flex-col items-center">
+      <p class="font-medium">Message Frequency (Hz)</p>
+      <div class="leading-none messageFrequencyDiv">10</div>
+      <input id="messageFrequency" value="10" type="range" min="1" max="100" onchange="updateLabels()" />
+    </div>
+    <div class="flex flex-col items-center">
+      <p class="font-medium">Carrier Frequency (Hz)</p>
+      <div class="leading-none carrierFrequencyDiv">100</div>
+      <input id="carrierFrequency" value="100" type="range" min="50" max="500" onchange="updateLabels()" />
+    </div>
+    <div class="flex flex-col items-center">
+      <p class="font-medium">Message Gain</p>
+      <div class="leading-none gainDiv">1</div>
+      <input id="gain" value="1" type="range" min="0.1" max="10" step="0.1" onchange="updateLabels()" />
+    </div>
+    <div class="flex flex-col items-center">
+      <p class="font-medium">Sampling Frequency (Hz)</p>
+      <div class="leading-none samplingFrequencyDiv">1000</div>
+      <input id="samplingFrequency" value="1000" type="range" min="200" max="2000" onchange="updateLabels()" />
+    </div>
+  </div>
+  <br/>
+
+  <button
+    class="bg-blue-500 text-white py-1 px-3 rounded-md hover:scale-105"
+    onclick="generateComparison()"
+  >
+    Generate Comparison
+  </button>
+
+  <div id="messagePlotSection" class="flex gap-4 mt-4">
+    <div id="messagePlot" class="flex-1 w-[600px]"></div>
+  </div>
+
+  <div id="comparisonSection" class="flex gap-4 mt-4">
+    <div id="dsbPlot" class="flex-1 w-[600px]"></div>
+    <div id="ssbPlot" class="flex-1 w-[600px]"></div>
+  </div>
+
+  <script>
+    function updateLabels() {
+      document.querySelector('.messageFrequencyDiv').innerHTML = document.getElementById('messageFrequency').value;
+      document.querySelector('.carrierFrequencyDiv').innerHTML = document.getElementById('carrierFrequency').value;
+      document.querySelector('.gainDiv').innerHTML = document.getElementById('gain').value;
+      document.querySelector('.samplingFrequencyDiv').innerHTML = document.getElementById('samplingFrequency').value;
+    }
+
+    // Generates ONE message signal, then produces DSB-SC and SSB-SC (USB)
+    // from it using the same formulas as DSBSC.html and SSBSC.html, so this
+    // is a fair like-for-like comparison: same message, same carrier, only
+    // the modulation type differs.
+    function generateComparison() {
+      var fm = parseFloat(document.getElementById('messageFrequency').value);
+      var fc = parseFloat(document.getElementById('carrierFrequency').value);
+      var gain = parseFloat(document.getElementById('gain').value);
+      var F = parseFloat(document.getElementById('samplingFrequency').value);
+
+      var T = 1 / F;
+      var t = Array.from({ length: F }, (_, i) => i * T);
+      var m = t.map((time) => gain * Math.cos(2 * Math.PI * fm * time));
+
+      // DSB-SC: simple product modulation, both sidebands present.
+      var dsb = m.map((sample, i) => sample * Math.cos(2 * Math.PI * fc * t[i]));
+
+      // SSB-SC (upper sideband): same phase-shift method already used in
+      // SSBSC.html -- y1 - y2 gives the USB signal.
+      var y1 = m.map((sample, i) => sample * Math.cos(2 * Math.PI * fc * t[i]));
+      var y2 = m.map((sample, i) =>
+        Math.sin(2 * Math.PI * fc * (t[i] + Math.PI / 2)) * Math.sin(2 * Math.PI * fc * t[i])
+      );
+      var ssb = y1.map((sample, i) => sample - y2[i]);
+
+      var plotRange = [1, Math.min(parseInt((3 / fm) * F), F - 1)];
+
+      Plotly.newPlot('messagePlot', [{
+        x: t.slice(plotRange[0], plotRange[1]), y: m.slice(plotRange[0], plotRange[1]),
+        mode: 'lines', name: 'Message signal', line: { color: 'green' }
+      }], {
+        title: 'Shared message signal m(t)',
+        xaxis: { title: 'Time' }, yaxis: { title: 'Amplitude' }
+      });
+
+      Plotly.newPlot('dsbPlot', [{
+        x: t.slice(plotRange[0], plotRange[1]), y: dsb.slice(plotRange[0], plotRange[1]),
+        mode: 'lines', name: 'DSB-SC signal', line: { color: 'blue' }
+      }], {
+        title: 'DSB-SC output (same message, same carrier)',
+        xaxis: { title: 'Time' }, yaxis: { title: 'Amplitude' }
+      });
+
+      Plotly.newPlot('ssbPlot', [{
+        x: t.slice(plotRange[0], plotRange[1]), y: ssb.slice(plotRange[0], plotRange[1]),
+        mode: 'lines', name: 'SSB-SC (USB) signal', line: { color: 'red' }
+      }], {
+        title: 'SSB-SC (USB) output (same message, same carrier)',
+        xaxis: { title: 'Time' }, yaxis: { title: 'Amplitude' }
+      });
+
+      document.getElementById('messagePlotSection').scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+  </body>
+</html>

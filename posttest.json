@@ -1,0 +1,175 @@
+{
+  "version": 2.0,
+  "questions": [
+    {
+      "question": "If the message signal has a maximum frequency of 5 kHz, what is the required transmission bandwidth for an SSB-SC signal?",
+      "answers": {
+        "a": "5 kHz",
+        "b": "10 kHz",
+        "c": "2.5 kHz",
+        "d": "20 kHz"
+      },
+      "explanations": {
+        "a": "Correct! For SSB-SC, the bandwidth equals the message bandwidth, which is 5 kHz.",
+        "b": "Incorrect! 10 kHz is the bandwidth for DSB-SC with the same message signal.",
+        "c": "Incorrect! Bandwidth is not halved again.",
+        "d": "Incorrect! 20 kHz is too large for a 5 kHz message signal."
+      },
+      "correctAnswer": "a",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "In SSB-SC modulation, why is only one sideband transmitted instead of both?",
+      "answers": {
+        "a": "To reduce power consumption",
+        "b": "To save transmission bandwidth",
+        "c": "To increase carrier amplitude",
+        "d": "To avoid using coherent detection"
+      },
+      "explanations": {
+        "a": "Incorrect! Power is not the main reason; the carrier is already suppressed.",
+        "b": "Correct! Transmitting only one sideband halves the bandwidth compared to DSB-SC, making it more efficient.",
+        "c": "Incorrect! Carrier amplitude is not affected by sideband selection.",
+        "d": "Incorrect! Coherent detection is still required for demodulation."
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "Which sideband does SSB-SC transmit if the upper sideband (USB) is selected?",
+      "answers": {
+        "a": "The lower frequency sideband only",
+        "b": "Both upper and lower sidebands",
+        "c": "The higher frequency sideband only",
+        "d": "No sideband; only carrier is transmitted"
+      },
+      "explanations": {
+        "a": "Incorrect! This describes LSB, not USB.",
+        "b": "Incorrect! SSB transmits only one sideband.",
+        "c": "Correct! USB corresponds to the higher frequency sideband above the carrier.",
+        "d": "Incorrect! Carrier is suppressed in SSB-SC."
+      },
+      "correctAnswer": "c",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "A message signal has a maximum frequency of 4 kHz. If we generate an SSB-SC signal using a carrier of 100 kHz, what will be the frequency range of the upper sideband?",
+      "answers": {
+        "a": "100 kHz to 104 kHz",
+        "b": "96 kHz to 100 kHz",
+        "c": "100 kHz to 108 kHz",
+        "d": "92 kHz to 96 kHz"
+      },
+      "explanations": {
+        "a": "Correct! Upper sideband ranges from carrier (100 kHz) to carrier + message max (100 + 4).",
+        "b": "Incorrect! 96–100 kHz corresponds to the lower sideband.",
+        "c": "Incorrect! 108 kHz is beyond the actual USB range.",
+        "d": "Incorrect! This is not related to the USB."
+      },
+      "correctAnswer": "a",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "In DSB-SC demodulation, what is the effect of a phase mismatch between the transmitter and receiver carrier signals?",
+      "answers": {
+        "a": "It changes the frequency of the output signal without affecting amplitude.",
+        "b": "It reduces output amplitude and introduces distortion.",
+        "c": "It has no effect if the signal amplitude is high.",
+        "d": "It increases overall signal power."
+      },
+      "explanations": {
+        "a": "Incorrect! Amplitude is affected, not frequency alone.",
+        "b": "Correct! Phase mismatch reduces amplitude and causes distortion in the recovered signal.",
+        "c": "Incorrect! Amplitude alone cannot correct phase mismatch effects.",
+        "d": "Incorrect! Phase mismatch reduces, not increases, effective signal power."
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "Which component is essential in SSB-SC modulation to generate a phase-shifted version of the message signal?",
+      "answers": {
+        "a": "Balanced amplifier",
+        "b": "Hilbert transformer",
+        "c": "Low-pass filter",
+        "d": "Phase-locked loop"
+      },
+      "explanations": {
+        "a": "Incorrect! A balanced amplifier does not create a phase-shifted signal.",
+        "b": "Correct! The Hilbert transform produces a 90° phase-shifted version required for SSB-SC.",
+        "c": "Incorrect! Low-pass filters remove high-frequency components but do not phase-shift.",
+        "d": "Incorrect! PLLs are used for carrier synchronization, not phase-shifting the message."
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "In SSB-SC modulation, what is the role of the Hilbert transform of the message signal?",
+      "answers": {
+        "a": "It suppresses the carrier completely.",
+        "b": "It generates a 90° phase-shifted version of the message signal to create a single sideband.",
+        "c": "It reduces the message bandwidth by half.",
+        "d": "It directly recovers the message signal at the receiver."
+      },
+      "explanations": {
+        "a": "Incorrect! Carrier suppression is handled by the modulator, not the Hilbert transform.",
+        "b": "Correct! The Hilbert transform produces a quadrature signal used to generate only one sideband.",
+        "c": "Incorrect! The bandwidth is reduced by transmitting only one sideband, not by the Hilbert transform itself.",
+        "d": "Incorrect! Message recovery is done by coherent detection at the receiver."
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "In SSB-SC systems, what is the main challenge in achieving perfect carrier suppression?",
+      "answers": {
+        "a": "The message signal bandwidth.",
+        "b": "Non-linearities in amplifiers.",
+        "c": "Low power of the transmitted signal.",
+        "d": "Maintaining precise oscillator frequency and phase, and handling non-ideal components."
+      },
+      "explanations": {
+        "a": "Incorrect! Bandwidth is not the main factor.",
+        "b": "Incorrect! Amplifier non-linearities are secondary concerns.",
+        "c": "Incorrect! Signal power alone does not determine carrier suppression quality.",
+        "d": "Correct! Perfect suppression requires precise oscillator control and good component performance."
+      },
+      "correctAnswer": "d",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "In SSB-SC demodulation, how does noise affect phase detection?",
+      "answers": {
+        "a": "Noise improves phase detection.",
+        "b": "Noise affects only amplitude, not phase.",
+        "c": "Noise causes phase jitter, reducing demodulation fidelity.",
+        "d": "Noise has no effect if SNR is high."
+      },
+      "explanations": {
+        "a": "Incorrect! Noise introduces errors.",
+        "b": "Incorrect! Noise affects both amplitude and phase.",
+        "c": "Correct! Noise can cause phase jitter and degrade the recovered signal.",
+        "d": "Incorrect! Even high SNR cannot completely eliminate phase errors caused by noise."
+      },
+      "correctAnswer": "c",
+      "difficulty": "advanced"
+    },
+    {
+      "question": "Calculate the transmitted power of a DSB-SC signal if the message signal is a sinusoid with a peak amplitude of 2 V and is transmitted over a 1 Ω resistive load. (Assume a normalized carrier amplitude of 1 V).",
+      "answers": {
+        "a": "2 W",
+        "b": "1 W",
+        "c": "4 W",
+        "d": "0.5 W"
+      },
+      "explanations": {
+        "a": "Incorrect! 2 W is the power of the message signal P_m = A_m^2 / 2R. Due to modulation, DSB-SC power is half of this.",
+        "b": "Correct! DSB-SC power is calculated as P_DSB = P_m / 2. Since P_m = 2 W, the transmitted power is 1 W.",
+        "c": "Incorrect! This value ignores the factor of 1/2 introduced by the carrier multiplication process.",
+        "d": "Incorrect! 0.5 W would be the power of an SSB-SC signal, which contains only one sideband. DSB-SC contains both, so it is 1 W."
+      },
+      "correctAnswer": "b",
+      "difficulty": "advanced"
+    }
+  ]
+}
