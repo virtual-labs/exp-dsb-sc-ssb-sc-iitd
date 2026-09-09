@@ -23,17 +23,17 @@
       Click the <em>“Generate Carrier”</em> button to generate the carrier signal. 
     </li>
     <li>
-    <strong>3. Generate Modulated Signal</strong>
+    <strong>3. Generate Modulated Signal:</strong>
         Once the frequencies are selected, click on the <em>"Generate Modulated Signal"</em> button. 
         This action will display the DSB-SC or SSB-SC modulated signal based on the selected modulation technique.
     </li>
     <li>
-        <strong>4. View Frequency Spectrums</strong>
+        <strong>4. View Frequency Spectrums:</strong>
         If you wish to analyze the frequency components, click on the <em>"Show Frequency Spectrums"</em> button. 
         This will generate and display the frequency spectrums of the message signal, the modulated signal, and the demodulated signal.
     </li>
     <li>
-    <strong>5. Perform Demodulation</strong>
+    <strong>5. Perform Demodulation:</strong>
         To recover the original message signal, click on the <em>"Perform Demodulation"</em> button. 
         This will execute the demodulation process and display the demodulated signal.
     </li>
