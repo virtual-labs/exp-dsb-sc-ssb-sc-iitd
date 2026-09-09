@@ -55,10 +55,10 @@
     {
       "question": "A message signal has a maximum frequency of 4 kHz. If we generate an SSB-SC signal using a carrier of 100 kHz, what will be the frequency range of the upper sideband?",
       "answers": {
-        "a": "100 kHz to 104 kHz",
-        "b": "96 kHz to 100 kHz",
-        "c": "100 kHz to 108 kHz",
-        "d": "92 kHz to 96 kHz"
+        "a": "100 to 104 kHz",
+        "b": "96 to 100 kHz",
+        "c": "100 to 108 kHz",
+        "d": "92 to 96 kHz"
       },
       "explanations": {
         "a": "Correct! Upper sideband ranges from carrier (100 kHz) to carrier + message max (100 + 4).",
