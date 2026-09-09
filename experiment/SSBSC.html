@@ -494,6 +494,16 @@
         is essential; otherwise, phase or frequency errors will introduce distortion in the recovered signal.
       </p>
 
+      <h2>A Note on Vestigial Sideband (VSB) Modulation</h2>
+      <p>
+        SSB-SC gives the best bandwidth efficiency but is difficult to generate for signals with significant low-frequency
+        content (such as video), since the sharp filter needed to isolate one sideband becomes impractical near \( f_c \).
+        <b>Vestigial sideband (VSB) modulation</b> is a practical middle ground between DSB-SC and SSB-SC: instead of
+        completely suppressing one sideband, only a small "vestige" (trace) of it is retained alongside the other full
+        sideband. This relaxes the filter design requirement considerably while still saving most of the bandwidth
+        SSB would save -- which is why VSB is used in applications like analog television broadcasting.
+      </p>
+
     </div>
   </div>
 </div>
